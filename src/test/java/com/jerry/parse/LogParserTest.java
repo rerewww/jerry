@@ -2,7 +2,6 @@ package com.jerry.parse;
 
 import com.jerry.model.LogModel;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -10,11 +9,10 @@ import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by son on 2019-02-25.
@@ -35,5 +33,14 @@ public class LogParserTest {
 		File file = folder.newFile();
 		Files.copy(new File("src/test/resources/test.log").toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 		LogModel logModel = parser.parse(file);
+
+		assertThat(logModel.getExceptions().size(), is(3));
+		assertThat(logModel.getStackTraces().size(), is(3));
+	}
+
+	@Test
+	public void readTest() {
+		String result = parser.read(null);
+		assertThat(result, is("not_exist_file"));
 	}
 }
