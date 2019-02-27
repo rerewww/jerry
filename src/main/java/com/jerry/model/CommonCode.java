@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public enum CommonCode {
-	SUCCESS(1, "success"), FAIL(0, "fail");
+	SUCCESS(1, "success"), FAIL(0, "fail"), NOT_EXIST_FILE(-1, "not_exist_file");
 
 	private int code;
 	private String message;

@@ -1,0 +1,28 @@
+정보: An error occurred in processing while on a non-container thread. The connection will be closed immediately
+java.net.SocketException: 파이프가 깨어짐
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:113)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:159)
+	at sun.security.ssl.OutputRecord.writeBuffer(OutputRecord.java:377)
+	at sun.security.ssl.OutputRecord.write(OutputRecord.java:363)
+	at sun.security.ssl.SSLSocketImpl.writeRecordInternal(SSLSocketImpl.java:837)
+	at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:808)
+	at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:122)
+	at org.apache.coyote.http11.InternalOutputBuffer.realWriteBytes(InternalOutputBuffer.java:215)
+2월 15, 2019 2:19:15 오후 org.apache.catalina.core.StandardServer await
+정보: A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2월 15, 2019 2:19:15 오후 org.apache.coyote.AbstractProtocol pause
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'test': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'socket.timeout' in value "${socket.timeout}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:372)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1272)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:312)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+2019-02-22 15:58:28.262 [ERROR] [bio-8443-exec-2] (test.java:138) Unknown Exception)
+com.test.AAA: java.net.SocketTimeoutException: connect timed out
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:339)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:200)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
