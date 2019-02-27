@@ -11,8 +11,8 @@ import java.util.List;
  */
 @NoArgsConstructor
 public class LogModel {
-    private String message;
     private CommonCode commonCode;
+    private String message;
 
     public LogModel(final CommonCode commonCode) {
         this.commonCode = commonCode;

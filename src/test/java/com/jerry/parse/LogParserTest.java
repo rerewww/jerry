@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -42,5 +44,15 @@ public class LogParserTest {
 	public void readTest() {
 		String result = parser.read(null);
 		assertThat(result, is("not_exist_file"));
+	}
+
+	@Test
+	public void getViewCodeTest() {
+		File srcFile = new File("src/test/resources/test.log");
+		List<String> result = parser.getViewCode(srcFile, 13, 5);
+
+		for (String str : result) {
+			log.info(str);
+		}
 	}
 }

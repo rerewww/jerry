@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by son on 2019-02-25.
@@ -76,5 +78,34 @@ public class LogParser {
 		}
 
 		return logModel;
+	}
+
+	/**
+	 * get src file contents
+	 */
+	public List<String> getViewCode(final File srcFile, final int line, final int range) {
+		List<String> contents = new ArrayList<>();
+		try (BufferedReader reader = new BufferedReader(new FileReader(srcFile))) {
+			String readLine = "";
+			int start = line - range;
+			int end = line + range;
+			int index = 1;
+
+			while ((readLine = reader.readLine()) != null) {
+				if (index < start) {
+					index++;
+					continue;
+				}
+
+				if (index > end) {
+					break;
+				}
+				contents.add(readLine);
+				index++;
+			}
+		} catch (IOException e) {
+			log.warn(e.getMessage(), e);
+		}
+		return contents;
 	}
 }

@@ -5,25 +5,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Created by son on 2019-02-26.
  */
 @Service
 public class LogManager implements Manager {
-	private LogParser logParser;
+	private LogParser parser;
 
 	@Autowired
-	LogManager(final LogParser logParser) {
-		this.logParser = logParser;
+	LogManager(final LogParser parser) {
+		this.parser = parser;
 	}
 
 	public LogModel parse(final File file) {
-		return logParser.parse(file);
+		return parser.parse(file);
 	}
 
-	public String getViewCode(final int line, final int range) {
-
+	public List<String> getViewCode(final File file, final int line, final int range) {
+		List<String> contents = parser.getViewCode(file, line, range);
+		return contents;
 	}
 
 	@Override

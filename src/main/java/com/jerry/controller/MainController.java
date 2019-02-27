@@ -2,6 +2,7 @@ package com.jerry.controller;
 
 import com.jerry.model.LogModel;
 import com.jerry.model.ResultModel;
+import com.jerry.project.ProjectFile;
 import com.jerry.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Created by son on 2019-02-25.
@@ -38,17 +41,17 @@ public class MainController {
 	public ResultModel parse() {
 		LogModel logModel = logService.parse();
 		ResultModel resultModel = new ResultModel(true, "success", logModel);
-
 		return resultModel;
 	}
 
 	@RequestMapping("/viewCode.son")
 	@ResponseBody
-	public String viewCode(
+	public List<String> viewCode(
+			final ProjectFile projectFile,
 			@RequestParam("line") int line,
 			@RequestParam("range") int range
 	) {
-		String code = logService.getViewCode(line, range);
-		return code;
+		List<String> contents = logService.getViewCode(projectFile, line, range);
+		return contents;
 	}
 }
