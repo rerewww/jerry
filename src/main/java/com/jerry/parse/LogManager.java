@@ -22,6 +22,10 @@ public class LogManager implements Manager {
 		return logParser.parse(file);
 	}
 
+	public String getViewCode(final int line, final int range) {
+
+	}
+
 	@Override
 	public File getLogFile() {
 		return new File("D:\\backup\\test.log");

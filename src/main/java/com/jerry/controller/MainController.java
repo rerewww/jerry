@@ -6,6 +6,7 @@ import com.jerry.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,5 +40,15 @@ public class MainController {
 		ResultModel resultModel = new ResultModel(true, "success", logModel);
 
 		return resultModel;
+	}
+
+	@RequestMapping("/viewCode.son")
+	@ResponseBody
+	public String viewCode(
+			@RequestParam("line") int line,
+			@RequestParam("range") int range
+	) {
+		String code = logService.getViewCode(line, range);
+		return code;
 	}
 }

@@ -27,4 +27,8 @@ public class LogService {
 		File file = logManager.getLogFile();
 		return logManager.parse(file);
 	}
+
+	public String getViewCode(final int line, final int range) {
+
+	}
 }
