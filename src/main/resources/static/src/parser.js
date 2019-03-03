@@ -14,6 +14,21 @@ var parser = {
             }
         })
     },
+
+    viewCode: function (fileName, line, range, successCallback) {
+        $.ajax({
+            url: '/viewCode.son',
+            type:'GET',
+            async: true,
+            data: {
+                fileName: fileName,
+                line: line,
+                range: range
+            },
+            dataType: 'json',
+            success: successCallback
+        })
+    }
 };
 
 var parserError = {
