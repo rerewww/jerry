@@ -1,0 +1,15 @@
+#error {
+    text-align: left;
+}
+
+.errorItem {
+    border-bottom: solid 1px darkgray;
+}
+
+#stack_trace {
+    text-align: left;
+}
+
+.fileInfo {
+    margin: 0px;
+}
