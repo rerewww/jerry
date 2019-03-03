@@ -67,6 +67,9 @@ public class LogParser {
 					index++;
 				}
 
+				if (line.contains("\tat ")) {
+					line = line.substring(4);
+				}
 				builder.append(line).append("\n");
 				index++;
 			}

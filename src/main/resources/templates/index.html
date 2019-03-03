@@ -17,10 +17,12 @@
   <title>Jerry</title>
   <script type="text/javascript" src="/src/jquery.3.3.1.js"></script>
   <script type="text/javascript" src="/src/parser.js"></script>
+  <script type="text/javascript" src="/src/renderer.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
   <link href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}" rel="stylesheet">
+  <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -100,9 +102,9 @@
       </div>
       <div style="border-bottom: 1px solid paleturquoise; margin-bottom: 5px"></div>
       <div class="row placeholders" style="margin-bottom: 0px">
-        <div class="col-xs-4 col-sm-3 placeholder" style="width: 50%;">
+        <div id="error" class="col-xs-4 col-sm-3 placeholder" style="width: 50%;">
         </div>
-        <div id='hexDumpInfo' class="col-xs-6 col-sm-3 placeholder" style="
+        <div id='stack_trace' class="col-xs-6 col-sm-3 placeholder" style="
     width: 50%;
 ">
           <h3 style="padding-bottom: 5px; font-weight: bold;">Transport Layer</h3>
@@ -137,5 +139,9 @@
     </div>
   </div>
 </div>
+
+<script>
+    parserError.start();
+</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text></svg></body></html>
