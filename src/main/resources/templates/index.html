@@ -18,6 +18,9 @@
   <script type="text/javascript" src="/src/jquery.3.3.1.js"></script>
   <script type="text/javascript" src="/src/parser.js"></script>
   <script type="text/javascript" src="/src/renderer.js"></script>
+  <script type="text/javascript" src="/src/sockjs.min.js"></script>
+  <script type="text/javascript" src="/src/stomp.js"></script>
+  <script type="text/javascript" src="/src/server.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -141,6 +144,7 @@
 
 <script>
     parserError.start();
+    connect();
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text></svg></body></html>
