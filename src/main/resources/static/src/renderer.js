@@ -66,23 +66,12 @@ var renderer = {
 
                     var contents = '';
                     aResponse.forEach(function (item) {
-                        contents += item + '\n';
+                        contents += (item + '</br>');
                     });
 
-                    var textarea = document.createElement('textarea');
-                    textarea.id = 'codemirrorArea';
-                    elem.appendChild(textarea);
-
-                    var editor = CodeMirror.fromTextArea(textarea, {
-                        lineNumbers: true,
-                        lineWrapping: true,
-                        theme: "darcula",
-                        mode: "text/x-java",
-                        styleActiveLine: true,
-                        matchBrackets: true
-                    });
-                    editor.setValue(contents);
-                    editor.setSize(null, 300);
+                    var p = document.createElement('p');
+                    p.innerHTML = contents;
+                    elem.appendChild(p);
                 };
 
                 parser.viewCode(fileName, line, 10, successCallback);
