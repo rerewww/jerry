@@ -30,4 +30,12 @@ public class LogService {
 		List<String> contents = logManager.getViewCode(new File(projectFile.getFilePath()), line, range);
 		return contents;
 	}
+
+	public List<String> getTomcatLogs() {
+		return logManager.getTomcatLogs();
+	}
+
+	public void start() {
+		logManager.runTailLog();
+	}
 }

@@ -7,10 +7,11 @@ function connect(){
     stompClient.connect({}, function(frame){
         console.log('connected stomp over sockjs');
         stompClient.subscribe('/subscribe/notice', onMessage);
+        stompClient.debug = null;
     });
 
 }
 
 function onMessage(message){
-    console.log("Recevied server msg: "+message);
+    console.log("Recevied server msg: " + message.body);
 }
