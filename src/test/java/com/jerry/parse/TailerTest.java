@@ -9,7 +9,7 @@ public class TailerTest {
 
     @Test
     public void tailTest() {
-        File srcFile = new File("D:/backup/catalina.2019-02-12.log");
+        File srcFile = new File("D:/backup/test.log");
         tailer.setSrcFile(srcFile);
 
         Thread thread = new Thread(tailer);

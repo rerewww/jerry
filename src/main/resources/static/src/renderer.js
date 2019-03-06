@@ -9,20 +9,23 @@ var renderer = {
         var rootElem = document.getElementById('error');
 
         for (var i = 0; i < aExceptions.length; i++) {
-            var elem = document.createElement('div');
-            elem.innerHTML = aExceptions[i];
-            elem.className = 'errorItem';
+            var tr = document.createElement('tr');
+            var td = document.createElement('td');
+            td.innerHTML = aExceptions[i];
+            td.className = 'errorItem';
 
             var number = '' + i;
-            elem.setAttribute('number', number);
+            td.setAttribute('number', number);
 
-            elem.onclick  = function() {
+            td.onclick  = function() {
                 this.drawStackTrace(window.event.currentTarget.getAttribute('number'));
             }.bind(this);
 
             sessionStorage.setItem(number, aStackTraces[i]);
-            rootElem.appendChild(elem);
+            tr.appendChild(td);
+            rootElem.appendChild(tr);
         }
+        this.autoScroll(0);
     },
 
     drawStackTrace: function (number) {
@@ -60,12 +63,26 @@ var renderer = {
                         elem.appendChild(p);
                         return;
                     }
+
+                    var contents = '';
                     aResponse.forEach(function (item) {
-                        var p = document.createElement('p');
-                        p.className = 'fileInfo';
-                        p.innerHTML = item;
-                        elem.appendChild(p);
+                        contents += item + '\n';
                     });
+
+                    var textarea = document.createElement('textarea');
+                    textarea.id = 'codemirrorArea';
+                    elem.appendChild(textarea);
+
+                    var editor = CodeMirror.fromTextArea(textarea, {
+                        lineNumbers: true,
+                        lineWrapping: true,
+                        theme: "darcula",
+                        mode: "text/x-java",
+                        styleActiveLine: true,
+                        matchBrackets: true
+                    });
+                    editor.setValue(contents);
+                    editor.setSize(null, 300);
                 };
 
                 parser.viewCode(fileName, line, 10, successCallback);
@@ -76,5 +93,26 @@ var renderer = {
             details.appendChild(elem);
             rootElem.appendChild(details);
         }
+    },
+
+    drawLog: function (logs) {
+        var aLogs = logs.split(',');
+        var length = aLogs.length;
+
+        var tbody = document.getElementById('logs').children[0];
+        for (var i = 0; i < length; i++) {
+            var tr = document.createElement('tr');
+            var td = document.createElement('td');
+            td.innerHTML = aLogs[i];
+
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+        }
+        this.autoScroll(1);
+    },
+
+    autoScroll: function (i) {
+        var divTable = document.getElementsByClassName('table-responsive')[i];
+        divTable.scrollTop = divTable.scrollHeight;
     }
 };
