@@ -22,8 +22,9 @@ import java.io.File;
 @Slf4j
 @Service
 public class ProjectFileArgumentResolver implements HandlerMethodArgumentResolver {
-    boolean isFind = false;
-    File srcFile = null;
+    private boolean isFind = false;
+    private File srcFile = null;
+
     //TODO properties파일로 빼자
     final String projectDirPath = "D:/backup/weboffice/src";
 
@@ -37,6 +38,7 @@ public class ProjectFileArgumentResolver implements HandlerMethodArgumentResolve
         final HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
         final String fileName = request.getParameter("fileName");
 
+        srcFile = null;
         if (StringUtils.isEmpty(fileName)) {
             log.warn("fileName is empty.");
             return null;
@@ -51,6 +53,9 @@ public class ProjectFileArgumentResolver implements HandlerMethodArgumentResolve
         }
 
         File srcFile = this.getJavaFileFromFileName(files, fileName);
+        if (srcFile == null || !srcFile.exists()) {
+            return null;
+        }
         return new ProjectFile(srcFile.getName(), srcFile.getAbsolutePath());
     }
 
@@ -68,6 +73,7 @@ public class ProjectFileArgumentResolver implements HandlerMethodArgumentResolve
                 break;
             }
         }
+        isFind = false;
         return srcFile;
     }
 }

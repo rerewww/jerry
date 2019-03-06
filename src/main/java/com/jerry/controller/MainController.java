@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,9 +31,9 @@ public class MainController {
 	}
 
 	@RequestMapping("/read.son")
-	public ModelAndView read() {
-		ModelAndView mv = new ModelAndView("index");
-		return mv;
+	@ResponseBody
+	public List<String> read() {
+		return logService.getTomcatLogs();
 	}
 
 	@RequestMapping("/parse.son")
@@ -51,6 +51,9 @@ public class MainController {
 			@RequestParam("line") int line,
 			@RequestParam("range") int range
 	) {
+		if (projectFile == null) {
+			return Collections.emptyList();
+		}
 		List<String> contents = logService.getViewCode(projectFile, line, range);
 		return contents;
 	}

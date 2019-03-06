@@ -4,6 +4,7 @@ import com.jerry.model.LogModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.util.List;
 
@@ -13,10 +14,29 @@ import java.util.List;
 @Service
 public class LogManager implements Manager {
 	private LogParser parser;
+	private Tailer tailer;
 
 	@Autowired
-	LogManager(final LogParser parser) {
+	LogManager(final LogParser parser, final Tailer tailer) {
 		this.parser = parser;
+
+		File srcFile = new File("D:/backup/catalina.2019-02-12.log");
+		tailer.setSrcFile(srcFile);
+		this.tailer = tailer;
+	}
+
+	@PostConstruct
+	public void runTailLog() {
+		new Thread(tailer).start();
+	}
+
+	public void clearLogs() {
+		tailer.clear();
+	}
+
+	public List<String> getTomcatLogs() {
+		List<String> logs = tailer.getLogs();
+		return logs;
 	}
 
 	public LogModel parse(final File file) {

@@ -53,6 +53,13 @@ var renderer = {
                 var line = fileInfo.split(':')[1];
 
                 var successCallback = function (aResponse) {
+                    if (aResponse.length === 0) {
+                        var p = document.createElement('p');
+                        p.className = 'fileInfo';
+                        p.innerHTML = "not exist file";
+                        elem.appendChild(p);
+                        return;
+                    }
                     aResponse.forEach(function (item) {
                         var p = document.createElement('p');
                         p.className = 'fileInfo';
