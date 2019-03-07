@@ -8,10 +8,12 @@ var renderer = {
 
         var rootElem = document.getElementById('error');
 
-        for (var i = 0; i < aExceptions.length; i++) {
+        var index = aExceptions.length - 1;
+        var i = 0;
+        while (i < 100) {
             var tr = document.createElement('tr');
             var td = document.createElement('td');
-            td.innerHTML = aExceptions[i];
+            td.innerHTML = aExceptions[index];
             td.className = 'errorItem';
 
             var number = '' + i;
@@ -24,6 +26,9 @@ var renderer = {
             sessionStorage.setItem(number, aStackTraces[i]);
             tr.appendChild(td);
             rootElem.appendChild(tr);
+
+            i++;
+            index--;
         }
         this.autoScroll(0);
     },
@@ -44,9 +49,18 @@ var renderer = {
 
             var details = document.createElement('details');
             details.id = 'details';
+            var isSourcePackage = aStackTraces[i].indexOf(_info.sourcePackage) > -1;
+
+            if ($('input[id=libCheck]').is(':checked') && !isSourcePackage) {
+                console.log('라이브러리 경로는 무시합니다.');
+                continue;
+            }
+
             details.onclick = function () {
                 var elem = window.event.currentTarget;
-                if (elem.childElementCount > 2) {
+
+                // no more than 2 call ajax
+                if (elem.childElementCount >= 2) {
                     return;
                 }
                 var text = elem.children[0].textContent;
@@ -56,6 +70,7 @@ var renderer = {
                 var line = fileInfo.split(':')[1];
 
                 var successCallback = function (aResponse) {
+                    var lineNumber = line;
                     if (aResponse.length === 0) {
                         var p = document.createElement('p');
                         p.className = 'fileInfo';
@@ -64,21 +79,33 @@ var renderer = {
                         return;
                     }
 
-                    var contents = '';
-                    aResponse.forEach(function (item) {
-                        contents += (item + '</br>');
-                    });
+                    for (var i = 0; i < aResponse.length; i++) {
+                        var p = document.createElement('p');
+                        p.className = 'codestyle';
 
-                    var p = document.createElement('p');
-                    p.innerHTML = contents;
-                    elem.appendChild(p);
-                };
+                        if (!aResponse[i + 1]) {
+                            p.innerHTML = aResponse[i];
+                        } else {
+                            p.innerHTML = aResponse[i] + '</br>';
+                        }
+
+                        if (lineNumber === aResponse[i].substring(0, aResponse[i].indexOf('&nbsp') - 1)) {
+                            p.style = 'color: red; font-weight: bold';
+                        }
+                        elem.appendChild(p);
+                    }
+                }.bind(this);
 
                 parser.viewCode(fileName, line, 10, successCallback);
             };
 
             var elem = document.createElement('summary');
             elem.innerHTML = aStackTraces[i];
+
+            if (isSourcePackage) {
+                elem.style = 'background-color: steelblue';
+            }
+
             details.appendChild(elem);
             rootElem.appendChild(details);
         }

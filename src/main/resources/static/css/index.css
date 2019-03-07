@@ -20,3 +20,7 @@ td {
 tr:nth-of-type(odd) {
     background-color: paleturquoise;
 }
+
+.codestyle {
+    margin: 0 0 0px;
+}

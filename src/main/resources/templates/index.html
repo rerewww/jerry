@@ -21,6 +21,7 @@
   <script type="text/javascript" src="/src/sockjs.min.js"></script>
   <script type="text/javascript" src="/src/stomp.js"></script>
   <script type="text/javascript" src="/src/server.js"></script>
+  <script type="text/javascript" src="/src/setting.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -82,9 +83,9 @@
             <span class="slider"></span>
           </label>
 
-          <div class="switchHeader">Graph</div>
+          <div class="switchHeader">Library On/Off</div>
           <label class="switch">
-            <input id="graphCheck" type="checkbox" onclick="setting.onTogglePacketEvent()">
+            <input id="libCheck" type="checkbox" onclick="setting.onToggleLibEvent()">
             <span class="slider"></span>
           </label>
 
@@ -103,6 +104,8 @@
           <button class="action" id="commit" name="contents" onclick="packets.commit()">Commit</button>
         </div>
       </div>
+
+      <h4 style="font-weight: bold;margin-top: 0px;">Tomcat Error Logs</h4>
       <div style="border-bottom: 1px solid paleturquoise; margin-bottom: 5px"></div>
       <div class="row placeholder">
         <div class="col-xs-2 placeholders table-responsive" style="width: 50%; margin-bottom: 0px; height: 350px;">
@@ -121,7 +124,7 @@
       </div>
       </div>
 
-      <h4 class="sub-header" style="font-weight: bold; margin-top: 0px; margin-left: 40px;">Tomcat catalina logs</h4>
+      <h4 class="sub-header" style="font-weight: bold; margin-top: 0px; margin-left: 40px;">Tomcat catalina Logs</h4>
       <div class="table-responsive" style="height: 400px; padding-left: 40px;">
       <table id="logs" class="table table-striped">
         <tbody></tbody>
@@ -131,9 +134,15 @@
   </div>
 </div>
 
-<script>
-    parserError.start();
+<script type="text/javascript" th:inline="javascript">
+    if (!window._info) {
+      window._info = {};
+    }
+    _info.sourcePackage = [[${sourcePackage}]];
+    _info.errorId = setInterval(function () {
+      parserError.start();
+    }, 2000);
     connect();
-</script>
 
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text></svg></body></html>
+    setting.onToggleLibEvent();
+</script>
