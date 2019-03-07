@@ -3,7 +3,6 @@
 }
 
 .errorItem {
-    border-bottom: solid 1px darkgray;
 }
 
 #stack_trace {
@@ -12,4 +11,16 @@
 
 .fileInfo {
     margin: 0px;
+}
+
+td {
+    padding: 1px;
+}
+
+tr:nth-of-type(odd) {
+    background-color: paleturquoise;
+}
+
+.codestyle {
+    margin: 0 0 0px;
 }

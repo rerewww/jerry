@@ -15,13 +15,15 @@ import java.util.List;
 public class LogManager implements Manager {
 	private LogParser parser;
 	private Tailer tailer;
+	private static final String LOG_FILE_PATH = "D:/backup/test.log";
 
 	@Autowired
 	LogManager(final LogParser parser, final Tailer tailer) {
 		this.parser = parser;
 
-		File srcFile = new File("D:/backup/catalina.2019-02-12.log");
+		File srcFile = new File(LOG_FILE_PATH);
 		tailer.setSrcFile(srcFile);
+		tailer.setPointer(srcFile.length());
 		this.tailer = tailer;
 	}
 
@@ -50,6 +52,6 @@ public class LogManager implements Manager {
 
 	@Override
 	public File getLogFile() {
-		return new File("D:\\backup\\test.log");
+		return new File(LOG_FILE_PATH);
 	}
 }

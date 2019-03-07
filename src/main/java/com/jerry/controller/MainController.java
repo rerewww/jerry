@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,14 +21,20 @@ import java.util.List;
 public class MainController {
 	private LogService logService;
 
+	//TODO properties파일로 빼자
+	final String sourcePackage = "com.synap";
+
 	@Autowired
 	MainController(final LogService logService) {
 		this.logService = logService;
 	}
 
 	@RequestMapping("/")
-	public String main() {
-		return "index";
+	public ModelAndView main() {
+		ModelAndView mv = new ModelAndView("index");
+		mv.addObject("sourcePackage", sourcePackage);
+
+		return mv;
 	}
 
 	@RequestMapping("/read.son")

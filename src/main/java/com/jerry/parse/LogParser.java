@@ -103,7 +103,8 @@ public class LogParser {
 				if (index > end) {
 					break;
 				}
-				contents.add(readLine.replaceAll("\t", ""));
+				String code = index + ":" + readLine.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
+				contents.add(code);
 				index++;
 			}
 		} catch (IOException e) {

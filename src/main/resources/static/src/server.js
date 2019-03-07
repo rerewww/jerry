@@ -13,5 +13,8 @@ function connect(){
 }
 
 function onMessage(message){
-    console.log("Recevied server msg: " + message.body);
+    if (message.body === "") {
+        return;
+    }
+    renderer.drawLog(message.body);
 }

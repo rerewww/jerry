@@ -23,6 +23,7 @@ public class Tailer implements Runnable {
     private boolean isRun = true;
 
     // file position
+    @Setter
     private long pointer = 0;
 
 	@Getter
@@ -56,9 +57,8 @@ public class Tailer implements Runnable {
                         line = reader.readLine();
                         continue;
                     }
-                    // TODO 변수에 담아서 getter로 값을 가져올 수 있도록 하자.
-	                logs.add(new String(line.getBytes("ISO-8859-1"), "UTF-8"));
-                    log.info("Chagned line: " + new String(line.getBytes("ISO-8859-1"), "UTF-8"));
+	                logs.add(new String(line.replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").getBytes("ISO-8859-1"), "UTF-8"));
+//                    log.info("Chagned line: " + new String(line.getBytes("ISO-8859-1"), "UTF-8"));
                     line = reader.readLine();
                 }
 
