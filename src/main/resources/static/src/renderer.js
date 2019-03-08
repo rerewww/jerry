@@ -6,7 +6,7 @@ var renderer = {
         var aExceptions = oResult.exceptions;
         var aStackTraces = oResult.stackTraces;
 
-        if (aExceptions.length === 0 && aStackTraces.length) {
+        if (aExceptions.length === 0 && aStackTraces.length === 0) {
             return;
         }
 
