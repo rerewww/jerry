@@ -6,6 +6,10 @@ var renderer = {
         var aExceptions = oResult.exceptions;
         var aStackTraces = oResult.stackTraces;
 
+        if (aExceptions.length === 0 && aStackTraces.length) {
+            return;
+        }
+
         var rootElem = document.getElementById('error');
 
         var index = aExceptions.length - 1;
