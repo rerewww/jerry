@@ -1,9 +1,11 @@
 package com.jerry.controller;
 
+import com.jerry.config.ServerConfig;
 import com.jerry.model.LogModel;
 import com.jerry.model.ResultModel;
 import com.jerry.project.ProjectFile;
 import com.jerry.service.LogService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,22 +19,22 @@ import java.util.List;
 /**
  * Created by son on 2019-02-25.
  */
+@Slf4j
 @Controller
 public class MainController {
 	private LogService logService;
-
-	//TODO properties파일로 빼자
-	final String sourcePackage = "com.synap";
+	private ServerConfig config;
 
 	@Autowired
-	MainController(final LogService logService) {
+	MainController(final LogService logService, final ServerConfig config) {
 		this.logService = logService;
+		this.config = config;
 	}
 
 	@RequestMapping("/")
 	public ModelAndView main() {
 		ModelAndView mv = new ModelAndView("index");
-		mv.addObject("sourcePackage", sourcePackage);
+		mv.addObject("sourcePackage", config.getSourcePackagePrefix());
 
 		return mv;
 	}

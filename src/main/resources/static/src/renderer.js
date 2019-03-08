@@ -14,7 +14,7 @@ var renderer = {
 
         var index = aExceptions.length - 1;
         var i = 0;
-        while (i < 100) {
+        while (i < index) {
             var tr = document.createElement('tr');
             var td = document.createElement('td');
             td.innerHTML = aExceptions[index];
