@@ -22,11 +22,14 @@ import java.io.File;
 @Slf4j
 @Service
 public class ProjectFileArgumentResolver implements HandlerMethodArgumentResolver {
+    private ServerConfig config;
+
     private boolean isFind = false;
     private File srcFile = null;
 
-    //TODO properties파일로 빼자
-    final String projectDirPath = "D:/backup/weboffice/src";
+    ProjectFileArgumentResolver(final ServerConfig config) {
+        this.config = config;
+    }
 
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
@@ -44,7 +47,7 @@ public class ProjectFileArgumentResolver implements HandlerMethodArgumentResolve
             return null;
         }
 
-        File projectDir = new File(projectDirPath);
+        File projectDir = new File(config.getSourceDirPath());
 
         File[] files = projectDir.listFiles();
         if (files == null || files.length == 0) {

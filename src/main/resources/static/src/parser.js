@@ -16,6 +16,9 @@ var parser = {
     },
 
     viewCode: function (fileName, line, range, successCallback) {
+        if (!line) {
+            return;
+        }
         $.ajax({
             url: '/viewCode.son',
             type:'GET',

@@ -1,5 +1,6 @@
 package com.jerry.parse;
 
+import com.jerry.config.ServerConfig;
 import com.jerry.model.LogModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,14 +15,15 @@ import java.util.List;
 @Service
 public class LogManager implements Manager {
 	private LogParser parser;
+	private ServerConfig config;
 	private Tailer tailer;
-	private static final String LOG_FILE_PATH = "D:/backup/test.log";
 
 	@Autowired
-	LogManager(final LogParser parser, final Tailer tailer) {
+	LogManager(final LogParser parser, final Tailer tailer, final ServerConfig config) {
 		this.parser = parser;
+		this.config = config;
 
-		File srcFile = new File(LOG_FILE_PATH);
+		File srcFile = new File(config.getLogFilePath());
 		tailer.setSrcFile(srcFile);
 		tailer.setPointer(srcFile.length());
 		this.tailer = tailer;
@@ -52,6 +54,6 @@ public class LogManager implements Manager {
 
 	@Override
 	public File getLogFile() {
-		return new File(LOG_FILE_PATH);
+		return new File(config.getLogFilePath());
 	}
 }
