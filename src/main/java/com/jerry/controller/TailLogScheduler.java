@@ -31,7 +31,7 @@ public class TailLogScheduler {
 	        List<String> logs = logManager.getTomcatLogs();
             int beforeSize = logs.size();
             template.setMessageConverter(new StringMessageConverter());
-            template.convertAndSend("/subscribe/notice", StringUtils.collectionToCommaDelimitedString(logs));
+            template.convertAndSend("/subscribe/notice", StringUtils.collectionToDelimitedString(logs, "\r\t"));
 
             if (beforeSize == logs.size()) {
                 logManager.clearLogs();
