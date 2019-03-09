@@ -201,6 +201,6 @@ summary {
 
 /* Style the summary when details box is open */
 details[open] summary {
-    background: #69c773;
+    background-color: #337ab7;
     color: #333;
 }
