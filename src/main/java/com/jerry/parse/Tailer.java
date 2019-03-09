@@ -12,6 +12,7 @@ import java.util.List;
 @Slf4j
 @Service
 public class Tailer implements Runnable {
+    private final static String PRE_ERROR_LOGS = "\tat";
     // source file
     @Setter
     private File srcFile;
@@ -50,18 +51,29 @@ public class Tailer implements Runnable {
             }
 
             try (RandomAccessFile reader = new RandomAccessFile(srcFile, "r")) {
+                StringBuilder builder = new StringBuilder();
                 reader.seek(pointer);
                 String line = reader.readLine();
+
                 while (line != null) {
                     if ("".equals(line)) {
                         line = reader.readLine();
                         continue;
                     }
-	                logs.add(new String(line.replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").getBytes("ISO-8859-1"), "UTF-8"));
-//                    log.info("Chagned line: " + new String(line.getBytes("ISO-8859-1"), "UTF-8"));
+
+                    if (line.contains(PRE_ERROR_LOGS)) {
+                        builder.append(line);
+                        builder.append("</br>");
+
+                        line = reader.readLine();
+                        continue;
+                    }
+
+                    this.buildErrorLogs(builder);
+                    logs.add(new String(line.replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").getBytes("ISO-8859-1"), "UTF-8"));
                     line = reader.readLine();
                 }
-
+                this.buildErrorLogs(builder);
                 pointer = reader.getFilePointer();
             } catch (IOException e) {
                 log.warn(e.getMessage(), e);
@@ -72,6 +84,16 @@ public class Tailer implements Runnable {
             } catch (InterruptedException e) {
                 log.warn(e.getMessage(), e);
             }
+        }
+    }
+
+    private void buildErrorLogs(final StringBuilder builder) throws UnsupportedEncodingException {
+        if (builder.length() > 0) {
+            String header = new String(logs.get(logs.size() - 1).replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").getBytes("ISO-8859-1"), "UTF-8") + "</br>";
+            logs.remove(logs.size() - 1);
+
+            logs.add("\\a\\r" + header + new String(builder.toString().replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").getBytes("ISO-8859-1"), "UTF-8"));
+            builder.delete(0, builder.length());
         }
     }
 }

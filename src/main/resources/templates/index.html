@@ -22,6 +22,7 @@
   <script type="text/javascript" src="/src/stomp.js"></script>
   <script type="text/javascript" src="/src/server.js"></script>
   <script type="text/javascript" src="/src/setting.js"></script>
+  <script type="text/javascript" src="/src/action.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -58,34 +59,22 @@
       <div class="row" style="margin-bottom: 0px;">
         <div class="col-xl-3 col-md-3 card_items container_items">
           <div class="card-box">
-            <h4 class="container_headers header-title mt-0 m-b-30">Daily Sales</h4>
+            <h4 class="container_headers header-title mt-0 m-b-30">Infos</h4>
             <div class="widget-box-2">
               <div class="widget-detail-2">
-                <span class="badge badge-pink badge-pill pull-left m-t-20">32% <i class="mdi mdi-trending-up"></i> </span>
-                <h2 class="mb-0"> 158 </h2>
-                <p class="text-muted m-b-25">Revenue today</p>
-              </div>
-              <div class="progress progress-bar-pink-alt progress-sm mb-0">
-                <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;">
-                  <span class="sr-only">77% Complete</span>
-                </div>
-              </div>
+                <h4 style="margin-top: 10px; font-weight: bold; color: beige;">Apache Tomcat/7.0.56</h4>
+                <h4 style="margin-top: 10px; font-weight: bold; color: beige;">1.7.0_80-b15</h4>
+                <h4 class="text-muted m-b-25" style="margin-top: 10px; font-weight: bold; color: beige;">source branch: master</h4></div>
             </div>
           </div>
         </div>
         <div class="col-xl-3 col-md-3 card_items container_items">
-          <div class="card-box">
-            <h4 class="container_headers header-title mt-0 m-b-30">Daily Sales</h4>
+          <div class="card-box" style="height: 149px">
+            <h4 class="container_headers header-title mt-0 m-b-30">Usage</h4>
             <div class="widget-box-2">
-              <div class="widget-detail-2">
-                <span class="badge badge-pink badge-pill pull-left m-t-20">32% <i class="mdi mdi-trending-up"></i> </span>
-                <h2 class="mb-0"> 158 </h2>
-                <p class="text-muted m-b-25">Revenue today</p>
-              </div>
-              <div class="progress progress-bar-pink-alt progress-sm mb-0">
-                <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;">
-                  <span class="sr-only">77% Complete</span>
-                </div>
+              <div class="widget-detail-2" style=" height: 112px;">
+                <h3 class="mb-0" style="margin-top: 10px; font-weight: bold; color: beige;">CPU / MEMORY(%)</h3>
+                <div id="usage" style="float: left; font-size: 50px; color: #F8F8F2; font-weight: bold;">12 / 50</div>
               </div>
             </div>
           </div>
@@ -127,14 +116,14 @@
       </div>
 
       <div class="row" style="margin-top: 15px">
-        <div class="col-xs-5 table-responsive container_items" style="margin-bottom: 0px; height: 350px;">
+        <div class="col-xs-5 table-responsive container_items" style="margin-bottom: 0px; height: 300px;">
           <h4 class="container_headers header-title mt-0">ErrorLogs</h4>
           <table id="error" class="table table-striped">
             <tbody>
             </tbody>
           </table>
         </div>
-        <div id='stack_trace' class="col-xs-6 container_items" style="margin-left: 80px;">
+        <div id='stack_trace' class="col-xs-7 container_items" style="width: 57%; margin-left: 15px;">
           <h4 class="container_headers header-title mt-0">Please select error log in table</h4>
           <details id="ethernetContents" style="display: none"></details>
           <details id="ipContents" style="display: none"></details>
@@ -144,7 +133,7 @@
       </div>
       </div>
 
-      <div class="table-responsive container_items" style="height: 400px; padding-left: 16px; margin-left: 25px; margin-right: 25px;">
+      <div class="table-responsive container_items" style="height: 550px; padding-left: 16px; margin-left: 25px; margin-right: 25px;">
         <h4 class="container_headers header-title mt-0">Logs</h4>
       <table id="logs" class="table table-striped">
         <tbody></tbody>
@@ -163,6 +152,10 @@
       parserError.start();
     }, 2000);
     connect();
+
+    setInterval(function () {
+      action.getUsage();
+    }, 5000);
 
     setting.onToggleParseEvent();
     setting.onToggleErrorEvent();

@@ -21,7 +21,7 @@ var renderer = {
         while (i < index) {
             var tr = document.createElement('tr');
             var td = document.createElement('td');
-            td.innerHTML = aExceptions[index];
+            td.innerHTML = '[' + i + '] ' + aExceptions[index];
             td.className = 'errorItem';
 
             var number = '' + index;
@@ -125,14 +125,33 @@ var renderer = {
         //     return;
         // }
 
-        var aLogs = logs.split(',');
+        var aLogs = logs.split('\r\t');
         var length = aLogs.length;
 
         var tbody = document.getElementById('logs').children[0];
         for (var i = 0; i < length; i++) {
+            var re = /.+(.java|.class)(.*?)\)/g;
             var tr = document.createElement('tr');
             var td = document.createElement('td');
-            td.innerHTML = aLogs[i];
+
+            tr.style = 'text-indent: 10px; !important';
+            var text = aLogs[i];
+
+            var span = document.createElement('span');
+            if (text.indexOf('\\a\\r') > -1) {
+                span.style = 'color: #BBBB00';
+                span.innerHTML = text.substring('\\a\\r'.length, text.indexOf('</br>'));
+                td.innerHTML = span.outerHTML + text.substring(text.indexOf('</br>'), text.length);
+            } else {
+                var regexText = re.exec(text);
+                if (!!regexText && !!regexText[0]) {
+                    span.style = 'color: beige';
+                    span.innerHTML = regexText[0];
+                    td.innerHTML = span.outerHTML + text.substring(regexText[0].length, text.length);
+                } else {
+                    td.innerHTML = text;
+                }
+            }
 
             tr.appendChild(td);
             tbody.appendChild(tr);
@@ -143,5 +162,32 @@ var renderer = {
     autoScroll: function (i) {
         var divTable = document.getElementsByClassName('table-responsive')[i];
         divTable.scrollTop = divTable.scrollHeight;
+    },
+
+    drawUsage: function (oData) {
+        var cpu = oData.cpu;
+        var memory = oData.memory;
+
+        var usageElem = document.getElementById('usage');
+
+        var i = 0, j = 0;
+        var acrInterval = setInterval (function() {
+            usageElem.innerHTML = i + ' / ' + j;
+            if( i === cpu && j === memory) {
+                clearInterval(acrInterval);
+            }
+
+            if (i === cpu) {
+                i = cpu;
+            } else {
+                i++;
+            }
+
+            if (j === memory) {
+                j = memory;
+            } else {
+                j++;
+            }
+        }, 15);
     }
 };

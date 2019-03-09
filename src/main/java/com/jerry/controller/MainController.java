@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by son on 2019-02-25.
@@ -65,5 +66,11 @@ public class MainController {
 		}
 		List<String> contents = logService.getViewCode(projectFile, line, range);
 		return contents;
+	}
+
+	@RequestMapping("/usage.son")
+	@ResponseBody
+	public Map<String, Integer> getUsage() {
+		return logService.getUsage();
 	}
 }

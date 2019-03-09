@@ -5,6 +5,7 @@
 .errorItem {
     font-family: "Karla", sans-serif;
     font-size: 15px;
+    font-weight: bold;
     color: #BBBB00
 }
 
@@ -21,7 +22,6 @@ td {
     font-family: "Karla", sans-serif;
     color: #F8F8F2;
     padding: 1px;
-    background-color: #2F3E47;
 }
 
 tr {
@@ -58,6 +58,11 @@ tr {
     flex: 0 0 25%;
     font-family: "Karla", sans-serif;
     max-width: 25%;
+}
+
+tr:nth-of-type(odd) {
+    border-radius: 10px;
+    background-color: #253138;
 }
 
 summary {
