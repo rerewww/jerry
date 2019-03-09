@@ -3,9 +3,13 @@
 }
 
 .errorItem {
+    font-family: "Karla", sans-serif;
+    font-size: 15px;
+    color: #BBBB00
 }
 
 #stack_trace {
+    font-family: "Karla", sans-serif;
     text-align: left;
 }
 
@@ -14,13 +18,55 @@
 }
 
 td {
+    font-family: "Karla", sans-serif;
+    color: #F8F8F2;
     padding: 1px;
+    background-color: #2F3E47;
 }
 
-tr:nth-of-type(odd) {
-    background-color: paleturquoise;
+tr {
+    font-family: "Karla", sans-serif;
+    font-size: 15px;
+    color: #F8F8F2;
+    background-color: #2F3E47;
 }
 
 .codestyle {
     margin: 0 0 0px;
+    background-color: #2F3E47;
+}
+
+.container_items {
+    background-color: #2F3E47;
+    border-radius: 10px;
+    box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+}
+
+.container_headers {
+    margin-bottom: 10px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #fff;
+    text-align: left;
+    font-family: "Karla", sans-serif;
+}
+
+.card_items {
+    width: 24.2%;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    flex: 0 0 25%;
+    font-family: "Karla", sans-serif;
+    max-width: 25%;
+}
+
+summary {
+    font-family: "Karla", sans-serif;
+    background-color: #2F3E47;
+    border-radius: 0px;
+    box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+}
+
+p {
+    color: #F8F8F2;
 }

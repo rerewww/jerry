@@ -16,14 +16,12 @@
 
   <title>Jerry</title>
   <script type="text/javascript" src="/src/jquery.3.3.1.js"></script>
-  <script type="text/javascript" src="/src/chart.2.4.0.js"></script>
   <script type="text/javascript" src="/src/parser.js"></script>
   <script type="text/javascript" src="/src/renderer.js"></script>
   <script type="text/javascript" src="/src/sockjs.min.js"></script>
   <script type="text/javascript" src="/src/stomp.js"></script>
   <script type="text/javascript" src="/src/server.js"></script>
   <script type="text/javascript" src="/src/setting.js"></script>
-  <script type="text/javascript" src="/src/chart.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -31,7 +29,7 @@
   <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color: #253138">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
@@ -57,64 +55,87 @@
 <div class="container-fluid">
   <div class="row">
     <div class="main">
-      <div class="row placeholders" style="margin-bottom: 0px">
-        <div class="panel panel-default col-xs-6 col-sm-1 placeholder" style="width: 15%; border: 3px solid black;">
-          <h4>CPU(%)</h4>
-          <span id="cpuAmount" style="font-family: Helvetica; font-size: 70px; font-weight: bold;"></span>
+      <div class="row" style="margin-bottom: 0px;">
+        <div class="col-xl-3 col-md-3 card_items container_items">
+          <div class="card-box">
+            <h4 class="container_headers header-title mt-0 m-b-30">Daily Sales</h4>
+            <div class="widget-box-2">
+              <div class="widget-detail-2">
+                <span class="badge badge-pink badge-pill pull-left m-t-20">32% <i class="mdi mdi-trending-up"></i> </span>
+                <h2 class="mb-0"> 158 </h2>
+                <p class="text-muted m-b-25">Revenue today</p>
+              </div>
+              <div class="progress progress-bar-pink-alt progress-sm mb-0">
+                <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;">
+                  <span class="sr-only">77% Complete</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="col-md-2 placeholder">
-          <h4>Memory(%)</h4>
-          <span id="memoryAmount" style="font-family: Helvetica; font-size: 70px; font-weight: bold;"></span>
+        <div class="col-xl-3 col-md-3 card_items container_items">
+          <div class="card-box">
+            <h4 class="container_headers header-title mt-0 m-b-30">Daily Sales</h4>
+            <div class="widget-box-2">
+              <div class="widget-detail-2">
+                <span class="badge badge-pink badge-pill pull-left m-t-20">32% <i class="mdi mdi-trending-up"></i> </span>
+                <h2 class="mb-0"> 158 </h2>
+                <p class="text-muted m-b-25">Revenue today</p>
+              </div>
+              <div class="progress progress-bar-pink-alt progress-sm mb-0">
+                <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;">
+                  <span class="sr-only">77% Complete</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="col-md-4 placeholder">
-          <canvas id="errorChart"></canvas>
+        <div class="col-xl-3 col-md-3 card_items container_items">
+          <div class="card-box">
+            <h4 class="container_headers header-title mt-0 m-b-30">Daily Sales</h4>
+            <div class="widget-box-2">
+              <div class="widget-detail-2">
+                <span class="badge badge-pink badge-pill pull-left m-t-20">32% <i class="mdi mdi-trending-up"></i> </span>
+                <h2 class="mb-0"> 158 </h2>
+                <p class="text-muted m-b-25">Revenue today</p>
+              </div>
+              <div class="progress progress-bar-pink-alt progress-sm mb-0">
+                <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;">
+                  <span class="sr-only">77% Complete</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="col-md-2 placeholder">
-          <div class="switchHeader">Parse On/Off</div>
-          <label class="switch">
-            <input id="ParseCheck" type="checkbox" onclick="setting.onToggleParseEvent()">
-            <span class="slider"></span>
-          </label>
-
-          <div class="switchHeader">Error On/Off</div>
-          <label class="switch">
-            <input id="ErrorCheck" type="checkbox" onclick="setting.onToggleErrorEvent()">
-            <span class="slider"></span>
-          </label>
-
-          <div class="switchHeader">Library On/Off</div>
-          <label class="switch">
-            <input id="libCheck" type="checkbox" onclick="setting.onToggleLibEvent()">
-            <span class="slider"></span>
-          </label>
-
-          <div class="switchHeader">ProcName</div>
-          <label class="switch">
-            <input id="procName" type="checkbox">
-            <span class="slider"></span>
-          </label>
-        </div>
-        <div class="col-md-2 placeholder">
-          <form action="/network/download" method="post">
-            <button class="action" id="download" name="contents" onclick="packets.download()">Download</button>
-          </form>
+        <div class="col-xl-3 col-md-3 card_items container_items">
+          <div class="card-box">
+            <h4 class="container_headers header-title mt-0 m-b-30">Daily Sales</h4>
+            <div class="widget-box-2">
+              <div class="widget-detail-2">
+                <span class="badge badge-pink badge-pill pull-left m-t-20">32% <i class="mdi mdi-trending-up"></i> </span>
+                <h2 class="mb-0"> 158 </h2>
+                <p class="text-muted m-b-25">Revenue today</p>
+              </div>
+              <div class="progress progress-bar-pink-alt progress-sm mb-0">
+                <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;">
+                  <span class="sr-only">77% Complete</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <h4 style="font-weight: bold;margin-top: 0px;">Tomcat Error Logs</h4>
-      <div style="border-bottom: 1px solid paleturquoise; margin-bottom: 5px"></div>
-      <div class="row placeholder">
-        <div class="col-xs-2 placeholders table-responsive" style="width: 50%; margin-bottom: 0px; height: 350px;">
+      <div class="row" style="margin-top: 15px">
+        <div class="col-xs-5 table-responsive container_items" style="margin-bottom: 0px; height: 350px;">
+          <h4 class="container_headers header-title mt-0">ErrorLogs</h4>
           <table id="error" class="table table-striped">
             <tbody>
             </tbody>
           </table>
         </div>
-        <div id='stack_trace' class="col-xs-2 placeholder" style="width: 50%;">
-          <h4> Please select error log in table...</h4>
+        <div id='stack_trace' class="col-xs-6 container_items" style="margin-left: 80px;">
+          <h4 class="container_headers header-title mt-0">Please select error log in table</h4>
           <details id="ethernetContents" style="display: none"></details>
           <details id="ipContents" style="display: none"></details>
           <details id="transport" style="display: none"></details>
@@ -123,8 +144,8 @@
       </div>
       </div>
 
-      <h4 class="sub-header" style="font-weight: bold; margin-top: 0px; margin-left: 40px;">Tomcat catalina Logs</h4>
-      <div class="table-responsive" style="height: 400px; padding-left: 40px;">
+      <div class="table-responsive container_items" style="height: 400px; padding-left: 16px; margin-left: 25px; margin-right: 25px;">
+        <h4 class="container_headers header-title mt-0">Logs</h4>
       <table id="logs" class="table table-striped">
         <tbody></tbody>
       </table>
@@ -146,3 +167,5 @@
     setting.onToggleParseEvent();
     setting.onToggleErrorEvent();
 </script>
+</body>
+</html>

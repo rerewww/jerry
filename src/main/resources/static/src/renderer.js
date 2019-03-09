@@ -3,9 +3,9 @@
  */
 var renderer = {
     drawErrorElem: function (oResult) {
-        if (!$('input[id=ErrorCheck]').is(':checked')) {
-            return;
-        }
+        // if (!$('input[id=ErrorCheck]').is(':checked')) {
+        //     return;
+        // }
 
         var aExceptions = oResult.exceptions;
         var aStackTraces = oResult.stackTraces;
@@ -59,7 +59,8 @@ var renderer = {
             details.id = 'details';
             var isSourcePackage = aStackTraces[i].indexOf(_info.sourcePackage) > -1;
 
-            if ($('input[id=libCheck]').is(':checked') && !isSourcePackage) {
+            // if ($('input[id=libCheck]').is(':checked') && !isSourcePackage) {
+            if (!isSourcePackage) {
                 console.log('라이브러리 경로는 무시합니다.');
                 continue;
             }
@@ -111,7 +112,7 @@ var renderer = {
             elem.innerHTML = aStackTraces[i];
 
             if (isSourcePackage) {
-                elem.style = 'background-color: steelblue';
+                elem.style = 'color: #BBBB00';
             }
 
             details.appendChild(elem);
@@ -120,9 +121,9 @@ var renderer = {
     },
 
     drawLog: function (logs) {
-        if (!$('input[id=ParseCheck]').is(':checked')) {
-            return;
-        }
+        // if (!$('input[id=ParseCheck]').is(':checked')) {
+        //     return;
+        // }
 
         var aLogs = logs.split(',');
         var length = aLogs.length;
