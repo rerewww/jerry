@@ -16,12 +16,14 @@
 
   <title>Jerry</title>
   <script type="text/javascript" src="/src/jquery.3.3.1.js"></script>
+  <script type="text/javascript" src="/src/chart.2.4.0.js"></script>
   <script type="text/javascript" src="/src/parser.js"></script>
   <script type="text/javascript" src="/src/renderer.js"></script>
   <script type="text/javascript" src="/src/sockjs.min.js"></script>
   <script type="text/javascript" src="/src/stomp.js"></script>
   <script type="text/javascript" src="/src/server.js"></script>
   <script type="text/javascript" src="/src/setting.js"></script>
+  <script type="text/javascript" src="/src/chart.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -61,25 +63,25 @@
           <span id="cpuAmount" style="font-family: Helvetica; font-size: 70px; font-weight: bold;"></span>
         </div>
 
-        <div class="panel panel-default col-xs-6 col-sm-1 placeholder" style="width: 15%; margin-left: 3%; border: 3px solid black;">
+        <div class="col-md-2 placeholder">
           <h4>Memory(%)</h4>
           <span id="memoryAmount" style="font-family: Helvetica; font-size: 70px; font-weight: bold;"></span>
         </div>
 
-        <div class="col-xs-6 col-sm-2 placeholder">
-          <canvas id="mostCalledProgram" height="200px"></canvas>
+        <div class="col-md-4 placeholder">
+          <canvas id="errorChart"></canvas>
         </div>
 
-        <div class="col-xs-6 col-sm-3 placeholder" style="display: flex; flex-wrap: wrap; flex-direction: row; width: 20%">
+        <div class="col-md-2 placeholder">
           <div class="switchHeader">Parse On/Off</div>
           <label class="switch">
-            <input id="cpuCheck" type="checkbox" onclick="setting.onToggleCpuEvent()">
+            <input id="ParseCheck" type="checkbox" onclick="setting.onToggleParseEvent()">
             <span class="slider"></span>
           </label>
 
-          <div class="switchHeader">Memory</div>
+          <div class="switchHeader">Error On/Off</div>
           <label class="switch">
-            <input id="memoryCheck" type="checkbox" onclick="setting.onToggleMemoryEvent()">
+            <input id="ErrorCheck" type="checkbox" onclick="setting.onToggleErrorEvent()">
             <span class="slider"></span>
           </label>
 
@@ -95,13 +97,10 @@
             <span class="slider"></span>
           </label>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder" style="width:17%;">
+        <div class="col-md-2 placeholder">
           <form action="/network/download" method="post">
             <button class="action" id="download" name="contents" onclick="packets.download()">Download</button>
           </form>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder" style="width:17%;">
-          <button class="action" id="commit" name="contents" onclick="packets.commit()">Commit</button>
         </div>
       </div>
 
@@ -144,5 +143,6 @@
     }, 2000);
     connect();
 
-    setting.onToggleLibEvent();
+    setting.onToggleParseEvent();
+    setting.onToggleErrorEvent();
 </script>

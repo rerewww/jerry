@@ -3,6 +3,10 @@
  */
 var renderer = {
     drawErrorElem: function (oResult) {
+        if (!$('input[id=ErrorCheck]').is(':checked')) {
+            return;
+        }
+
         var aExceptions = oResult.exceptions;
         var aStackTraces = oResult.stackTraces;
 
@@ -20,14 +24,14 @@ var renderer = {
             td.innerHTML = aExceptions[index];
             td.className = 'errorItem';
 
-            var number = '' + i;
+            var number = '' + index;
             td.setAttribute('number', number);
 
             td.onclick  = function() {
                 this.drawStackTrace(window.event.currentTarget.getAttribute('number'));
             }.bind(this);
 
-            sessionStorage.setItem(number, aStackTraces[i]);
+            sessionStorage.setItem(number, aStackTraces[index]);
             tr.appendChild(td);
             rootElem.appendChild(tr);
 
@@ -116,6 +120,10 @@ var renderer = {
     },
 
     drawLog: function (logs) {
+        if (!$('input[id=ParseCheck]').is(':checked')) {
+            return;
+        }
+
         var aLogs = logs.split(',');
         var length = aLogs.length;
 

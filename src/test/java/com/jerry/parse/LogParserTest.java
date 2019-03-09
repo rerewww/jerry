@@ -33,7 +33,7 @@ public class LogParserTest {
 	@Test
 	public void parseTest() throws IOException {
 		File file = folder.newFile();
-		Files.copy(new File("src/test/resources/test.log").toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		Files.copy(new File("D:/backup/log.txt").toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 		LogModel logModel = parser.parse(file);
 
 		assertThat(logModel.getExceptions().size(), is(3));
@@ -48,7 +48,7 @@ public class LogParserTest {
 
 	@Test
 	public void getViewCodeTest() {
-		File srcFile = new File("src/test/resources/test.log");
+		File srcFile = new File("D:/backup/log.txt");
 		List<String> result = parser.getViewCode(srcFile, 13, 5);
 
 		for (String str : result) {

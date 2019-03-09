@@ -16,6 +16,7 @@ import java.util.List;
 @Service
 public class LogParser {
 	private final static String PRE_ERROR_LOGS = "\tat";
+	private long fileLength;
 
 	/**
 	 * Read Log File
@@ -36,6 +37,10 @@ public class LogParser {
 	public LogModel parse(final File file) {
 		if (file == null || !file.exists()) {
 			return new LogModel(CommonCode.FAIL);
+		}
+
+		if (fileLength == file.length()) {
+			return new LogModel(CommonCode.NO_CHAGE_LOGS);
 		}
 
 		LogModel logModel = new LogModel();
@@ -80,6 +85,7 @@ public class LogParser {
 			log.warn(e.getMessage(), e);
 		}
 
+		fileLength = file.length();
 		return logModel;
 	}
 

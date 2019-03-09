@@ -22,11 +22,14 @@ import java.io.File;
 @Slf4j
 @Service
 public class ProjectFileArgumentResolver implements HandlerMethodArgumentResolver {
-	@Autowired
     private ServerConfig config;
 
     private boolean isFind = false;
     private File srcFile = null;
+
+    ProjectFileArgumentResolver(final ServerConfig config) {
+        this.config = config;
+    }
 
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
