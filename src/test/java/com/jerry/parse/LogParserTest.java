@@ -55,4 +55,10 @@ public class LogParserTest {
 			log.info(str);
 		}
 	}
+
+	@Test
+	public void getAccessLogsTest() {
+		File srcFile = new File("D:/backup/access_log.txt");
+		LogModel model = parser.getAccessLogs(srcFile);
+	}
 }

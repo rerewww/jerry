@@ -52,6 +52,11 @@ public class LogManager implements Manager {
 		return contents;
 	}
 
+	public LogModel getAccessLogs() {
+		File accessLogFile = new File(config.getAccessLogFilePath());
+		return parser.getAccessLogs(accessLogFile);
+	}
+
 	@Override
 	public File getLogFile() {
 		return new File(config.getLogFilePath());

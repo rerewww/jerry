@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,62 +41,6 @@ public class SystemService {
 
         result.put("cpu", cpu);
         result.put("memory", (int)(memory / operatingSystemMXBean.getTotalPhysicalMemorySize() * 100));
-        return result;
-    }
-
-    public String tomcatVersion() {
-        // ../bin
-        File binDir = new File(config.getLogFilePath()).getParentFile().getParentFile();
-        File script = new File(binDir.getAbsoluteFile() + "/version.sh");
-
-        if (!script.exists()) {
-            return "not exists file";
-        }
-
-        String[] command = new String[]{"sh", script.getAbsolutePath()};
-
-        try {
-            StringBuilder result = this.executeCommand(command);
-            return result.toString();
-        } catch (IOException e) {
-            log.warn(e.getMessage(), e);
-        }
-
-        return "";
-    }
-
-    public String getBranch() {
-        File sourceDir = new File(config.getSourceDirPath());
-        String[] command = new String[]{"cd " + sourceDir.getAbsolutePath().replaceAll("\\\\", "/"), ";", "git branch"};
-        try {
-            StringBuilder result = this.executeCommand(command);
-            return result.toString();
-        } catch (IOException e) {
-            log.warn(e.getMessage(), e);
-        }
-
-
-        return "a";
-    }
-
-    private StringBuilder executeCommand(final String[] command) throws IOException {
-        ProcessBuilder processBuilder = new ProcessBuilder(command);
-        processBuilder.redirectErrorStream(true);
-
-        Process process = processBuilder.start();
-
-        StringBuilder result = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream(), "MS949"))) {
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                result.append(line);
-                line = bufferedReader.readLine();
-            }
-            process.waitFor();
-        } catch (InterruptedException e) {
-            log.warn(e.getMessage());
-        }
-        process.destroy();
         return result;
     }
 }
