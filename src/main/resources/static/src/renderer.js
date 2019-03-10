@@ -38,7 +38,7 @@ var renderer = {
             i++;
             index--;
         }
-        this.autoScroll(0);
+        this.autoScroll(1);
     },
 
     drawStackTrace: function (number) {
@@ -156,7 +156,7 @@ var renderer = {
             tr.appendChild(td);
             tbody.appendChild(tr);
         }
-        this.autoScroll(1);
+        this.autoScroll(2);
     },
 
     autoScroll: function (i) {
@@ -189,5 +189,33 @@ var renderer = {
                 j++;
             }
         }, 15);
+    },
+
+    drawAccessLogs: function (data) {
+        var elem = document.getElementById('accessLogs');
+
+        data.forEach(function (item) {
+            var tr = document.createElement('tr');
+            var td = document.createElement('td');
+            td.innerHTML = item;
+
+            tr.appendChild(td);
+            elem.appendChild(tr);
+        });
+        this.autoScroll(0);
+    },
+
+    updateChart: function (oSuccess, oFail) {
+        // 200 - 300
+        chartConfig.data.datasets[0].data.push(oSuccess);
+        // 400 - 500
+        chartConfig.data.datasets[1].data.push(oFail);
+
+        window.chart.update();
+    },
+
+    drawChart: function (chartConfig) {
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.chart = new Chart(ctx, chartConfig);
     }
 };

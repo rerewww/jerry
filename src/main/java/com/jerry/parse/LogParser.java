@@ -18,6 +18,8 @@ public class LogParser {
 	private final static String PRE_ERROR_LOGS = "\tat";
 	private long fileLength;
 
+	private long accessFileLength;
+
 	/**
 	 * Read Log File
 	 */
@@ -117,5 +119,34 @@ public class LogParser {
 			log.warn(e.getMessage(), e);
 		}
 		return contents;
+	}
+
+	/**
+	 * parse access logs
+	 */
+	public LogModel getAccessLogs(final File accessLogFile) {
+		if (accessLogFile == null || !accessLogFile.exists()) {
+			return new LogModel(CommonCode.NOT_EXIST_FILE);
+		}
+
+		if (accessFileLength == accessLogFile.length()) {
+			return new LogModel(CommonCode.NO_CHAGE_LOGS);
+		}
+
+		LogModel model = new LogModel(CommonCode.SUCCESS);
+
+		try (BufferedReader reader = new BufferedReader(new FileReader(accessLogFile))) {
+			String line = reader.readLine();
+
+			while (line != null) {
+				model.setAccessLogs(line);
+				line = reader.readLine();
+			}
+		} catch (IOException e) {
+			log.warn(e.getMessage(), e);
+		}
+
+		accessFileLength = accessLogFile.length();
+		return model;
 	}
 }

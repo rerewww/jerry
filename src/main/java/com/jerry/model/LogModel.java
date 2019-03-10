@@ -23,6 +23,8 @@ public class LogModel {
     private List<String> exceptions = new ArrayList<>();
     @Getter
     private List<String> stackTraces = new ArrayList<>();
+    @Getter
+    private List<String> accessLogs = new ArrayList<>();
 
     public void setExceptions(final String exception) {
         exceptions.add(exception);
@@ -30,5 +32,9 @@ public class LogModel {
 
     public void setStackTraces(final StringBuilder builder) {
         stackTraces.add(builder.toString());
+    }
+
+    public void setAccessLogs(final String log) {
+        accessLogs.add(log);
     }
 }

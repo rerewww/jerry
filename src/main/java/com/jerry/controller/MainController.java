@@ -73,4 +73,10 @@ public class MainController {
 	public Map<String, Integer> getUsage() {
 		return logService.getUsage();
 	}
+
+	@RequestMapping("/accessLogs.son")
+	@ResponseBody
+	public LogModel accessLogs() {
+		return logService.getAccessLogs();
+	}
 }

@@ -47,4 +47,8 @@ public class LogService {
 		Map<String, Integer> result = systemService.getUsage();
 		return result;
 	}
+
+	public LogModel getAccessLogs() {
+		return logManager.getAccessLogs();
+	}
 }

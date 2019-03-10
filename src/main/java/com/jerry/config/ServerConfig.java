@@ -32,4 +32,11 @@ public class ServerConfig {
 	@Value("${source.package.prefix}")
 	@Getter
 	private String sourcePackagePrefix;
+
+	/**
+	 * It for detect access log file path
+	 */
+	@Value("${accesslog.file.path}")
+	@Getter
+	private String accessLogFilePath;
 }
