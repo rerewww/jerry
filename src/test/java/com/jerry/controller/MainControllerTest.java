@@ -82,4 +82,14 @@ public class MainControllerTest {
 		List<String> result = mapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
 		assertThat(result.size(), is(3));
 	}
+
+	@Test
+	public void getUsageTest() throws Exception {
+		mockMvc.perform(post("/usage.son")).andExpect(status().isOk());
+	}
+
+	@Test
+	public void accessLogsTest() throws Exception {
+		mockMvc.perform(post("/accessLogs.son")).andExpect(status().isOk());
+	}
 }
