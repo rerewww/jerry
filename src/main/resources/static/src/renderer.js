@@ -16,9 +16,18 @@ var renderer = {
 
         var rootElem = document.getElementById('error');
 
+        while (rootElem.childElementCount > 1) {
+            console.log('remove');
+            rootElem.removeChild(rootElem.firstElementChild);
+        }
+
         var index = aExceptions.length - 1;
         var i = 0;
         while (i < index) {
+            if (i === 200) {
+                break;
+            }
+
             var tr = document.createElement('tr');
             var td = document.createElement('td');
             td.innerHTML = '[' + i + '] ' + aExceptions[index];
