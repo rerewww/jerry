@@ -3,7 +3,7 @@
 <head>
   <style>
   tr:hover td{
-    background: #45E1E8;
+    background: darkslateblue;
   }
 </style>
 
@@ -25,6 +25,7 @@
   <script type="text/javascript" src="/src/server.js"></script>
   <script type="text/javascript" src="/src/setting.js"></script>
   <script type="text/javascript" src="/src/action.js"></script>
+  <script type="text/javascript" src="/src/clientConfig.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -87,8 +88,6 @@
         <div class="col-xs-5 table-responsive container_items" style="margin-bottom: 0px; height: 300px;">
           <h4 class="container_headers header-title mt-0">ERROR LOGS</h4>
           <table id="error" class="table table-striped">
-            <tbody>
-            </tbody>
           </table>
         </div>
         <div id='stack_trace' class="col-xs-7 container_items" style="width: 57%; margin-left: 15px;">

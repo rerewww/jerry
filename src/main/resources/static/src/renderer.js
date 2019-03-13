@@ -13,15 +13,23 @@ var renderer = {
         if (aExceptions.length === 0 && aStackTraces.length === 0) {
             return;
         }
-
         var rootElem = document.getElementById('error');
 
         var index = aExceptions.length - 1;
         var i = 0;
         while (i < index) {
+            // 제한 크기와 같으면 에러 로그 삽입을 중지한다.
+            if (i === clientConfig.removeNodeLimit) {
+                break;
+            }
+
+            if (rootElem.childElementCount >= clientConfig.removeNodeLimit) {
+                rootElem.removeChild(rootElem.firstElementChild);
+            }
+
             var tr = document.createElement('tr');
             var td = document.createElement('td');
-            td.innerHTML = '[' + i + '] ' + aExceptions[index];
+            td.innerHTML = aExceptions[index];
             td.className = 'errorItem';
 
             var number = '' + index;
@@ -130,6 +138,10 @@ var renderer = {
 
         var tbody = document.getElementById('logs').children[0];
         for (var i = 0; i < length; i++) {
+            if (tbody.childElementCount >= clientConfig.removeNodeLimit) {
+                tbody.removeChild(tbody.firstElementChild);
+            }
+
             var re = /.+(.java|.class)(.*?)\)/g;
             var tr = document.createElement('tr');
             var td = document.createElement('td');
