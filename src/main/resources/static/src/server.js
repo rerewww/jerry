@@ -5,7 +5,6 @@ function connect(){
     sock = new SockJS("http://localhost:8888/stomp");
     stompClient = Stomp.over(sock);
     stompClient.connect({}, function(frame){
-        console.log('connected stomp over sockjs');
         stompClient.subscribe('/subscribe/notice', onMessage);
         stompClient.debug = null;
     });

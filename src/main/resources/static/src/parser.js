@@ -9,8 +9,6 @@ var parser = {
                 if (response === null || response === undefined) {
                     return;
                 }
-
-                console.log(response);
             }
         })
     },
