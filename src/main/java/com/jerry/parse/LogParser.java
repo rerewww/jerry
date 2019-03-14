@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class LogParser {
 	private final static String PRE_ERROR_LOGS = "\tat";
-	private long fileLength;
+	private long pointer = 0;
 
 	private long accessFileLength;
 
@@ -41,7 +41,7 @@ public class LogParser {
 			return new LogModel(CommonCode.FAIL);
 		}
 
-		if (fileLength == file.length()) {
+		if (file.length() <= pointer) {
 			return new LogModel(CommonCode.NO_CHAGE_LOGS);
 		}
 
@@ -50,7 +50,8 @@ public class LogParser {
 		StringBuilder builder = new StringBuilder();
 		String line;
 		boolean isCatchException = false;
-		try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+		try (RandomAccessFile reader = new RandomAccessFile(file, "r")){
+			reader.seek(pointer);
 			int index = 0;
 			String header = "";
 			while ((line = reader.readLine()) != null) {
@@ -83,11 +84,12 @@ public class LogParser {
 			if (builder.length() > 0) {
 				logModel.setStackTraces(builder);
 			}
+
+			pointer = reader.getFilePointer();
 		} catch (IOException e) {
 			log.warn(e.getMessage(), e);
 		}
 
-		fileLength = file.length();
 		return logModel;
 	}
 
