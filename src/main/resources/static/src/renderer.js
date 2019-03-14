@@ -205,6 +205,9 @@ var renderer = {
 
     drawAccessLogs: function (data) {
         var elem = document.getElementById('accessLogs');
+        if (elem.childElementCount >= clientConfig.removeNodeLimit) {
+            elem.removeChild(elem.firstElementChild);
+        }
 
         data.forEach(function (item) {
             var tr = document.createElement('tr');
