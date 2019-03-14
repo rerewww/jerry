@@ -205,11 +205,10 @@ var renderer = {
 
     drawAccessLogs: function (data) {
         var elem = document.getElementById('accessLogs');
-        if (elem.childElementCount >= clientConfig.removeNodeLimit) {
-            elem.removeChild(elem.firstElementChild);
-        }
-
         data.forEach(function (item) {
+            if (elem.childElementCount >= clientConfig.removeNodeLimit) {
+                elem.removeChild(elem.firstElementChild);
+            }
             var tr = document.createElement('tr');
             var td = document.createElement('td');
             td.innerHTML = item;
