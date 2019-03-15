@@ -17,7 +17,7 @@ var renderer = {
 
         var index = aExceptions.length - 1;
         var i = 0;
-        while (i < index) {
+        while (i <= index) {
             // 제한 크기와 같으면 에러 로그 삽입을 중지한다.
             if (i === clientConfig.removeNodeLimit) {
                 break;

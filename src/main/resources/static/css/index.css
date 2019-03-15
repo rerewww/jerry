@@ -6,7 +6,8 @@
     font-family: "Karla", sans-serif;
     font-size: 15px;
     font-weight: bold;
-    color: #BBBB00
+    color: #BBBB00;
+    cursor: pointer;
 }
 
 #stack_trace {
@@ -70,6 +71,7 @@ summary {
     background-color: #2F3E47;
     border-radius: 0px;
     box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+    cursor: pointer;
 }
 
 p {
