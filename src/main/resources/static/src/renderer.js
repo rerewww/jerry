@@ -17,7 +17,7 @@ var renderer = {
 
         var index = aExceptions.length - 1;
         var i = 0;
-        while (i < index) {
+        while (i <= index) {
             // 제한 크기와 같으면 에러 로그 삽입을 중지한다.
             if (i === clientConfig.removeNodeLimit) {
                 break;
@@ -100,6 +100,7 @@ var renderer = {
                         var p = document.createElement('p');
                         p.className = 'codestyle';
 
+                        theme.apply(aResponse[i]);
                         if (!aResponse[i + 1]) {
                             p.innerHTML = aResponse[i];
                         } else {
@@ -205,8 +206,10 @@ var renderer = {
 
     drawAccessLogs: function (data) {
         var elem = document.getElementById('accessLogs');
-
         data.forEach(function (item) {
+            if (elem.childElementCount >= clientConfig.removeNodeLimit) {
+                elem.removeChild(elem.firstElementChild);
+            }
             var tr = document.createElement('tr');
             var td = document.createElement('td');
             td.innerHTML = item;
