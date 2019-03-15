@@ -100,6 +100,7 @@ var renderer = {
                         var p = document.createElement('p');
                         p.className = 'codestyle';
 
+                        theme.apply(aResponse[i]);
                         if (!aResponse[i + 1]) {
                             p.innerHTML = aResponse[i];
                         } else {
