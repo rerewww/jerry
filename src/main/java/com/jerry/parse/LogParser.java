@@ -16,9 +16,8 @@ import java.util.List;
 @Service
 public class LogParser {
 	private final static String PRE_ERROR_LOGS = "\tat";
-	private long pointer = 0;
-
-	private long accessFileLength;
+	private long errorPointer = 0;
+	private long accessPointer = 0;
 
 	/**
 	 * Read Log File
@@ -41,7 +40,7 @@ public class LogParser {
 			return new LogModel(CommonCode.FAIL);
 		}
 
-		if (file.length() <= pointer) {
+		if (file.length() <= errorPointer) {
 			return new LogModel(CommonCode.NO_CHAGE_LOGS);
 		}
 
@@ -51,7 +50,7 @@ public class LogParser {
 		String line;
 		boolean isCatchException = false;
 		try (RandomAccessFile reader = new RandomAccessFile(file, "r")){
-			reader.seek(pointer);
+			reader.seek(errorPointer);
 			int index = 0;
 			String header = "";
 			while ((line = reader.readLine()) != null) {
@@ -85,7 +84,7 @@ public class LogParser {
 				logModel.setStackTraces(builder);
 			}
 
-			pointer = reader.getFilePointer();
+			errorPointer = reader.getFilePointer();
 		} catch (IOException e) {
 			log.warn(e.getMessage(), e);
 		}
@@ -131,24 +130,24 @@ public class LogParser {
 			return new LogModel(CommonCode.NOT_EXIST_FILE);
 		}
 
-		if (accessFileLength == accessLogFile.length()) {
+		if (accessLogFile.length() <= accessPointer) {
 			return new LogModel(CommonCode.NO_CHAGE_LOGS);
 		}
 
 		LogModel model = new LogModel(CommonCode.SUCCESS);
 
-		try (BufferedReader reader = new BufferedReader(new FileReader(accessLogFile))) {
+		try (RandomAccessFile reader = new RandomAccessFile(accessLogFile, "r")) {
+			reader.seek(accessPointer);
 			String line = reader.readLine();
 
 			while (line != null) {
 				model.setAccessLogs(line);
 				line = reader.readLine();
 			}
+			accessPointer = reader.getFilePointer();
 		} catch (IOException e) {
 			log.warn(e.getMessage(), e);
 		}
-
-		accessFileLength = accessLogFile.length();
 		return model;
 	}
 }
