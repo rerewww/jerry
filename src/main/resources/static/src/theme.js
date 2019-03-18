@@ -2,16 +2,26 @@
  * Created by son on 2019-03-14.
  */
 var theme = {
-    regexKeyword: /public|private|if|else|while|for|try|catch|return|new|null|final|break|continue/g,
-    regexType: /int|String|List|Map|Set|File|Path/g,
-    regexBracket: /\(|\)|\{|\}|\[|\]/g,
-    keywordColor: '#93C763',
-    typeColor: '#678CB1',
-    bracketColor: '#E8E2B7',
+    regexKeyword: /public|private|if|else|while|for|try|catch|return|new|null|final|break|continue|true|false/g,
+    regexType: /int|File|Path|MultipartFile|Iterator|boolean|char/g,
+    keywordColor: '#CC7832',
+    typeColor: '#BBB529',
+    numberColor: '#606366',
 
     apply : function (text) {
         var result = text;
         var matchKeyword = text.match(this.regexKeyword);
+
+        if (text.indexOf(':') > 0) {
+            var number = result.substring(0, text.indexOf(':') + 1);
+            var back = result.substring(text.indexOf(':') + 1, text.length);
+
+            var font = document.createElement('font');
+            font.innerText += number;
+            font.color = this.numberColor;
+
+            result = font.outerHTML + back;
+        }
 
         if (!!matchKeyword && matchKeyword !== '') {
             matchKeyword.forEach(function (item) {
@@ -30,35 +40,28 @@ var theme = {
 
         var matchType = result.match(this.regexType);
         if (!!matchType && matchType !== '') {
+            var _text = result;
+            var temp = '';
+            var back = '';
             matchType.forEach(function (item) {
-                var _text = result;
                 var index = _text.indexOf(item);
+
                 var front = _text.substring(0, index);
-                var back = _text.substring(index + item.length, _text.length);
+                back = _text.substring(index + item.length, _text.length);
+                if ((_text.charAt(index - 1) === ";" && _text.charAt(index + item.length) === ' ')
+                    || _text.charAt(index - 1) === ' ') {
+                    var font = document.createElement('font');
+                    font.innerText += item;
+                    font.color = this.typeColor;
 
-                var font = document.createElement('font');
-                font.innerText += item;
-                font.color = this.typeColor;
-
-                result = front + font.outerHTML + back;
+                    temp += front + font.outerHTML;
+                } else {
+                    temp += front + item;
+                }
+                _text = back;
             }.bind(this));
+            result = temp + back;
         }
-
-        // var matchBracket = result.match(this.regexBracket);
-        // if (!!matchBracket && matchBracket !== '') {
-        //     matchBracket.forEach(function (item) {
-        //         var _text = result;
-        //         var index = _text.indexOf(item);
-        //         var front = _text.substring(0, index);
-        //         var back = _text.substring(index + item.length, _text.length);
-        //
-        //         var span = document.createElement('span');
-        //         span.innerText += item;
-        //         span.style = this.bracketColor;
-        //
-        //         result = front + span.outerHTML + back;
-        //     }.bind(this));
-        // }
 
         if (result === '') {
             result = text;
