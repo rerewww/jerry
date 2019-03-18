@@ -100,15 +100,15 @@ var renderer = {
                         var p = document.createElement('p');
                         p.className = 'codestyle';
 
-                        theme.apply(aResponse[i]);
+                        if (lineNumber === aResponse[i].substring(0, aResponse[i].indexOf('&nbsp') - 1)) {
+                            p.style = 'color: red; font-weight: bold';
+                        } else {
+                            aResponse[i] = theme.apply(aResponse[i]);
+                        }
                         if (!aResponse[i + 1]) {
                             p.innerHTML = aResponse[i];
                         } else {
                             p.innerHTML = aResponse[i] + '</br>';
-                        }
-
-                        if (lineNumber === aResponse[i].substring(0, aResponse[i].indexOf('&nbsp') - 1)) {
-                            p.style = 'color: red; font-weight: bold';
                         }
                         elem.appendChild(p);
                     }

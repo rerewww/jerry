@@ -50,8 +50,7 @@ public class MainController {
 	@ResponseBody
 	public ResultModel parse() {
 		LogModel logModel = logService.parse();
-		ResultModel resultModel = new ResultModel(true, "success", logModel);
-		return resultModel;
+		return new ResultModel(true, "success", logModel);
 	}
 
 	@RequestMapping("/viewCode.son")
@@ -64,8 +63,7 @@ public class MainController {
 		if (projectFile == null) {
 			return Collections.emptyList();
 		}
-		List<String> contents = logService.getViewCode(projectFile, line, range);
-		return contents;
+		return logService.getViewCode(projectFile, line, range);
 	}
 
 	@RequestMapping("/usage.son")
