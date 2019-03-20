@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by son on 2019-03-09.
@@ -51,8 +53,17 @@ public class SystemService {
     }
 
     public Map<String, String> getInfos() {
+        Pattern pattern = Pattern.compile("Servernumber:([0-9].*)");
         Map<String, String> result = new HashMap<>();
-        result.put("version", "7.0.59");
+
+        String version = getTomcatVersion().replaceAll(" ", "");
+        Matcher matcher = pattern.matcher(version);
+
+        result.put("version", "no exist");
+        if (matcher.find()) {
+            result.put("version", matcher.group(1));
+        }
+
         result.put("branch", "master");
 
         return result;
@@ -63,7 +74,7 @@ public class SystemService {
             return "Do not windows";
         }
 
-        File tomcatDir = new File(config.getLogFilePath()).getParentFile();
+        File tomcatDir = new File(config.getLogFilePath()).getParentFile().getParentFile();
         File versionScript = new File(String.format("%s/bin/version.sh", tomcatDir.getAbsolutePath()));
 
         List<String> command = new ArrayList<>();
