@@ -64,10 +64,16 @@
         <div class="col-xl-3 col-md-3 card_items container_items">
           <div class="card-box" style="height: 149px">
             <h4 class="container_headers header-title mt-0 m-b-30">USAGE</h4>
-            <div class="widget-box-2">
+            <div class="widget-box-2" style="width: 50%; float: left;">
               <div class="widget-detail-2" style=" height: 112px;">
-                <h3 class="mb-0" style="margin-top: 10px; font-weight: bold; color: beige;">CPU / MEMORY(%)</h3>
-                <div id="usage" style="float: left; font-size: 50px; color: #F8F8F2; font-weight: bold;">12 / 50</div>
+                <h5 class="mb-0" style="margin-top: 10px; font-weight: bold; color: beige;">CPU/MEMORY(%)</h5>
+                <div id="usage" style="float: left; font-size: 40px; color: #F8F8F2; font-weight: bold;"></div>
+              </div>
+            </div>
+            <div class="widget-box-2" style="width: 50%; float: right;">
+              <div class="widget-detail-2" style=" height: 112px;">
+                <h5 class="mb-0" style="margin-top: 10px; font-weight: bold; color: beige;">VERSION/BRANCH</h5>
+                <div id="infos" style="float: left; font-size: 35px; color: #F8F8F2; font-weight: bold; line-height: 30px;"></div>
               </div>
             </div>
           </div>
@@ -121,6 +127,7 @@
     }, 2000);
     connect();
 
+    action.getInfos();
     setInterval(function () {
       action.getUsage();
     }, 5000);
