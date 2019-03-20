@@ -185,7 +185,7 @@ var renderer = {
 
         var i = 0, j = 0;
         var acrInterval = setInterval (function() {
-            usageElem.innerHTML = i + ' / ' + j;
+            usageElem.innerHTML = i + '/' + j;
             if( i === cpu && j === memory) {
                 clearInterval(acrInterval);
             }
@@ -202,6 +202,15 @@ var renderer = {
                 j++;
             }
         }, 15);
+    },
+
+
+    drawInfos: function (oData) {
+        var version = oData.version;
+        var branch = oData.branch;
+
+        var infosElem = document.getElementById('infos');
+        infosElem.innerHTML = version + '<br>' + branch;
     },
 
     drawAccessLogs: function (data) {

@@ -12,5 +12,16 @@ var action = {
                 renderer.drawUsage(response);
             }
         })
+    },
+    getInfos: function () {
+        $.ajax({
+            url: 'getInfos.son',
+            type: 'GET',
+            async: true,
+            dataType: 'json',
+            success: function(response) {
+                renderer.drawInfos(response);
+            }
+        })
     }
 };

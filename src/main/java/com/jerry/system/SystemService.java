@@ -5,9 +5,15 @@ import com.sun.management.OperatingSystemMXBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StreamUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,5 +48,42 @@ public class SystemService {
         result.put("cpu", cpu);
         result.put("memory", (int)(memory / operatingSystemMXBean.getTotalPhysicalMemorySize() * 100));
         return result;
+    }
+
+    public Map<String, String> getInfos() {
+        Map<String, String> result = new HashMap<>();
+        result.put("version", "7.0.59");
+        result.put("branch", "master");
+
+        return result;
+    }
+
+    private String getTomcatVersion() {
+        if (System.getProperty("os.name").toLowerCase().contains("window")) {
+            return "Do not windows";
+        }
+
+        File tomcatDir = new File(config.getLogFilePath()).getParentFile();
+        File versionScript = new File(String.format("%s/bin/version.sh", tomcatDir.getAbsolutePath()));
+
+        List<String> command = new ArrayList<>();
+        command.add("/bin/bash");
+        command.add("-c");
+        command.add(versionScript.getAbsolutePath());
+
+        ProcessBuilder processBuilder = new ProcessBuilder(command);
+        processBuilder.redirectInput();
+
+        try {
+            Process process = processBuilder.start();
+            String result = StreamUtils.copyToString(process.getInputStream(), StandardCharsets.UTF_8);
+            process.destroy();
+
+            return result;
+        } catch (IOException e) {
+            log.warn(e.getMessage(), e);
+        }
+
+        return "";
     }
 }

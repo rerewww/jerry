@@ -51,4 +51,9 @@ public class LogService {
 	public LogModel getAccessLogs() {
 		return logManager.getAccessLogs();
 	}
+
+	public Map<String, String> getInfos() {
+		Map<String, String> result = systemService.getInfos();
+		return result;
+	}
 }
