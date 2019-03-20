@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,8 +65,8 @@ public class SystemService {
             result.put("version", matcher.group(1));
         }
 
-        result.put("branch", "master");
-
+        String branch = getBranchInfo();
+        result.put("branch", StringUtils.isEmpty(branch) ? "no exist" : branch);
         return result;
     }
 
@@ -81,6 +82,36 @@ public class SystemService {
         command.add("/bin/bash");
         command.add("-c");
         command.add(versionScript.getAbsolutePath());
+
+        ProcessBuilder processBuilder = new ProcessBuilder(command);
+        processBuilder.redirectInput();
+
+        try {
+            Process process = processBuilder.start();
+            String result = StreamUtils.copyToString(process.getInputStream(), StandardCharsets.UTF_8);
+            process.destroy();
+
+            return result;
+        } catch (IOException e) {
+            log.warn(e.getMessage(), e);
+        }
+
+        return "";
+    }
+
+     public String getBranchInfo() {
+        if (System.getProperty("os.name").toLowerCase().contains("window")) {
+            return "Do not windows";
+        }
+
+        File projectDir = new File(config.getSourceDirPath());
+
+        List<String> command = new ArrayList<>();
+        command.add("cd");
+        command.add(projectDir.getAbsolutePath());
+        command.add(";");
+        command.add("git");
+        command.add("branch");
 
         ProcessBuilder processBuilder = new ProcessBuilder(command);
         processBuilder.redirectInput();
