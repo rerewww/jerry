@@ -65,7 +65,7 @@ public class SystemService {
             result.put("version", matcher.group(1));
         }
 
-        String branch = getBranchInfo();
+        String branch = getBranchInfo().replaceAll("\\n", "");
         result.put("branch", StringUtils.isEmpty(branch) ? "no exist" : branch);
         return result;
     }
@@ -99,7 +99,7 @@ public class SystemService {
         return "";
     }
 
-     public String getBranchInfo() {
+    public String getBranchInfo() {
         if (System.getProperty("os.name").toLowerCase().contains("window")) {
             return "Do not windows";
         }
@@ -107,13 +107,13 @@ public class SystemService {
         File projectDir = new File(config.getSourceDirPath());
 
         List<String> command = new ArrayList<>();
-        command.add("cd");
-        command.add(projectDir.getAbsolutePath());
-        command.add(";");
         command.add("git");
-        command.add("branch");
+        command.add("rev-parse");
+        command.add("--abbrev-ref");
+        command.add("HEAD");
 
         ProcessBuilder processBuilder = new ProcessBuilder(command);
+        processBuilder.directory(projectDir);
         processBuilder.redirectInput();
 
         try {
