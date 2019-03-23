@@ -112,6 +112,7 @@ var renderer = {
                         }
                         elem.appendChild(p);
                     }
+                    $('#loading').css('display', 'none');
                 }.bind(this);
 
                 parser.viewCode(fileName, line, 10, successCallback);
