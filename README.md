@@ -16,16 +16,17 @@ Quick Start
 
 1. Modify application.properties.xml
 ```
-server.port = 'insert your port'
-source.dir.path = 'source folder path to explore'
-source.package.prefix = 'com.example'
-log.file.path = 'tomcat log file path to explore'
-accesslog.file.path = 'access log file path to explore'
+- server.port = 'insert your port'
+- source.dir.path = 'source folder path to explore'
+- source.package.prefix = 'com.example'
+- log.file.path = 'tomcat log file path to explore'
+- accesslog.file.path = 'access log file path to explore'
 ```
 2. Run Maven
 ```
 mvn spring-boot:run
 ```
+3. Connect "localhost:port"
 
 Requirements
 -----------
