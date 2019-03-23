@@ -17,6 +17,11 @@
 
 .fileInfo {
     margin: 0px;
+    background-color: #2B2B2B;
+    font-size: 17px;
+    font-weight: bold;
+    vertical-align: middle;
+    text-align: center;
 }
 
 td {
