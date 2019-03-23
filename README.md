@@ -7,6 +7,7 @@ Collect tomcat logs and show them beautifully
 
 Documentation
 -------------
+![main view](./images/mainView.PNG)
 It's to quickly analyze and view tomcat logs in real time without needing to use your terminal.
 
 
