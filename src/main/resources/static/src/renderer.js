@@ -67,8 +67,7 @@ var renderer = {
             details.id = 'details';
             var isSourcePackage = aStackTraces[i].indexOf(_info.sourcePackage) > -1;
 
-            // if ($('input[id=libCheck]').is(':checked') && !isSourcePackage) {
-            if (!isSourcePackage) {
+            if (!clientConfig.checkedLib() && !isSourcePackage) {
                 console.log('라이브러리 경로는 무시합니다.');
                 continue;
             }

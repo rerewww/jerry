@@ -3,21 +3,55 @@
  */
 var setting = {
     onToggleLibEvent: function () {
-        var isCheckedPackets = $('input[id=libCheck]').is(':checked');
-        if (!isCheckedPackets) {
+        var isCheckedLib= $('input[id=libCheck]').is(':checked');
+        if (!isCheckedLib) {
             $('input[id=libCheck]').trigger('click');
         }
     },
-    onToggleParseEvent: function () {
-        var isCheckedPackets = $('input[id=ParseCheck]').is(':checked');
-        if (!isCheckedPackets) {
-            $('input[id=ParseCheck]').trigger('click');
+    onToggleLogEvent: function () {
+        var isCheckedLog = $('input[id=logCheck]').is(':checked');
+        if (!isCheckedLog) {
+            $('input[id=logCheck]').trigger('click');
         }
     },
     onToggleErrorEvent: function () {
-        var isCheckedPackets = $('input[id=ErrorCheck]').is(':checked');
-        if (!isCheckedPackets) {
-            $('input[id=ErrorCheck]').trigger('click');
+        var isCheckedError = $('input[id=errorCheck]').is(':checked');
+        if (!isCheckedError) {
+            $('input[id=errorCheck]').trigger('click');
         }
+    },
+    onToggleAccessEvent: function () {
+        var isCheckedAccess= $('input[id=accessCheck]').is(':checked');
+        if (!isCheckedAccess) {
+            $('input[id=accessCheck]').trigger('click');
+        }
+    },
+    dropDowns: function () {
+        document.getElementById("options").classList.toggle("show");
+    }
+};
+
+window.onclick = function(e) {
+    if (!e.target.matches('.dropbtn')) {
+        var options = document.getElementById("options");
+        if (!e.target.matches('.slider') && !e.target.matches('input') && options.classList.contains('show')) {
+            options.classList.remove('show');
+        }
+    }
+
+    var stackTraces = document.getElementById('stack_trace');
+
+    if (e.target.matches('.errorItem') || e.target.matches('summary') || e.target.matches('.codestyle')) {
+        return;
+    }
+
+    if (stackTraces.firstElementChild.tagName === 'DETAILS') {
+        while (stackTraces.childElementCount > 0) {
+            stackTraces.removeChild(stackTraces.firstElementChild)
+        }
+
+        var header = document.createElement('h4');
+        header.innerHTML = '<h4 class="container_headers header-title mt-0">Please select error log in table</h4>';
+        stackTraces.appendChild(header);
     }
 };
