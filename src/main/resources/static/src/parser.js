@@ -17,6 +17,8 @@ var parser = {
         if (!line) {
             return;
         }
+
+        $('#loading').css('display', 'block');
         $.ajax({
             url: '/viewCode.son',
             type:'GET',
