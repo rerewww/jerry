@@ -90,7 +90,7 @@ var renderer = {
                     if (aResponse.length === 0) {
                         var p = document.createElement('p');
                         p.className = 'fileInfo';
-                        p.innerHTML = "not exist file";
+                        p.innerHTML = "Library files can not do code analysis.";
                         elem.appendChild(p);
                         return;
                     }
