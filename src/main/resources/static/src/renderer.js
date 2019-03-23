@@ -92,6 +92,7 @@ var renderer = {
                         p.className = 'fileInfo';
                         p.innerHTML = "Library files can not do code analysis.";
                         elem.appendChild(p);
+                        $('#loading').css('display', 'none');
                         return;
                     }
 
