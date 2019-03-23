@@ -1,5 +1,8 @@
 var parser = {
     start: function() {
+        if (!clientConfig.checkedLog()) {
+            return;
+        }
         $.ajax({
             url: '/read.son',
             type:'GET',
@@ -34,7 +37,9 @@ var parser = {
     },
 
     accesssLogs: function () {
-        var status =
+        if (!clientConfig.checkedAccess()) {
+            return;
+        }
         $.ajax({
             url: 'accessLogs.son',
             type: 'GET',
@@ -83,6 +88,9 @@ var parser = {
 
 var parserError = {
     start: function () {
+        if (!clientConfig.checkedError()) {
+            return;
+        }
         $.ajax({
             url: 'parse.son',
             type: 'GET',

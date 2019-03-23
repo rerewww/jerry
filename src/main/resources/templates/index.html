@@ -53,7 +53,41 @@
           <img id='loading' th:src="@{/images/loading.gif}" style="display: none;"/>
         </li>
         <li class="active"><a href="/">Home</a></li>
-        <li><a href="/info">Info</a></li>
+        <li>
+          <div class="dropdown">
+            <button onclick="setting.dropDowns()" class="dropbtn">Options</button>
+            <div id="options" class="dropdown-content">
+              <div style="padding-bottom: 5px;">
+                <span class="switchHeader">ACCESS</span>
+                <label class="switch">
+                  <input id="accessCheck" type="checkbox" onclick="setting.onToggleAccessEvent()">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div style="padding-bottom: 5px;">
+                <span class="switchHeader">ERROR</span>
+                <label class="switch">
+                  <input id="errorCheck" type="checkbox" onclick="setting.onToggleErrorEvent()">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div style="padding-bottom: 5px;">
+                <span class="switchHeader">LOGS</span>
+                <label class="switch">
+                  <input id="logCheck" type="checkbox" onclick="setting.onToggleLogEvent()">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div style="padding-bottom: 5px;">
+                <span class="switchHeader">Stacks</span>
+                <label class="switch">
+                  <input id="libCheck" type="checkbox" onclick="setting.onToggleLibEvent()">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </li>
         <li><a href="/setting">Setting</a></li>
       </ul>
     </div>
@@ -102,10 +136,6 @@
         </div>
         <div id='stack_trace' class="col-xs-7 container_items" style="width: 57%; margin-left: 15px; background-color: #2F3E47;">
           <h4 class="container_headers header-title mt-0">Please select error log in table</h4>
-          <details id="ethernetContents" style="display: none"></details>
-          <details id="ipContents" style="display: none"></details>
-          <details id="transport" style="display: none"></details>
-          <details id="dumpContents" style="display: none"></details>
         </div>
       </div>
       </div>
@@ -139,8 +169,9 @@
       parser.accesssLogs();
     }, 1000);
 
-    setting.onToggleParseEvent();
+    setting.onToggleLogEvent();
     setting.onToggleErrorEvent();
+    setting.onToggleAccessEvent();
 
     var date = moment().add(0, 'd').format();
     var chartConfig = {
