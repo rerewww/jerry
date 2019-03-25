@@ -28,7 +28,7 @@ var parser = {
             async: true,
             data: {
                 fileName: fileName,
-                line: line,
+                line: document.getElementById('codeRange').value,
                 range: range
             },
             dataType: 'json',
