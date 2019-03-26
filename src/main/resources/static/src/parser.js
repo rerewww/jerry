@@ -28,8 +28,8 @@ var parser = {
             async: true,
             data: {
                 fileName: fileName,
-                line: document.getElementById('codeRange').value,
-                range: range
+                line: line,
+                range: document.getElementById('codeRange').value
             },
             dataType: 'json',
             success: successCallback
