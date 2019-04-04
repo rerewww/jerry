@@ -3,6 +3,7 @@
  */
 var clientConfig = {
     removeNodeLimit: 200,
+    chartDataLimit: 6,
     checkedLib: function () {
         return $('input[id=libCheck]').is(':checked');
     },
