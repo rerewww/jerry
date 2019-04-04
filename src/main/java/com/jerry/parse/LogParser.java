@@ -41,7 +41,7 @@ public class LogParser {
 		}
 
 		if (file.length() <= errorPointer) {
-			return new LogModel(CommonCode.NO_CHAGE_LOGS);
+			return new LogModel(CommonCode.NO_CHANGE_LOGS);
 		}
 
 		LogModel logModel = new LogModel();
@@ -131,7 +131,7 @@ public class LogParser {
 		}
 
 		if (accessLogFile.length() <= accessPointer) {
-			return new LogModel(CommonCode.NO_CHAGE_LOGS);
+			return new LogModel(CommonCode.NO_CHANGE_LOGS);
 		}
 
 		LogModel model = new LogModel(CommonCode.SUCCESS);

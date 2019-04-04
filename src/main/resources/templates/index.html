@@ -159,19 +159,9 @@
       window._info = {};
     }
     _info.sourcePackage = [[${sourcePackage}]];
-    _info.errorId = setInterval(function () {
-      parserError.start();
-    }, 2000);
     connect();
 
     action.getInfos();
-    setInterval(function () {
-      action.getUsage();
-    }, 5000);
-
-    setInterval(function () {
-      parser.accesssLogs();
-    }, 1000);
 
     setting.onToggleLogEvent();
     setting.onToggleErrorEvent();

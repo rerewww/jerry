@@ -3,10 +3,6 @@
  */
 var renderer = {
     drawErrorElem: function (oResult) {
-        // if (!$('input[id=ErrorCheck]').is(':checked')) {
-        //     return;
-        // }
-
         var aExceptions = oResult.exceptions;
         var aStackTraces = oResult.stackTraces;
 
@@ -131,10 +127,6 @@ var renderer = {
     },
 
     drawLog: function (logs) {
-        // if (!$('input[id=ParseCheck]').is(':checked')) {
-        //     return;
-        // }
-
         var aLogs = logs.split('\r\t');
         var length = aLogs.length;
 
@@ -216,7 +208,7 @@ var renderer = {
 
     drawAccessLogs: function (data) {
         var elem = document.getElementById('accessLogs');
-        data.forEach(function (item) {
+        data.accessLogs.forEach(function (item) {
             if (elem.childElementCount >= clientConfig.removeNodeLimit) {
                 elem.removeChild(elem.firstElementChild);
             }
