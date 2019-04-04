@@ -1,8 +1,5 @@
 var parser = {
     start: function() {
-        if (!clientConfig.checkedLog()) {
-            return;
-        }
         $.ajax({
             url: '/read.son',
             type:'GET',

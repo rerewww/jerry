@@ -45,7 +45,7 @@ window.onclick = function(e) {
         return;
     }
 
-    if (stackTraces.firstElementChild.tagName === 'DETAILS') {
+    if (stackTraces.firstElementChild !== null && stackTraces.firstElementChild.tagName === 'DETAILS') {
         while (stackTraces.childElementCount > 0) {
             stackTraces.removeChild(stackTraces.firstElementChild)
         }
