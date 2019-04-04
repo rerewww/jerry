@@ -39,4 +39,25 @@ public class ServerConfig {
 	@Value("${accesslog.file.path}")
 	@Getter
 	private String accessLogFilePath;
+
+	/**
+	 * It for ajp protocol
+	 */
+	@Value("${ajp.protocol}")
+	@Getter
+	private String ajpProtocol;
+
+	/**
+	 * It for ajp port
+	 */
+	@Value("${ajp.port}")
+	@Getter
+	private int ajpPort;
+
+	/**
+	 * It for ajp protocol
+	 */
+	@Value("${ajp.enabled}")
+	@Getter
+	private boolean ajpEnabled;
 }
