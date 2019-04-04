@@ -223,9 +223,12 @@ var renderer = {
     },
 
     updateChart: function (oSuccess, oFail) {
-        // 200 - 300
+        if (chartConfig.data.datasets[0].data.length >= clientConfig.chartDataLimit || chartConfig.data.datasets[1].data.length >= clientConfig.chartDataLimit) {
+            chartConfig.data.datasets[0].data.shift();
+            chartConfig.data.datasets[1].data.shift();
+        }
+
         chartConfig.data.datasets[0].data.push(oSuccess);
-        // 400 - 500
         chartConfig.data.datasets[1].data.push(oFail);
 
         window.chart.update();
