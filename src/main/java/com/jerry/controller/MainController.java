@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,14 +29,6 @@ public class MainController {
 	MainController(final LogService logService, final ServerConfig config) {
 		this.logService = logService;
 		this.config = config;
-	}
-
-	@RequestMapping("/")
-	public ModelAndView main() {
-		ModelAndView mv = new ModelAndView("index");
-		mv.addObject("sourcePackage", config.getSourcePackagePrefix());
-
-		return mv;
 	}
 
 	@RequestMapping("/read.son")
