@@ -21,6 +21,8 @@ Quick Start
 - source.package.prefix = 'com.example'
 - log.file.path = 'tomcat log file path to explore'
 - accesslog.file.path = 'access log file path to explore'
+- admin.user.id = 'your admin id'
+- admin.user.password = 'your admin password'
 ```
 2. Run Maven
 ```
