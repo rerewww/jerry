@@ -60,4 +60,18 @@ public class ServerConfig {
 	@Value("${ajp.enabled}")
 	@Getter
 	private boolean ajpEnabled;
+
+	/**
+	 * It for Admin Id
+	 */
+	@Value("${admin.user.id}")
+	@Getter
+	private String adminUserId;
+
+	/**
+	 * It for Admin Password
+	 */
+	@Value("${admin.user.password}")
+	@Getter
+	private String adminUserPassword;
 }

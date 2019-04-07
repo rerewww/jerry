@@ -22,6 +22,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(new ProjectFileArgumentResolver(config));
+        resolvers.add(new UserInfoArgumentResolver(config));
     }
 
     @Bean
