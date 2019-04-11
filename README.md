@@ -30,6 +30,12 @@ mvn spring-boot:run
 ```
 3. Connect "localhost:port"
 
+4. Check Web Sockets Connection
+- tomcat log
+- apache log
+- error log
+- usage log
+
 Requirements
 -----------
 
