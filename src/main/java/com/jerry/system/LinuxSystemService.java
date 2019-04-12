@@ -3,8 +3,7 @@ package com.jerry.system;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -21,16 +20,17 @@ public class LinuxSystemService implements SystemService {
 
 	@Override
 	public Map<String, Integer> getUsage() {
-		List<String> command = new ArrayList<>();
-		command.add("vmstat");
-		command.add("-s");
+		Map<String, Integer> result = new HashMap<>();
+		ProcessBuilder processBuilderForTotalMem = new ProcessBuilder("/bin/sh", "-c", "vmstat -s | grep -P \"total memory\" | sed 's/[^0-9]//g'");
+		processBuilderForTotalMem.redirectInput();
+		String totalMemory = systemCommonUtils.getStringResultByProcess(processBuilderForTotalMem);
 
-		ProcessBuilder processBuilder = new ProcessBuilder(command);
-		processBuilder.redirectInput();
-		String result = systemCommonUtils.getStringResultByProcess(processBuilder);
+		ProcessBuilder processBuilderForUsedMem = new ProcessBuilder("/bin/sh", "-c", "vmstat -s | grep -P \"used memory\" | sed 's/[^0-9]//g'");
+		processBuilderForUsedMem.redirectInput();
+		String usedMemory = systemCommonUtils.getStringResultByProcess(processBuilderForUsedMem);
 
-		log.info(result);
-		return null;
+		result.put("memory", (int)Math.ceil((Double.valueOf(usedMemory) / Double.valueOf(totalMemory)) * 100.0));
+		return result;
 	}
 
 	@Override
