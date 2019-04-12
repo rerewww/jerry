@@ -1,6 +1,9 @@
 package com.jerry.handler;
 
 import com.jerry.config.ServerConfig;
+import com.jerry.parse.LogManager;
+import com.jerry.service.LogService;
+import com.jerry.system.SystemServiceFactoryBean;
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
@@ -18,6 +21,8 @@ import java.util.List;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired ServerConfig config;
+    @Autowired LogManager logManager;
+    @Autowired SystemServiceFactoryBean systemServiceFactoryBean;
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
@@ -40,5 +45,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         connector.setSecure(false);
         connector.setAllowTrace(false);
         return connector;
+    }
+
+    @Bean
+    public LogService logService() {
+        return new LogService(logManager, systemServiceFactoryBean.getObject());
     }
 }
