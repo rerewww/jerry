@@ -1,6 +1,7 @@
 package com.jerry.system;
 
 import com.jerry.config.ServerConfig;
+import com.sun.management.OperatingSystemMXBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
@@ -107,5 +108,18 @@ public class SystemCommonUtils {
 		}
 
 		return result;
+	}
+
+	public int getCpuUsage(OperatingSystemMXBean operatingSystemMXBean) {
+		int cpu = 0;
+		while (cpu <= 0.0) {
+			cpu = (int) Math.round(operatingSystemMXBean.getSystemCpuLoad() * 100.0);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				log.warn(e.getMessage(), e);
+			}
+		}
+		return cpu;
 	}
 }

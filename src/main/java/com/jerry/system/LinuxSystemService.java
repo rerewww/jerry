@@ -1,8 +1,10 @@
 package com.jerry.system;
 
+import com.sun.management.OperatingSystemMXBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.lang.management.ManagementFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +31,9 @@ public class LinuxSystemService implements SystemService {
 		processBuilderForUsedMem.redirectInput();
 		String usedMemory = systemCommonUtils.getStringResultByProcess(processBuilderForUsedMem);
 
+		OperatingSystemMXBean operatingSystemMXBean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		result.put("memory", (int)Math.ceil((Double.valueOf(usedMemory) / Double.valueOf(totalMemory)) * 100.0));
+		result.put("cpu", systemCommonUtils.getCpuUsage(operatingSystemMXBean));
 		return result;
 	}
 

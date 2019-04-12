@@ -24,20 +24,9 @@ public class WindowSystemService implements SystemService {
     public Map<String, Integer> getUsage() {
         Map<String, Integer> result = new HashMap<>();
         OperatingSystemMXBean operatingSystemMXBean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
-        int cpu = 0;
-
-        while (cpu <= 0.0) {
-            cpu = (int) Math.round(operatingSystemMXBean.getSystemCpuLoad() * 100.0);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                log.warn(e.getMessage(), e);
-            }
-        }
-
         double memory = operatingSystemMXBean.getTotalPhysicalMemorySize() - operatingSystemMXBean.getFreePhysicalMemorySize();
 
-        result.put("cpu", cpu);
+        result.put("cpu", systemCommonUtils.getCpuUsage(operatingSystemMXBean));
         result.put("memory", (int)(memory / operatingSystemMXBean.getTotalPhysicalMemorySize() * 100));
         return result;
     }
