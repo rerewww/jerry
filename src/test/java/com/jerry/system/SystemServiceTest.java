@@ -13,12 +13,12 @@ import java.util.Map;
  */
 public class SystemServiceTest {
     @Mock ServerConfig serverConfig;
-    private SystemService systemService;
+    private WindowSystemService systemService;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        systemService = new SystemService(serverConfig);
+        systemService = new WindowSystemService(new SystemCommonUtils(serverConfig));
     }
 
     @Test

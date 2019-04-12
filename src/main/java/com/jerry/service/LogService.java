@@ -4,8 +4,8 @@ import com.jerry.model.LogModel;
 import com.jerry.parse.LogManager;
 import com.jerry.project.ProjectFile;
 import com.jerry.system.SystemService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 
 import java.io.File;
 import java.util.List;
@@ -14,16 +14,12 @@ import java.util.Map;
 /**
  * Created by son on 2019-02-26.
  */
-@Service
+@AllArgsConstructor
 public class LogService {
+	@Setter
 	private LogManager logManager;
+	@Setter
 	private SystemService systemService;
-
-	@Autowired
-	LogService(final LogManager logManager, final SystemService systemService) {
-		this.logManager = logManager;
-		this.systemService = systemService;
-	}
 
 	public LogModel parse() {
 		File file = logManager.getLogFile();
