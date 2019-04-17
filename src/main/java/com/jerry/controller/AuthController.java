@@ -3,6 +3,7 @@ package com.jerry.controller;
 import com.jerry.config.ServerConfig;
 import com.jerry.model.UserInfo;
 import com.jerry.service.AuthService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,5 +59,12 @@ public class AuthController {
         } else {
             return new ModelAndView("login");
         }
+    }
+
+    @RequestMapping("/setting")
+    public ModelAndView setting() {
+        ModelAndView mv = new ModelAndView("setting");
+	    mv.addObject("data", authService.getServerEnviornments());
+        return mv;
     }
 }

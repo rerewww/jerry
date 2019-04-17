@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -29,5 +31,14 @@ public class AuthService {
 
     public String createUniqueKey(final String userId) {
         return String.format("%s_%s", userId, UUID.randomUUID().toString());
+    }
+
+    /**
+     * Read a application.properties file
+     * @return Map
+     */
+    public Map<String, String> getServerEnviornments() {
+        Map<String, String> result = new HashMap<>();
+        return result;
     }
 }
