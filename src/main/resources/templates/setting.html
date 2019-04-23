@@ -96,10 +96,20 @@
 
 <div class="container-fluid">
   <div class="row">
+    <button onclick="action.reset()">Reset</button>
+    <button onclick="action.apply()">Apply</button>
+    <table id="settingTable" class="table table-stripted">
+    </table>
   </div>
 </div>
 </body>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+  if (!window._info) {
+    window._info = {
+      defaultEnvs: {}
+    };
+  }
+  action.setDefaultEnvs([[${data}]]);
   renderer.drawSetting([[${data}]]);
 </script>
 </html>

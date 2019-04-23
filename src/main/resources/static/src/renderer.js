@@ -240,5 +240,29 @@ var renderer = {
     },
 
     drawSetting: function (data) {
+        var table = document.getElementById('settingTable');
+        for (var i in data) {
+            var tr = document.createElement('tr');
+            var key = document.createElement('td');
+            var value = document.createElement('input');
+            value.className = 'setting_values';
+            value.value = data[i];
+            for (var j = 0; j < clientConfig.readOnlyKeys.length; j++) {
+                if (i === clientConfig.readOnlyKeys[j]) {
+                    value = document.createElement('td');
+                    break;
+                }
+            }
+
+            if (value.nodeName === 'TD') {
+                value.innerText = data[i];
+            }
+            key.innerText = i;
+
+            tr.appendChild(key);
+            tr.appendChild(value);
+
+            table.appendChild(tr);
+        }
     }
 };

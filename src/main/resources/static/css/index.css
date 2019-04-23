@@ -123,3 +123,7 @@ p {
 #options {
     background-color: #1F2328;
 }
+
+.setting_values {
+    color: black;
+}

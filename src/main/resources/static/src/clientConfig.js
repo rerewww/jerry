@@ -15,5 +15,7 @@ var clientConfig = {
     },
     checkedAccess: function () {
         return $('input[id=accessCheck]').is(':checked');
-    }
+    },
+
+    readOnlyKeys: ['serverPort', 'ajpProtocol', 'ajpPort', 'ajpEnabled']
 };
