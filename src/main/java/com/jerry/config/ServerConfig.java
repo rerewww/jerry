@@ -2,6 +2,7 @@ package com.jerry.config;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -16,28 +17,28 @@ public class ServerConfig {
 	 * It for detect source dir path
 	 */
 	@Value("${source.dir.path}")
-	@Getter
+	@Getter @Setter
 	private String sourceDirPath;
 
 	/**
 	 * It for detect log file path
 	 */
 	@Value("${log.file.path}")
-	@Getter
+	@Getter @Setter
 	private String logFilePath;
 
 	/**
 	 * It for highlighting stacktraces
 	 */
 	@Value("${source.package.prefix}")
-	@Getter
+	@Getter @Setter
 	private String sourcePackagePrefix;
 
 	/**
 	 * It for detect access log file path
 	 */
 	@Value("${accesslog.file.path}")
-	@Getter
+	@Getter @Setter
 	private String accessLogFilePath;
 
 	/**
