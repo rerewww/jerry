@@ -257,6 +257,7 @@ var renderer = {
             if (value.nodeName === 'TD') {
                 value.innerText = data[i];
             }
+            key.className = 'setting_keys';
             key.innerText = i;
 
             tr.appendChild(key);

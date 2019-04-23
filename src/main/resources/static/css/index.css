@@ -124,6 +124,21 @@ p {
     background-color: #1F2328;
 }
 
+.setting_keys {
+    text-indent: 5px;
+}
+
 .setting_values {
+    width: 50%;
     color: black;
+}
+
+.set_btn {
+    width: 70px;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 3px;
+    margin: 6px;
+    background-color: aqua;
+    font-weight: bold;
 }

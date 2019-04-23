@@ -48,7 +48,7 @@
         <li>
           <img id='loading' th:src="@{/images/loading.gif}" style="display: none;"/>
         </li>
-        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li>
           <div class="dropdown">
             <button onclick="setting.dropDowns()" class="dropbtn">Options</button>
@@ -88,7 +88,7 @@
             </div>
           </div>
         </li>
-        <li><a href="/setting">Setting</a></li>
+        <li class="active"><a href="/setting">Setting</a></li>
       </ul>
     </div>
   </div>
@@ -96,8 +96,8 @@
 
 <div class="container-fluid">
   <div class="row">
-    <button onclick="action.reset()">Reset</button>
-    <button onclick="action.apply()">Apply</button>
+    <button class="set_btn" onclick="action.reset()">Reset</button>
+    <button class="set_btn" onclick="action.apply()">Apply</button>
     <table id="settingTable" class="table table-stripted">
     </table>
   </div>
