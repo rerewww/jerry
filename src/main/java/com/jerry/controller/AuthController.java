@@ -59,4 +59,11 @@ public class AuthController {
             return new ModelAndView("login");
         }
     }
+
+    @RequestMapping("/setting")
+    public ModelAndView setting() {
+        ModelAndView mv = new ModelAndView("setting");
+	    mv.addObject("data", authService.getServerEnviornments());
+        return mv;
+    }
 }
