@@ -43,13 +43,24 @@ var action = {
     },
 
     apply: function () {
+        var data = {};
+        var table = document.getElementById('settingTable');
+        for (var i = 0; i < table.childElementCount; i++) {
+            if (table.children[i].lastElementChild.nodeName === "TD") {
+                continue;
+            }
+            data[table.children[i].firstChild.textContent] = table.children[i].lastElementChild.value;
+        }
         $.ajax({
             url: 'apply.son',
             type: 'POST',
             async: true,
+            contentType: "application/json;charset=UTF-8",
+            traditional: true,
+            data: JSON.stringify(data),
             dataType: 'json',
             success: function(response) {
-                console.log(response);
+                // alert
             }
         })
     }

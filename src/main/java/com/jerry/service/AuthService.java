@@ -46,16 +46,36 @@ public class AuthService {
         Map<String, Object> result = new HashMap<>();
 	    for (Field f : config.getClass().getDeclaredFields()) {
             for (Method m : config.getClass().getDeclaredMethods()) {
-	            if (!m.getName().toLowerCase().contains(f.getName().toLowerCase())) {
-		            continue;
-                }
-                try {
-                    result.put(f.getName(), m.invoke(config));
-                } catch (InvocationTargetException | IllegalAccessException e) {
-                    log.warn(e.getMessage(), e);
+	            if (m.getName().indexOf("set") != 0 && m.getName().toLowerCase().substring(3, m.getName().length()).contains(f.getName().toLowerCase())) {
+                    try {
+                        result.put(f.getName(), m.invoke(config));
+                        break;
+                    } catch (InvocationTargetException | IllegalAccessException e) {
+                        log.warn(e.getMessage(), e);
+                    }
                 }
             }
         }
         return result;
+    }
+
+    /**
+     * set enviornment
+     */
+    public void setEnviornments(final Map<String, String> data) {
+        for (Map.Entry<String, String> item : data.entrySet()) {
+            for (Method m : config.getClass().getDeclaredMethods()) {
+                if (m.getName().contains("get")
+                        || !m.getName().toLowerCase().substring(3, m.getName().length()).equals(item.getKey().toLowerCase())) {
+                    continue;
+                }
+
+                try {
+                    m.invoke(config, item.getValue());
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    log.warn(e.getMessage(), e);
+                }
+            }
+        }
     }
 }

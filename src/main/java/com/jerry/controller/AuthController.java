@@ -6,11 +6,11 @@ import com.jerry.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * Created by son on 2019-04-07.
@@ -65,5 +65,12 @@ public class AuthController {
         ModelAndView mv = new ModelAndView("setting");
 	    mv.addObject("data", authService.getServerEnviornments());
         return mv;
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/apply.son")
+    public boolean apply(@RequestBody final Map<String, String> data) {
+        authService.setEnviornments(data);
+        return true;
     }
 }
