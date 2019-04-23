@@ -237,5 +237,8 @@ var renderer = {
     drawChart: function (chartConfig) {
         var ctx = document.getElementById("canvas").getContext("2d");
         window.chart = new Chart(ctx, chartConfig);
+    },
+
+    drawSetting: function (data) {
     }
 };

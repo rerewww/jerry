@@ -18,8 +18,8 @@
   <script type="text/javascript" src="/src/jquery.3.3.1.js"></script>
   <script type="text/javascript" src="/src/sockjs.min.js"></script>
   <script type="text/javascript" src="/src/stomp.js"></script>
-  <script type="text/javascript" src="/src/server.js"></script>
   <script type="text/javascript" src="/src/setting.js"></script>
+  <script type="text/javascript" src="/src/renderer.js"></script>
   <script type="text/javascript" src="/src/action.js"></script>
   <script type="text/javascript" src="/src/clientConfig.js"></script>
   <script type="text/javascript" src="/src/theme.js"></script>
@@ -98,6 +98,8 @@
   <div class="row">
   </div>
 </div>
-
 </body>
+<script type="text/javascript">
+  renderer.drawSetting([[${data}]]);
+</script>
 </html>
