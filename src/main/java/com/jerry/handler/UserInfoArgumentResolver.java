@@ -20,24 +20,24 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Service
 public class UserInfoArgumentResolver implements HandlerMethodArgumentResolver {
-    private ServerConfig config;
+	private ServerConfig config;
 
-    UserInfoArgumentResolver(final ServerConfig config) {
-        this.config = config;
-    }
+	UserInfoArgumentResolver(final ServerConfig config) {
+		this.config = config;
+	}
 
-    @Override
-    public boolean supportsParameter(MethodParameter methodParameter) {
-        return UserInfo.class.isAssignableFrom(methodParameter.getParameterType());
-    }
+	@Override
+	public boolean supportsParameter(MethodParameter methodParameter) {
+		return UserInfo.class.isAssignableFrom(methodParameter.getParameterType());
+	}
 
-    @Override
-    public Object resolveArgument(MethodParameter methodParameter, @Nullable ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, @Nullable WebDataBinderFactory webDataBinderFactory) throws Exception {
-        final HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
-        String userId = request.getParameter("userId");
-        if (StringUtils.isEmpty(userId)) {
-            return new UserInfo("");
-        }
-        return new UserInfo(userId);
-    }
+	@Override
+	public Object resolveArgument(MethodParameter methodParameter, @Nullable ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, @Nullable WebDataBinderFactory webDataBinderFactory) throws Exception {
+		final HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
+		String userId = request.getParameter("userId");
+		if (StringUtils.isEmpty(userId)) {
+			return new UserInfo("");
+		}
+		return new UserInfo(userId);
+	}
 }

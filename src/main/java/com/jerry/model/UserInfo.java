@@ -9,6 +9,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public class UserInfo {
-    @Getter
-    String userId;
+	@Getter
+	String userId;
 }

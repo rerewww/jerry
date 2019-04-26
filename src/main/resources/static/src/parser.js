@@ -1,101 +1,101 @@
 var parser = {
-    start: function() {
-        $.ajax({
-            url: '/read.son',
-            type:'GET',
-            async: true,
-            dataType: 'json',
-            success: function(response) {
-                if (response === null || response === undefined) {
-                    return;
-                }
-            }
-        })
-    },
+	start: function() {
+		$.ajax({
+			url: '/read.son',
+			type:'GET',
+			async: true,
+			dataType: 'json',
+			success: function(response) {
+				if (response === null || response === undefined) {
+					return;
+				}
+			}
+		})
+	},
 
-    viewCode: function (fileName, line, range, successCallback) {
-        if (!line) {
-            return;
-        }
+	viewCode: function (fileName, line, range, successCallback) {
+		if (!line) {
+			return;
+		}
 
-        $('#loading').css('display', 'block');
-        $.ajax({
-            url: '/viewCode.son',
-            type:'GET',
-            async: true,
-            data: {
-                fileName: fileName,
-                line: line,
-                range: document.getElementById('codeRange').value
-            },
-            dataType: 'json',
-            success: successCallback
-        })
-    },
+		$('#loading').css('display', 'block');
+		$.ajax({
+			url: '/viewCode.son',
+			type:'GET',
+			async: true,
+			data: {
+				fileName: fileName,
+				line: line,
+				range: document.getElementById('codeRange').value
+			},
+			dataType: 'json',
+			success: successCallback
+		})
+	},
 
-    accesssLogs: function () {
-        if (!clientConfig.checkedAccess()) {
-            return;
-        }
-        $.ajax({
-            url: 'accessLogs.son',
-            type: 'GET',
-            async: true,
-            dataType: 'json',
-            success: function(response) {
-                if (!response || !response.accessLogs || response.accessLogs.length === 0) {
-                    return;
-                }
+	accesssLogs: function () {
+		if (!clientConfig.checkedAccess()) {
+			return;
+		}
+		$.ajax({
+			url: 'accessLogs.son',
+			type: 'GET',
+			async: true,
+			dataType: 'json',
+			success: function(response) {
+				if (!response || !response.accessLogs || response.accessLogs.length === 0) {
+					return;
+				}
 
-                var date = moment().add(0, 'd').format();
-                var successCnt = 0;
-                var failCnt = 0;
-                response.accessLogs.forEach(function (item) {
-                    var aData = item.split(' ');
-                    var length = aData.length;
-                    for (var i = 0; i < length; i++) {
-                        var code = Number(aData.pop());
+				var date = moment().add(0, 'd').format();
+				var successCnt = 0;
+				var failCnt = 0;
+				response.accessLogs.forEach(function (item) {
+					var aData = item.split(' ');
+					var length = aData.length;
+					for (var i = 0; i < length; i++) {
+						var code = Number(aData.pop());
 
-                        if (!!code && (code >= 200 && code <= 308)) {
-                            successCnt++;
-                            break;
-                        }
-                        if (!!code && (code >= 400 && code <= 599)) {
-                            failCnt++;
-                            break;
-                        }
-                    }
-                });
+						if (!!code && (code >= 200 && code <= 308)) {
+							successCnt++;
+							break;
+						}
+						if (!!code && (code >= 400 && code <= 599)) {
+							failCnt++;
+							break;
+						}
+					}
+				});
 
-                var oSuccess = {
-                    x: date,
-                    y: successCnt
-                };
-                var oFail = {
-                    x: date,
-                    y: failCnt
-                };
+				var oSuccess = {
+					x: date,
+					y: successCnt
+				};
+				var oFail = {
+					x: date,
+					y: failCnt
+				};
 
-                renderer.drawAccessLogs(response.accessLogs);
-                renderer.updateChart(oSuccess, oFail);
-            }
-        })
-    }
+				renderer.drawAccessLogs(response.accessLogs);
+				renderer.updateChart(oSuccess, oFail);
+			}
+		})
+	}
 };
 
 var parserError = {
-    start: function () {
-        if (!clientConfig.checkedError()) {
-            return;
-        }
-        $.ajax({
-            url: 'parse.son',
-            type: 'GET',
-            async: true,
-            dataType: 'json',
-            success: function(response) {
-                renderer.drawErrorElem(response.logModel);
-            }
-        })
-    }
+	start: function () {
+		if (!clientConfig.checkedError()) {
+			return;
+		}
+		$.ajax({
+			url: 'parse.son',
+			type: 'GET',
+			async: true,
+			dataType: 'json',
+			success: function(response) {
+				renderer.drawErrorElem(response.logModel);
+			}
+		})
+	}
 };

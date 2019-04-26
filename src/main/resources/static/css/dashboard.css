@@ -4,7 +4,7 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-    padding-top: 50px;
+	padding-top: 50px;
 }
 
 
@@ -13,8 +13,8 @@ body {
  */
 
 .sub-header {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
 }
 
 /*
@@ -22,7 +22,7 @@ body {
  * Hide default border to remove 1px line.
  */
 .navbar-fixed-top {
-    border: 0;
+	border: 0;
 }
 
 /*
@@ -31,39 +31,39 @@ body {
 
 /* Hide for mobile, show later */
 .sidebar {
-    display: none;
+	display: none;
 }
 @media (min-width: 768px) {
-    .sidebar {
-        position: fixed;
-        top: 51px;
-        bottom: 0;
-        left: 0;
-        z-index: 1000;
-        display: block;
-        padding: 20px;
-        overflow-x: hidden;
-        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-        background-color: #f5f5f5;
-        border-right: 1px solid #eee;
-    }
+	.sidebar {
+		position: fixed;
+		top: 51px;
+		bottom: 0;
+		left: 0;
+		z-index: 1000;
+		display: block;
+		padding: 20px;
+		overflow-x: hidden;
+		overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+		background-color: #f5f5f5;
+		border-right: 1px solid #eee;
+	}
 }
 
 /* Sidebar navigation */
 .nav-sidebar {
-    margin-right: -21px; /* 20px padding + 1px border */
-    margin-bottom: 20px;
-    margin-left: -20px;
+	margin-right: -21px; /* 20px padding + 1px border */
+	margin-bottom: 20px;
+	margin-left: -20px;
 }
 .nav-sidebar > li > a {
-    padding-right: 20px;
-    padding-left: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
 }
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
-    color: #fff;
-    background-color: #428bca;
+	color: #fff;
+	background-color: #428bca;
 }
 
 
@@ -72,16 +72,16 @@ body {
  */
 
 .main {
-    padding: 20px;
+	padding: 20px;
 }
 @media (min-width: 768px) {
-    .main {
-        padding-right: 40px;
-        padding-left: 40px;
-    }
+	.main {
+		padding-right: 40px;
+		padding-left: 40px;
+	}
 }
 .main .page-header {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 
@@ -90,121 +90,121 @@ body {
  */
 
 .placeholders {
-    margin-bottom: 30px;
-    text-align: center;
+	margin-bottom: 30px;
+	text-align: center;
 }
 .placeholders h4 {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 .placeholder {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 .placeholder img {
-    display: inline-block;
-    border-radius: 50%;
+	display: inline-block;
+	border-radius: 50%;
 }
 
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 50%;
-    height: 35px;
-    margin-bottom: 0px;
+	position: relative;
+	display: inline-block;
+	width: 50%;
+	height: 35px;
+	margin-bottom: 0px;
 }
 
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+	opacity: 0;
+	width: 0;
+	height: 0;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
 }
 
 input:checked + .slider {
-    background-color: #BBBB00;
+	background-color: #BBBB00;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+	box-shadow: 0 0 1px #2196F3;
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(50px);
-    -ms-transform: translateX(50px);
-    transform: translateX(50px);
+	-webkit-transform: translateX(50px);
+	-ms-transform: translateX(50px);
+	transform: translateX(50px);
 }
 
 /* Rounded sliders */
 .slider.round {
-    border-radius: 34px;
+	border-radius: 34px;
 }
 
 .slider.round:before {
-    border-radius: 50%;
+	border-radius: 50%;
 }
 
 .switchHeader {
-    float: left;
-    width: 40%;
-    margin-top: 7px;
-    font-size: 14px;
-    color: wheat;
-    text-align: center;
-    /*margin: auto;*/
+	float: left;
+	width: 40%;
+	margin-top: 7px;
+	font-size: 14px;
+	color: wheat;
+	text-align: center;
+	/*margin: auto;*/
 }
 
 .action {
-    background-color: darkcyan;
-    border: none;
-    border-radius: 7px;
-    color: white;
-    padding: 12px 30px;
-    cursor: pointer;
-    font-size: 20px;
+	background-color: darkcyan;
+	border: none;
+	border-radius: 7px;
+	color: white;
+	padding: 12px 30px;
+	cursor: pointer;
+	font-size: 20px;
 }
 
 .action:hover {
-    background-color: silver;
+	background-color: silver;
 }
 
 details {
-    border-radius: 3px;
-    background: #EEE;
-    margin: 3px;
+	border-radius: 3px;
+	background: #EEE;
+	margin: 3px;
 }
 
 summary {
-    background: gray;
-    color: #FFF;
-    border-radius: 3px;
-    padding: 5px 10px;
-    outline: none;
+	background: gray;
+	color: #FFF;
+	border-radius: 3px;
+	padding: 5px 10px;
+	outline: none;
 }
 
 /* Style the summary when details box is open */
 details[open] summary {
-    background-color: #337ab7;
-    color: #333;
+	background-color: #337ab7;
+	color: #333;
 }

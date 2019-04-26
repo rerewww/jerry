@@ -14,26 +14,26 @@ import java.util.Map;
 @Slf4j
 @Service
 public class WindowSystemService implements SystemService {
-    private SystemCommonUtils systemCommonUtils;
+	private SystemCommonUtils systemCommonUtils;
 
-    public WindowSystemService(final SystemCommonUtils systemCommonUtils) {
-        this.systemCommonUtils = systemCommonUtils;
-    }
+	public WindowSystemService(final SystemCommonUtils systemCommonUtils) {
+		this.systemCommonUtils = systemCommonUtils;
+	}
 
-    @Override
-    public Map<String, Integer> getUsage() {
-        Map<String, Integer> result = new HashMap<>();
-        OperatingSystemMXBean operatingSystemMXBean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
-        double memory = operatingSystemMXBean.getTotalPhysicalMemorySize() - operatingSystemMXBean.getFreePhysicalMemorySize();
+	@Override
+	public Map<String, Integer> getUsage() {
+		Map<String, Integer> result = new HashMap<>();
+		OperatingSystemMXBean operatingSystemMXBean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+		double memory = operatingSystemMXBean.getTotalPhysicalMemorySize() - operatingSystemMXBean.getFreePhysicalMemorySize();
 
-        result.put("cpu", systemCommonUtils.getCpuUsage(operatingSystemMXBean));
-        result.put("memory", (int)(memory / operatingSystemMXBean.getTotalPhysicalMemorySize() * 100));
-        return result;
-    }
+		result.put("cpu", systemCommonUtils.getCpuUsage(operatingSystemMXBean));
+		result.put("memory", (int)(memory / operatingSystemMXBean.getTotalPhysicalMemorySize() * 100));
+		return result;
+	}
 
-    @Override
-    public Map<String, String> getInfos() {
-	    return systemCommonUtils.getInfos();
-    }
+	@Override
+	public Map<String, String> getInfos() {
+		return systemCommonUtils.getInfos();
+	}
 
 }

@@ -3,7 +3,7 @@
 <head>
   <style>
   tr:hover td{
-    background: darkslateblue;
+	background: darkslateblue;
   }
 </style>
 
@@ -34,80 +34,80 @@
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" style="font-weight: bold;" href="/">Jerry</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <img id='loading' th:src="@{/images/loading.gif}" style="display: none;"/>
-        </li>
-        <li><a href="/">Home</a></li>
-        <li>
-          <div class="dropdown">
-            <button onclick="setting.dropDowns()" class="dropbtn">Options</button>
-            <div id="options" class="dropdown-content">
-              <div style="padding-bottom: 5px;">
-                <span class="switchHeader">ACCESS</span>
-                <label class="switch">
-                  <input id="accessCheck" type="checkbox" onclick="setting.onToggleAccessEvent()">
-                  <span class="slider"></span>
-                </label>
-              </div>
-              <div style="padding-bottom: 5px;">
-                <span class="switchHeader">ERROR</span>
-                <label class="switch">
-                  <input id="errorCheck" type="checkbox" onclick="setting.onToggleErrorEvent()">
-                  <span class="slider"></span>
-                </label>
-              </div>
-              <div style="padding-bottom: 5px;">
-                <span class="switchHeader">LOGS</span>
-                <label class="switch">
-                  <input id="logCheck" type="checkbox" onclick="setting.onToggleLogEvent()">
-                  <span class="slider"></span>
-                </label>
-              </div>
-              <div style="padding-bottom: 5px;">
-                <span class="switchHeader">Stacks</span>
-                <label class="switch">
-                  <input id="libCheck" type="checkbox" onclick="setting.onToggleLibEvent()">
-                  <span class="slider"></span>
-                </label>
-              </div>
-              <div style="padding-bottom: 5px;">
-                <span class="switchHeader" style="width: 40%;">RANGE</span>
-                <input id='codeRange' type="number" style="width: 50%;" min="1" max="15" value="5">
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="active"><a href="/setting">Setting</a></li>
-      </ul>
-    </div>
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" style="font-weight: bold;" href="/">Jerry</a>
+	</div>
+	<div id="navbar" class="navbar-collapse collapse">
+	  <ul class="nav navbar-nav navbar-right">
+		<li>
+		  <img id='loading' th:src="@{/images/loading.gif}" style="display: none;"/>
+		</li>
+		<li><a href="/">Home</a></li>
+		<li>
+		  <div class="dropdown">
+			<button onclick="setting.dropDowns()" class="dropbtn">Options</button>
+			<div id="options" class="dropdown-content">
+			  <div style="padding-bottom: 5px;">
+				<span class="switchHeader">ACCESS</span>
+				<label class="switch">
+				  <input id="accessCheck" type="checkbox" onclick="setting.onToggleAccessEvent()">
+				  <span class="slider"></span>
+				</label>
+			  </div>
+			  <div style="padding-bottom: 5px;">
+				<span class="switchHeader">ERROR</span>
+				<label class="switch">
+				  <input id="errorCheck" type="checkbox" onclick="setting.onToggleErrorEvent()">
+				  <span class="slider"></span>
+				</label>
+			  </div>
+			  <div style="padding-bottom: 5px;">
+				<span class="switchHeader">LOGS</span>
+				<label class="switch">
+				  <input id="logCheck" type="checkbox" onclick="setting.onToggleLogEvent()">
+				  <span class="slider"></span>
+				</label>
+			  </div>
+			  <div style="padding-bottom: 5px;">
+				<span class="switchHeader">Stacks</span>
+				<label class="switch">
+				  <input id="libCheck" type="checkbox" onclick="setting.onToggleLibEvent()">
+				  <span class="slider"></span>
+				</label>
+			  </div>
+			  <div style="padding-bottom: 5px;">
+				<span class="switchHeader" style="width: 40%;">RANGE</span>
+				<input id='codeRange' type="number" style="width: 50%;" min="1" max="15" value="5">
+			  </div>
+			</div>
+		  </div>
+		</li>
+		<li class="active"><a href="/setting">Setting</a></li>
+	  </ul>
+	</div>
   </div>
 </nav>
 
 <div class="container-fluid">
   <div class="row">
-    <button class="set_btn" onclick="action.reset()">Reset</button>
-    <button class="set_btn" onclick="action.apply()">Apply</button>
-    <table id="settingTable" class="table table-stripted">
-    </table>
+	<button class="set_btn" onclick="action.reset()">Reset</button>
+	<button class="set_btn" onclick="action.apply()">Apply</button>
+	<table id="settingTable" class="table table-stripted">
+	</table>
   </div>
 </div>
 </body>
 <script type="text/javascript" th:inline="javascript">
   if (!window._info) {
-    window._info = {
-      defaultEnvs: {}
-    };
+	window._info = {
+	  defaultEnvs: {}
+	};
   }
   action.setDefaultEnvs([[${data}]]);
   renderer.drawSetting([[${data}]]);

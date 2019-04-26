@@ -22,69 +22,69 @@ import java.util.Map;
 @Slf4j
 @Component
 public class TailLogScheduler {
-    @Autowired LogManager logManager;
-    @Autowired LogService logService;
-    private SimpMessagingTemplate template;
+	@Autowired LogManager logManager;
+	@Autowired LogService logService;
+	private SimpMessagingTemplate template;
 
-    @Autowired
-    public void setTemplate(SimpMessagingTemplate template) {
-        this.template = template;
-    }
+	@Autowired
+	public void setTemplate(SimpMessagingTemplate template) {
+		this.template = template;
+	}
 
-    @Scheduled(cron="*/1 * * * * *")
-    public void start() {
-        try {
-	        List<String> logs = logManager.getTomcatLogs();
-            int beforeSize = logs.size();
-            template.setMessageConverter(new StringMessageConverter());
-            template.convertAndSend("/subscribe/logs", StringUtils.collectionToDelimitedString(logs, "\r\t"));
+	@Scheduled(cron="*/1 * * * * *")
+	public void start() {
+		try {
+			List<String> logs = logManager.getTomcatLogs();
+			int beforeSize = logs.size();
+			template.setMessageConverter(new StringMessageConverter());
+			template.convertAndSend("/subscribe/logs", StringUtils.collectionToDelimitedString(logs, "\r\t"));
 
-            if (beforeSize == logs.size()) {
-                logManager.clearLogs();
-            }
-        } catch (Exception e) {
-	        log.warn(e.getMessage(), e);
-        }
-    }
+			if (beforeSize == logs.size()) {
+				logManager.clearLogs();
+			}
+		} catch (Exception e) {
+			log.warn(e.getMessage(), e);
+		}
+	}
 
-    @Scheduled(cron="*/1 * * * * *")
-    public void startAccessLogs() {
-        try {
-            LogModel model = logManager.getAccessLogs();
-            if (CommonCode.NO_CHANGE_LOGS == model.getCommonCode()) {
-                return;
-            }
-            template.setMessageConverter(new MappingJackson2MessageConverter());
-            template.convertAndSend("/subscribe/accessLogs", model);
-        } catch (Exception e) {
-            log.warn(e.getMessage(), e);
-        }
-    }
+	@Scheduled(cron="*/1 * * * * *")
+	public void startAccessLogs() {
+		try {
+			LogModel model = logManager.getAccessLogs();
+			if (CommonCode.NO_CHANGE_LOGS == model.getCommonCode()) {
+				return;
+			}
+			template.setMessageConverter(new MappingJackson2MessageConverter());
+			template.convertAndSend("/subscribe/accessLogs", model);
+		} catch (Exception e) {
+			log.warn(e.getMessage(), e);
+		}
+	}
 
-    @Scheduled(cron="*/1 * * * * *")
-    public void startErrorLogs() {
-        try {
-            LogModel model = logService.parse();
-            if (CommonCode.NO_CHANGE_LOGS == model.getCommonCode()) {
-                return;
-            }
-            template.setMessageConverter(new MappingJackson2MessageConverter());
-            template.convertAndSend("/subscribe/errorLogs", model);
+	@Scheduled(cron="*/1 * * * * *")
+	public void startErrorLogs() {
+		try {
+			LogModel model = logService.parse();
+			if (CommonCode.NO_CHANGE_LOGS == model.getCommonCode()) {
+				return;
+			}
+			template.setMessageConverter(new MappingJackson2MessageConverter());
+			template.convertAndSend("/subscribe/errorLogs", model);
 
-        } catch (Exception e) {
-            log.warn(e.getMessage(), e);
-        }
-    }
+		} catch (Exception e) {
+			log.warn(e.getMessage(), e);
+		}
+	}
 
-    @Scheduled(cron="*/10 * * * * *")
-    public void startUsage() {
-        try {
-            Map<String, Integer> usage = logService.getUsage();
-            template.setMessageConverter(new MappingJackson2MessageConverter());
-            template.convertAndSend("/subscribe/usage", usage);
+	@Scheduled(cron="*/10 * * * * *")
+	public void startUsage() {
+		try {
+			Map<String, Integer> usage = logService.getUsage();
+			template.setMessageConverter(new MappingJackson2MessageConverter());
+			template.convertAndSend("/subscribe/usage", usage);
 
-        } catch (Exception e) {
-            log.warn(e.getMessage(), e);
-        }
-    }
+		} catch (Exception e) {
+			log.warn(e.getMessage(), e);
+		}
+	}
 }
