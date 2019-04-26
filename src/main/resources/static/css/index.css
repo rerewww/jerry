@@ -1,119 +1,119 @@
 #error {
-    text-align: left;
+	text-align: left;
 }
 
 .errorItem {
-    font-family: "Karla", sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    color: #BBBB00;
-    cursor: pointer;
+	font-family: "Karla", sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	color: #BBBB00;
+	cursor: pointer;
 }
 
 #stack_trace {
-    font-family: "Karla", sans-serif;
-    text-align: left;
+	font-family: "Karla", sans-serif;
+	text-align: left;
 }
 
 .fileInfo {
-    margin: 0px;
-    background-color: #2B2B2B;
-    font-size: 17px;
-    font-weight: bold;
-    vertical-align: middle;
-    text-align: center;
+	margin: 0px;
+	background-color: #2B2B2B;
+	font-size: 17px;
+	font-weight: bold;
+	vertical-align: middle;
+	text-align: center;
 }
 
 td {
-    font-family: "Karla", sans-serif;
-    color: #F8F8F2;
-    padding: 1px;
+	font-family: "Karla", sans-serif;
+	color: #F8F8F2;
+	padding: 1px;
 }
 
 tr {
-    font-family: "Karla", sans-serif;
-    font-size: 15px;
-    color: #F8F8F2;
-    background-color: #2F3E47;
+	font-family: "Karla", sans-serif;
+	font-size: 15px;
+	color: #F8F8F2;
+	background-color: #2F3E47;
 }
 
 .codestyle {
-    margin: 0 0 0px;
-    background-color: #2B2B2B;
+	margin: 0 0 0px;
+	background-color: #2B2B2B;
 }
 
 .container_items {
-    background-color: #2F3E47;
-    border-radius: 10px;
-    box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+	background-color: #2F3E47;
+	border-radius: 10px;
+	box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
 }
 
 .container_headers {
-    margin-bottom: 10px;
-    font-weight: 600;
-    line-height: 16px;
-    color: #fff;
-    text-align: left;
-    font-family: "Karla", sans-serif;
+	margin-bottom: 10px;
+	font-weight: 600;
+	line-height: 16px;
+	color: #fff;
+	text-align: left;
+	font-family: "Karla", sans-serif;
 }
 
 .card_items {
-    width: 24.2%;
-    margin-left: 15px;
-    margin-bottom: 10px;
-    flex: 0 0 25%;
-    font-family: "Karla", sans-serif;
-    max-width: 25%;
+	width: 24.2%;
+	margin-left: 15px;
+	margin-bottom: 10px;
+	flex: 0 0 25%;
+	font-family: "Karla", sans-serif;
+	max-width: 25%;
 }
 
 tr:nth-of-type(odd) {
-    border-radius: 10px;
-    background-color: #253138;
+	border-radius: 10px;
+	background-color: #253138;
 }
 
 summary {
-    font-family: "Karla", sans-serif;
-    background-color: #2F3E47;
-    border-radius: 0px;
-    box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
-    cursor: pointer;
+	font-family: "Karla", sans-serif;
+	background-color: #2F3E47;
+	border-radius: 0px;
+	box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+	cursor: pointer;
 }
 
 p {
-    color: #F8F8F2;
+	color: #F8F8F2;
 }
 
 .dropbtn {
-    background-color: #222222;
-    color: #9d9d9d;
-    padding: 15px;
-    border: none;
-    cursor: pointer;
+	background-color: #222222;
+	color: #9d9d9d;
+	padding: 15px;
+	border: none;
+	cursor: pointer;
 }
 
 .dropbtn:hover, .dropbtn:focus {
-    background-color: #2980B9;
+	background-color: #2980B9;
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+	display: none;
+	position: absolute;
+	min-width: 160px;
+	overflow: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
 }
 
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
 }
 
 .dropdown a:hover {background-color: #ddd;}
@@ -121,24 +121,24 @@ p {
 .show {display: block;}
 
 #options {
-    background-color: #1F2328;
+	background-color: #1F2328;
 }
 
 .setting_keys {
-    text-indent: 5px;
+	text-indent: 5px;
 }
 
 .setting_values {
-    width: 50%;
-    color: black;
+	width: 50%;
+	color: black;
 }
 
 .set_btn {
-    width: 70px;
-    height: 30px;
-    font-size: 14px;
-    border-radius: 3px;
-    margin: 6px;
-    background-color: aqua;
-    font-weight: bold;
+	width: 70px;
+	height: 30px;
+	font-size: 14px;
+	border-radius: 3px;
+	margin: 6px;
+	background-color: aqua;
+	font-weight: bold;
 }

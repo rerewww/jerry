@@ -20,35 +20,35 @@ import java.util.List;
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    @Autowired ServerConfig config;
-    @Autowired LogManager logManager;
-    @Autowired SystemServiceFactoryBean systemServiceFactoryBean;
+	@Autowired ServerConfig config;
+	@Autowired LogManager logManager;
+	@Autowired SystemServiceFactoryBean systemServiceFactoryBean;
 
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new ProjectFileArgumentResolver(config));
-        resolvers.add(new UserInfoArgumentResolver(config));
-    }
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+		resolvers.add(new ProjectFileArgumentResolver(config));
+		resolvers.add(new UserInfoArgumentResolver(config));
+	}
 
-    @Bean
-    public WebServerFactoryCustomizer<TomcatServletWebServerFactory> servletContainer() {
-        return server -> {
-            if (TomcatServletWebServerFactory.class.isInstance(server)) {
-                server.addAdditionalTomcatConnectors(redirectConnector());
-            }
-        };
-    }
+	@Bean
+	public WebServerFactoryCustomizer<TomcatServletWebServerFactory> servletContainer() {
+		return server -> {
+			if (TomcatServletWebServerFactory.class.isInstance(server)) {
+				server.addAdditionalTomcatConnectors(redirectConnector());
+			}
+		};
+	}
 
-    private Connector redirectConnector() {
-        Connector connector = new Connector(config.getAjpProtocol());
-        connector.setPort(config.getAjpPort());
-        connector.setSecure(false);
-        connector.setAllowTrace(false);
-        return connector;
-    }
+	private Connector redirectConnector() {
+		Connector connector = new Connector(config.getAjpProtocol());
+		connector.setPort(config.getAjpPort());
+		connector.setSecure(false);
+		connector.setAllowTrace(false);
+		return connector;
+	}
 
-    @Bean
-    public LogService logService() {
-        return new LogService(logManager, systemServiceFactoryBean.getObject());
-    }
+	@Bean
+	public LogService logService() {
+		return new LogService(logManager, systemServiceFactoryBean.getObject());
+	}
 }
