@@ -1,6 +1,5 @@
 package com.jerry.controller;
 
-import com.jerry.config.ServerConfig;
 import com.jerry.model.LogModel;
 import com.jerry.model.ResultModel;
 import com.jerry.project.ProjectFile;
@@ -23,12 +22,10 @@ import java.util.Map;
 @Controller
 public class MainController {
 	private LogService logService;
-	private ServerConfig config;
 
 	@Autowired
-	MainController(final LogService logService, final ServerConfig config) {
+	MainController(final LogService logService) {
 		this.logService = logService;
-		this.config = config;
 	}
 
 	@RequestMapping("/read.son")

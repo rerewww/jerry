@@ -31,6 +31,9 @@ public class TailLogScheduler {
 		this.template = template;
 	}
 
+	/**
+	 * detect log
+	 */
 	@Scheduled(cron="*/1 * * * * *")
 	public void start() {
 		try {
@@ -47,6 +50,9 @@ public class TailLogScheduler {
 		}
 	}
 
+	/**
+	 * detect access log
+	 */
 	@Scheduled(cron="*/1 * * * * *")
 	public void startAccessLogs() {
 		try {
@@ -61,6 +67,9 @@ public class TailLogScheduler {
 		}
 	}
 
+	/**
+	 * detect error log
+	 */
 	@Scheduled(cron="*/1 * * * * *")
 	public void startErrorLogs() {
 		try {
@@ -76,6 +85,9 @@ public class TailLogScheduler {
 		}
 	}
 
+	/**
+	 * detect usage(cpu/memory)
+	 */
 	@Scheduled(cron="*/10 * * * * *")
 	public void startUsage() {
 		try {
