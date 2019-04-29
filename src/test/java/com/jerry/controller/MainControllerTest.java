@@ -1,7 +1,6 @@
 package com.jerry.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jerry.config.ServerConfig;
 import com.jerry.model.LogModel;
 import com.jerry.project.ProjectFile;
 import com.jerry.service.LogService;
@@ -22,6 +21,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MainControllerTest {
 	@InjectMocks private MainController controller;
 	@Mock private LogService logService;
-	@Mock private ServerConfig serverConfig;
 
 	private MockMvc mockMvc;
 	private ObjectMapper mapper = new ObjectMapper();
@@ -39,14 +38,9 @@ public class MainControllerTest {
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		controller = new MainController(logService, serverConfig);
+		controller = new MainController(logService);
 
 		this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-	}
-
-	@Test
-	public void mainTest() throws Exception {
-		mockMvc.perform(post("/")).andExpect(status().isOk());
 	}
 
 	@Test
@@ -91,5 +85,10 @@ public class MainControllerTest {
 	@Test
 	public void accessLogsTest() throws Exception {
 		mockMvc.perform(post("/accessLogs.son")).andExpect(status().isOk());
+	}
+
+	@Test
+	public void getInfosTest() throws Exception {
+		mockMvc.perform(get("/getInfos.son")).andExpect(status().isOk());
 	}
 }
