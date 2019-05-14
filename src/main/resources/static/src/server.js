@@ -4,7 +4,7 @@
 function connect(){
 	sock = new SockJS(window.location.origin + '/stomp');
 	stompClient = Stomp.over(sock);
-	stompClient.connect({}, function(frame){
+	stompClient.connect({}, function(){
 		stompClient.subscribe('/subscribe/logs', onMessageForLogs);
 		stompClient.subscribe('/subscribe/accessLogs', onMessageForAccessLogs);
 		stompClient.subscribe('/subscribe/errorLogs', onMessageForErrorLogs);
