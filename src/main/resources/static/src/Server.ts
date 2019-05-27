@@ -1,37 +1,44 @@
-"use strict";
-var clientConfig_1 = require("./clientConfig");
+import {clientConfig} from "./ClientConfig";
+import {renderer} from "./Renderer";
 /**
  * Created by son on 2019-03-05.
  */
-var Server = (function () {
-    function Server() {
+
+export class Server {
+    constructor() {
+
     }
-    Server.prototype.connect = function () {
+
+    public connect(): void {
         sock = new SockJS(window.location.origin + '/stomp');
         stompClient = Stomp.over(sock);
-        Stomp.over(stompClient.connect({}, function () {
-            stompClient.subscribe('/subscribe/logs', onMessageForLogs);
-            stompClient.subscribe('/subscribe/accessLogs', onMessageForAccessLogs);
-            stompClient.subscribe('/subscribe/errorLogs', onMessageForErrorLogs);
-            stompClient.subscribe('/subscribe/usage', onMessageForUsage);
+        Stomp.over(stompClient.connect({}, function(){
+            stompClient.subscribe('/subscribe/logs', this.onMessageForLogs);
+            stompClient.subscribe('/subscribe/accessLogs', this.onMessageForAccessLogs);
+            stompClient.subscribe('/subscribe/errorLogs', this.onMessageForErrorLogs);
+            stompClient.subscribe('/subscribe/usage', this.onMessageForUsage);
             stompClient.debug = null;
         }));
-    };
-    Server.prototype.onMessageForLogs = function (message) {
-        if (message.body === "" || !clientConfig_1.clientConfig.checkedLog()) {
+    }
+
+    public onMessageForLogs(message): void {
+        if (message.body === "" || !clientConfig.checkedLog()) {
             return;
         }
         renderer.drawLog(message.body);
-    };
-    Server.prototype.onMessageForAccessLogs = function (message) {
-        if (message.body === "" || !clientConfig_1.clientConfig.checkedAccess()) {
+    }
+
+    public onMessageForAccessLogs(message): void {
+        if (message.body === "" || !clientConfig.checkedAccess()) {
             return;
         }
+
         var oData = JSON.parse(message.body);
         renderer.drawAccessLogs(oData);
         if (!!oData && oData.accessLogs.length === 0) {
             return;
         }
+
         var date = moment().add(0, 'd').format();
         var successCnt = 0;
         var failCnt = 0;
@@ -40,6 +47,7 @@ var Server = (function () {
             var length = aData.length;
             for (var i = 0; i < length; i++) {
                 var code = Number(aData.pop());
+
                 if (!!code && (code >= 200 && code <= 308)) {
                     successCnt++;
                     break;
@@ -50,6 +58,7 @@ var Server = (function () {
                 }
             }
         });
+
         var oSuccess = {
             x: date,
             y: successCnt
@@ -59,20 +68,19 @@ var Server = (function () {
             y: failCnt
         };
         renderer.updateChart(oSuccess, oFail);
-    };
-    Server.prototype.onMessageForErrorLogs = function (message) {
-        if (message.body === "" || !clientConfig_1.clientConfig.checkedError()) {
+    }
+
+    public onMessageForErrorLogs(message): void {
+        if (message.body === "" || !clientConfig.checkedError()) {
             return;
         }
         renderer.drawErrorElem(JSON.parse(message.body));
-    };
-    Server.prototype.onMessageForUsage = function (message) {
+    }
+
+    public onMessageForUsage(message): void {
         if (message.body === "") {
             return;
         }
         renderer.drawUsage(JSON.parse(message.body));
-    };
-    return Server;
-}());
-exports.Server = Server;
-//# sourceMappingURL=server.js.map
+    }
+}

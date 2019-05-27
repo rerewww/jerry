@@ -1,8 +1,13 @@
+import {clientConfig} from "./ClientConfig";
+import {theme} from "./Theme";
 /**
  * Created by son on 2019-03-04.
  */
-var renderer = {
-	drawErrorElem: function (oResult) {
+export class Renderer {
+	constructor() {
+
+	}
+	drawErrorElem(oResult: any): void {
 		var aExceptions = oResult.exceptions;
 		var aStackTraces = oResult.stackTraces;
 
@@ -32,7 +37,7 @@ var renderer = {
 			td.setAttribute('number', number);
 
 			td.onclick  = function() {
-				this.drawStackTrace(window.event.currentTarget.getAttribute('number'));
+				// this.drawStackTrace(window.event.currentTarget.getAttribute('number'));
 			}.bind(this);
 
 			sessionStorage.setItem(number, aStackTraces[index]);
@@ -43,9 +48,10 @@ var renderer = {
 			index--;
 		}
 		this.autoScroll(1);
-	},
+	}
 
-	drawStackTrace: function (number) {
+	/*
+	drawStackTrace(number: number): void {
 		var rootElem = document.getElementById('stack_trace');
 
 		while(rootElem.firstChild) {
@@ -111,7 +117,7 @@ var renderer = {
 					$('#loading').css('display', 'none');
 				}.bind(this);
 
-				parser.viewCode(fileName, line, 10, successCallback);
+				// parser.viewCode(fileName, line, 10, successCallback);
 			};
 
 			var elem = document.createElement('summary');
@@ -124,9 +130,10 @@ var renderer = {
 			details.appendChild(elem);
 			rootElem.appendChild(details);
 		}
-	},
+	}
+	*/
 
-	drawLog: function (logs) {
+	drawLog(logs: string): void {
 		var aLogs = logs.split('\r\t');
 		var length = aLogs.length;
 
@@ -163,14 +170,14 @@ var renderer = {
 			tbody.appendChild(tr);
 		}
 		this.autoScroll(2);
-	},
+	}
 
-	autoScroll: function (i) {
+	autoScroll(i: number): void {
 		var divTable = document.getElementsByClassName('table-responsive')[i];
 		divTable.scrollTop = divTable.scrollHeight;
-	},
+	}
 
-	drawUsage: function (oData) {
+	drawUsage(oData: any): void {
 		var cpu = oData.cpu;
 		var memory = oData.memory;
 
@@ -195,18 +202,18 @@ var renderer = {
 				j++;
 			}
 		}, 15);
-	},
+	}
 
 
-	drawInfos: function (oData) {
+	drawInfos(oData: any): void {
 		var version = oData.version;
 		var branch = oData.branch;
 
 		var infosElem = document.getElementById('infos');
 		infosElem.innerHTML = version + '<br>' + branch;
-	},
+	}
 
-	drawAccessLogs: function (data) {
+	drawAccessLogs(data: any): void {
 		var elem = document.getElementById('accessLogs');
 		data.accessLogs.forEach(function (item) {
 			if (elem.childElementCount >= clientConfig.removeNodeLimit) {
@@ -220,26 +227,26 @@ var renderer = {
 			elem.appendChild(tr);
 		});
 		this.autoScroll(0);
-	},
+	}
 
-	updateChart: function (oSuccess, oFail) {
-		if (chartConfig.data.datasets[0].data.length >= clientConfig.chartDataLimit || chartConfig.data.datasets[1].data.length >= clientConfig.chartDataLimit) {
-			chartConfig.data.datasets[0].data.shift();
-			chartConfig.data.datasets[1].data.shift();
-		}
+	updateChart(oSuccess: any, oFail: any): void {
+		// if (chartConfig.data.datasets[0].data.length >= clientConfig.chartDataLimit || chartConfig.data.datasets[1].data.length >= clientConfig.chartDataLimit) {
+		// 	chartConfig.data.datasets[0].data.shift();
+		// 	chartConfig.data.datasets[1].data.shift();
+		// }
+        //
+        // chartConfig.data.datasets[0].data.push(oSuccess);
+        // chartConfig.data.datasets[1].data.push(oFail);
+        //
+        // window.chart.update();
+	}
 
-		chartConfig.data.datasets[0].data.push(oSuccess);
-		chartConfig.data.datasets[1].data.push(oFail);
-
-		window.chart.update();
-	},
-
-	drawChart: function (chartConfig) {
+	drawChart(chartConfig: any): void {
 		var ctx = document.getElementById("canvas").getContext("2d");
-		window.chart = new Chart(ctx, chartConfig);
-	},
+		// window.chart = new Chart(ctx, chartConfig);
+	}
 
-	drawSetting: function (data) {
+	drawSetting(data: any): void {
 		var table = document.getElementById('settingTable');
 		for (var i in data) {
 			var tr = document.createElement('tr');
@@ -266,4 +273,4 @@ var renderer = {
 			table.appendChild(tr);
 		}
 	}
-};
+}

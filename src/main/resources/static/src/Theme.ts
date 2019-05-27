@@ -1,16 +1,16 @@
 /**
  * Created by son on 2019-03-14.
  */
-var theme = {
-	regexKeyword: /public|private|if|else|while|for|try|catch|return|new|null|final|break|continue|true|false/g,
-	regexType: /int|File|Path|MultipartFile|Iterator|boolean|char|@ResponseBody|@RequestMapping|@RequestParam|HttpServletRequest|HttpServletResponse/g,
-	regexAnnotation: /@ResponseBody|@RequestMapping|@RequestParam|@Autowired/g,
-	keywordColor: '#CC7832',
-	typeColor: '#BBB529',
-	annotationColor: '#BBB529',
-	numberColor: '#606366',
+export class theme {
+	regexKeyword: any = /public|private|if|else|while|for|try|catch|return|new|null|final|break|continue|true|false/g;
+	regexType: any = /int|File|Path|MultipartFile|Iterator|boolean|char|@ResponseBody|@RequestMapping|@RequestParam|HttpServletRequest|HttpServletResponse/g;
+	regexAnnotation: any = /@ResponseBody|@RequestMapping|@RequestParam|@Autowired/g;
+	keywordColor: string = '#CC7832';
+	typeColor: string = '#BBB529';
+	annotationColor: string = '#BBB529';
+	numberColor: string = '#606366';
 
-	apply : function (text) {
+	apply(text: string): string {
 		var result = text;
 
 		if (text.indexOf(':') > 0) {
@@ -87,4 +87,4 @@ var theme = {
 
 		return result;
 	}
-};
+}

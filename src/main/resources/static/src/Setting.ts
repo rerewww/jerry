@@ -1,35 +1,44 @@
 /**
  * Created by son on 2019-03-07.
  */
-var setting = {
-	onToggleLibEvent: function () {
+import $ from 'jquery';
+
+export class Setting {
+	constructor() {
+
+	}
+	onToggleLibEvent(): void {
 		var isCheckedLib= $('input[id=libCheck]').is(':checked');
 		if (!isCheckedLib) {
 			$('input[id=libCheck]').trigger('click');
 		}
-	},
-	onToggleLogEvent: function () {
+	}
+
+	onToggleLogEvent(): void {
 		var isCheckedLog = $('input[id=logCheck]').is(':checked');
 		if (!isCheckedLog) {
 			$('input[id=logCheck]').trigger('click');
 		}
-	},
-	onToggleErrorEvent: function () {
+	}
+
+	onToggleErrorEvent(): void {
 		var isCheckedError = $('input[id=errorCheck]').is(':checked');
 		if (!isCheckedError) {
 			$('input[id=errorCheck]').trigger('click');
 		}
-	},
-	onToggleAccessEvent: function () {
+	}
+
+	onToggleAccessEvent(): void {
 		var isCheckedAccess= $('input[id=accessCheck]').is(':checked');
 		if (!isCheckedAccess) {
 			$('input[id=accessCheck]').trigger('click');
 		}
-	},
-	dropDowns: function () {
+	}
+
+	dropDowns(): void {
 		document.getElementById("options").classList.toggle("show");
 	}
-};
+}
 
 window.onclick = function(e) {
 	if (!e.target.matches('.dropbtn')) {
