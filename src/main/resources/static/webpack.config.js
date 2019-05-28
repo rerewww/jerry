@@ -18,5 +18,10 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    resolve: {
+        // require('./example')과 같이 빈 확장자를 아래 확장자로 import 해줌.
+        extensions: ['.ts', '.js']
+    },
+    node: { fs: 'empty' }
 };

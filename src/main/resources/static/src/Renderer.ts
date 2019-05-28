@@ -1,5 +1,4 @@
 import {clientConfig} from "./ClientConfig";
-import {theme} from "./Theme";
 /**
  * Created by son on 2019-03-04.
  */
@@ -147,18 +146,18 @@ export class Renderer {
 			var tr = document.createElement('tr');
 			var td = document.createElement('td');
 
-			tr.style = 'text-indent: 10px; !important';
+			$(tr).css('text-indent: 10px; !important');
 			var text = aLogs[i];
 
 			var span = document.createElement('span');
 			if (text.indexOf('\\a\\r') > -1) {
-				span.style = 'color: #BBBB00';
+				$(span).css('color: #BBBB00');
 				span.innerHTML = text.substring('\\a\\r'.length, text.indexOf('</br>'));
 				td.innerHTML = span.outerHTML + text.substring(text.indexOf('</br>'), text.length);
 			} else {
 				var regexText = re.exec(text);
 				if (!!regexText && !!regexText[0]) {
-					span.style = 'color: beige';
+					$(span).css('color: beige');
 					span.innerHTML = regexText[0];
 					td.innerHTML = span.outerHTML + text.substring(regexText[0].length, text.length);
 				} else {
@@ -242,7 +241,7 @@ export class Renderer {
 	}
 
 	drawChart(chartConfig: any): void {
-		var ctx = document.getElementById("canvas").getContext("2d");
+		// var ctx = document.getElementById("canvas").getContext("2d");
 		// window.chart = new Chart(ctx, chartConfig);
 	}
 
@@ -256,7 +255,7 @@ export class Renderer {
 			value.value = data[i];
 			for (var j = 0; j < clientConfig.readOnlyKeys.length; j++) {
 				if (i === clientConfig.readOnlyKeys[j]) {
-					value = document.createElement('td');
+					// value: HTMLTableDataCellElement = document.createElement('td');
 					break;
 				}
 			}

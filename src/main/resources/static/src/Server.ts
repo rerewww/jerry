@@ -1,23 +1,26 @@
 import {clientConfig} from "./ClientConfig";
-import {renderer} from "./Renderer";
+import {Renderer} from "./Renderer";
+import {Stomp} from "@stomp/stompjs";
+import SockJS from "sockjs";
+
 /**
  * Created by son on 2019-03-05.
  */
 
 export class Server {
-    constructor() {
-
-    }
+    private sock;
+    private stompClient;
+    private renderer = new Renderer();
 
     public connect(): void {
-        sock = new SockJS(window.location.origin + '/stomp');
-        stompClient = Stomp.over(sock);
-        Stomp.over(stompClient.connect({}, function(){
-            stompClient.subscribe('/subscribe/logs', this.onMessageForLogs);
-            stompClient.subscribe('/subscribe/accessLogs', this.onMessageForAccessLogs);
-            stompClient.subscribe('/subscribe/errorLogs', this.onMessageForErrorLogs);
-            stompClient.subscribe('/subscribe/usage', this.onMessageForUsage);
-            stompClient.debug = null;
+        this.sock = SockJS.createServer({sockjs_url:window.location.origin + '/stomp'});
+        this.stompClient = Stomp.over(this.sock);
+        Stomp.over(this.stompClient.connect({}, function(){
+            this.stompClient.subscribe('/subscribe/logs', this.onMessageForLogs);
+            this.stompClient.subscribe('/subscribe/accessLogs', this.onMessageForAccessLogs);
+            this.stompClient.subscribe('/subscribe/errorLogs', this.onMessageForErrorLogs);
+            this.stompClient.subscribe('/subscribe/usage', this.onMessageForUsage);
+            this.stompClient.debug = null;
         }));
     }
 
@@ -25,7 +28,7 @@ export class Server {
         if (message.body === "" || !clientConfig.checkedLog()) {
             return;
         }
-        renderer.drawLog(message.body);
+        this.renderer.drawLog(message.body);
     }
 
     public onMessageForAccessLogs(message): void {
@@ -34,12 +37,13 @@ export class Server {
         }
 
         var oData = JSON.parse(message.body);
-        renderer.drawAccessLogs(oData);
+        this.renderer.drawAccessLogs(oData);
         if (!!oData && oData.accessLogs.length === 0) {
             return;
         }
 
-        var date = moment().add(0, 'd').format();
+        // var date = moment().add(0, 'd').format();
+        var date = 0;
         var successCnt = 0;
         var failCnt = 0;
         oData.accessLogs.forEach(function (item) {
@@ -67,20 +71,20 @@ export class Server {
             x: date,
             y: failCnt
         };
-        renderer.updateChart(oSuccess, oFail);
+        this.renderer.updateChart(oSuccess, oFail);
     }
 
     public onMessageForErrorLogs(message): void {
         if (message.body === "" || !clientConfig.checkedError()) {
             return;
         }
-        renderer.drawErrorElem(JSON.parse(message.body));
+        this.renderer.drawErrorElem(JSON.parse(message.body));
     }
 
     public onMessageForUsage(message): void {
         if (message.body === "") {
             return;
         }
-        renderer.drawUsage(JSON.parse(message.body));
+        this.renderer.drawUsage(JSON.parse(message.body));
     }
 }

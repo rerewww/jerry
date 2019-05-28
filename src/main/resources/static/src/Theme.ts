@@ -25,7 +25,7 @@ export class theme {
 		}
 
 		var matchAnnotation = text.match(this.regexAnnotation);
-		if (!!matchAnnotation && matchAnnotation !== '') {
+		if (!!matchAnnotation) {
 			matchAnnotation.forEach(function (item) {
 				var _text = result;
 				var index = _text.indexOf(item);
@@ -41,7 +41,7 @@ export class theme {
 		}
 
 		var matchKeyword = text.match(this.regexKeyword);
-		if (!!matchKeyword && matchKeyword !== '') {
+		if (!!matchKeyword) {
 			matchKeyword.forEach(function (item) {
 				var _text = result;
 				var index = _text.indexOf(item);
@@ -57,7 +57,7 @@ export class theme {
 		}
 
 		var matchType = result.match(this.regexType);
-		if (!!matchType && matchType !== '') {
+		if (!!matchType) {
 			var _text = result;
 			var temp = '';
 			var back = '';

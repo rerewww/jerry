@@ -2,12 +2,10 @@
  * Created by son on 2019-05-27.
  */
 import $ from 'jquery';
-import {Server} from './Server';
-import {Renderer} from './Renderer';
+import {Server} from "./Server";
 import {Setting} from "./Setting";
 
 const server = new Server();
-const renderer = new Renderer();
 const setting = new Setting();
 
 $( document ).ready( () => {
@@ -17,7 +15,7 @@ $( document ).ready( () => {
     setting.onToggleLogEvent();
     setting.onToggleErrorEvent();
     setting.onToggleAccessEvent();
-    //
+
     // var date = moment().add(0, 'd').format();
     // var chartConfig = {
     //     type: 'line',
