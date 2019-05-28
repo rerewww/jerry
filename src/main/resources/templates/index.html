@@ -14,18 +14,7 @@
   <meta name="author" content="">
 
   <title>Jerry</title>
-  <script type="text/javascript" src="/src/jquery.3.3.1.js"></script>
-  <script type="text/javascript" src="/src/Moment.js"></script>
-  <script type="text/javascript" src="/src/Chart.js"></script>
-  <script type="text/javascript" src="/src/parser.js"></script>
-  <script type="text/javascript" src="/src/renderer.js"></script>
-  <script type="text/javascript" src="/src/sockjs.min.js"></script>
-  <script type="text/javascript" src="/src/stomp.js"></script>
-  <script type="text/javascript" src="/src/server.js"></script>
-  <script type="text/javascript" src="/src/setting.js"></script>
-  <script type="text/javascript" src="/src/action.js"></script>
-  <script type="text/javascript" src="/src/clientConfig.js"></script>
-  <script type="text/javascript" src="/src/theme.js"></script>
+  <script type="text/javascript" src="/dist/main.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -54,33 +43,33 @@
 		<li class="active"><a href="/">Home</a></li>
 		<li>
 		  <div class="dropdown">
-			<button onclick="setting.dropDowns()" class="dropbtn">Options</button>
+			<!--<button onclick="setting.dropDowns()" class="dropbtn">Options</button>-->
 			<div id="options" class="dropdown-content">
 			  <div style="padding-bottom: 5px;">
 				<span class="switchHeader">ACCESS</span>
 				<label class="switch">
-				  <input id="accessCheck" type="checkbox" onclick="setting.onToggleAccessEvent()">
+				  <!--<input id="accessCheck" type="checkbox" onclick="setting.onToggleAccessEvent()">-->
 				  <span class="slider"></span>
 				</label>
 			  </div>
 			  <div style="padding-bottom: 5px;">
 				<span class="switchHeader">ERROR</span>
 				<label class="switch">
-				  <input id="errorCheck" type="checkbox" onclick="setting.onToggleErrorEvent()">
+				  <!--<input id="errorCheck" type="checkbox" onclick="setting.onToggleErrorEvent()">-->
 				  <span class="slider"></span>
 				</label>
 			  </div>
 			  <div style="padding-bottom: 5px;">
 				<span class="switchHeader">LOGS</span>
 				<label class="switch">
-				  <input id="logCheck" type="checkbox" onclick="setting.onToggleLogEvent()">
+				  <!--<input id="logCheck" type="checkbox" onclick="setting.onToggleLogEvent()">-->
 				  <span class="slider"></span>
 				</label>
 			  </div>
 			  <div style="padding-bottom: 5px;">
 				<span class="switchHeader">Stacks</span>
 				<label class="switch">
-				  <input id="libCheck" type="checkbox" onclick="setting.onToggleLibEvent()">
+				  <!--<input id="libCheck" type="checkbox" onclick="setting.onToggleLibEvent()">-->
 				  <span class="slider"></span>
 				</label>
 			  </div>
@@ -155,64 +144,9 @@
 
 <script type="text/javascript" th:inline="javascript">
 	if (!window._info) {
-	  window._info = {};
+		window._info = {};
 	}
 	_info.sourcePackage = [[${sourcePackage}]];
-	connect();
-
-	action.getInfos();
-
-	setting.onToggleLogEvent();
-	setting.onToggleErrorEvent();
-	setting.onToggleAccessEvent();
-
-	var date = moment().add(0, 'd').format();
-	var chartConfig = {
-	  type: 'line',
-	  data: {
-		datasets: [{
-		  label: 'success',
-		  backgroundColor: '#4fBB98',
-		  pointBackgroundColor: '#4fBB98',
-		  borderColor: '#4FBB98',
-		  pointBorderColor: '#4FBB98',
-		  data: [{
-			x: date,
-			y: 0
-		  }],
-		  fill: false
-		}, {
-		  label: 'fail',
-		  backgroundColor: '#F95F5E',
-		  pointBackgroundColor: '#F95F5E',
-		  borderColor: '#F95F5E',
-		  pointBorderColor: '#F95F5E',
-		  data: [{
-			x: date,
-			y: 0
-		  }],
-		  fill: false
-		}]
-	  },
-	  options: {
-		responsive: false,
-		maintainAspectRatio: true,
-		scales: {
-		  xAxes: [{
-			type: "time",
-			display: true,
-			time: {
-				unit: 'second',
-			  displayFormats: {
-				quarter: 'HH:mm:ss'
-			  }
-			}
-		  }]
-		}
-	  }
-	};
-
-	renderer.drawChart(chartConfig);
 </script>
 </body>
 </html>
