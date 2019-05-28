@@ -1,26 +1,24 @@
+import Stomp from "stompjs";
+import SockJS from "sockjs-client";
 import {clientConfig} from "./ClientConfig";
 import {Renderer} from "./Renderer";
-import {Stomp} from "@stomp/stompjs";
-import SockJS from "sockjs";
 
 /**
  * Created by son on 2019-03-05.
  */
 
 export class Server {
-    private sock;
-    private stompClient;
     private renderer = new Renderer();
 
     public connect(): void {
-        this.sock = SockJS.createServer({sockjs_url:window.location.origin + '/stomp'});
-        this.stompClient = Stomp.over(this.sock);
-        Stomp.over(this.stompClient.connect({}, function(){
-            this.stompClient.subscribe('/subscribe/logs', this.onMessageForLogs);
-            this.stompClient.subscribe('/subscribe/accessLogs', this.onMessageForAccessLogs);
-            this.stompClient.subscribe('/subscribe/errorLogs', this.onMessageForErrorLogs);
-            this.stompClient.subscribe('/subscribe/usage', this.onMessageForUsage);
-            this.stompClient.debug = null;
+        const sock = new SockJS(window.location.origin + '/stomp');
+        const stompClient = Stomp.over(sock);
+        Stomp.over(stompClient.connect({}, function(){
+            stompClient.subscribe('/subscribe/logs', this.onMessageForLogs);
+            stompClient.subscribe('/subscribe/accessLogs', this.onMessageForAccessLogs);
+            stompClient.subscribe('/subscribe/errorLogs', this.onMessageForErrorLogs);
+            stompClient.subscribe('/subscribe/usage', this.onMessageForUsage);
+            stompClient.debug = null;
         }));
     }
 
