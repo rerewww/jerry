@@ -1,18 +1,6 @@
 // /**
 //  * Created by son on 2019-03-09.
 //  */
-// var action = {
-// 	getInfos: function () {
-// 		$.ajax({
-// 			url: 'getInfos.son',
-// 			type: 'GET',
-// 			async: true,
-// 			dataType: 'json',
-// 			success: function(response) {
-// 				renderer.drawInfos(response);
-// 			}
-// 		})
-// 	},
 //
 // 	setDefaultEnvs: function (data) {
 // 		for (var i in data) {

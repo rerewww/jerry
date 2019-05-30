@@ -4,64 +4,43 @@
 import $ from 'jquery';
 
 export class Setting {
-	constructor() {
-
+	public init(): void {
+		const toggleButtons = ['logCheck', 'accessCheck', 'errorCheck'];
+		toggleButtons.forEach( (id) => {
+			$('input[id=' + id + ']').trigger('click');
+		});
 	}
-	public onToggleLibEvent(): void {
-		var isCheckedLib= $('input[id=libCheck]').is(':checked');
-		if (!isCheckedLib) {
-			$('input[id=libCheck]').trigger('click');
+
+	/**
+	 * 토글 이벤트
+	 * @param elem
+	 */
+	public onToggleEvent(elem: any): void {
+		if (!elem.is(':checked')) {
+			elem.triggerHandler('click');
 		}
 	}
 
-	public onToggleLogEvent(): void {
-		var isCheckedLog = $('input[id=logCheck]').is(':checked');
-		if (!isCheckedLog) {
-			$('input[id=logCheck]').trigger('click');
-		}
-	}
-
-	public onToggleErrorEvent(): void {
-		var isCheckedError = $('input[id=errorCheck]').is(':checked');
-		if (!isCheckedError) {
-			$('input[id=errorCheck]').trigger('click');
-		}
-	}
-
-	public onToggleAccessEvent(): void {
-		var isCheckedAccess= $('input[id=accessCheck]').is(':checked');
-		if (!isCheckedAccess) {
-			$('input[id=accessCheck]').trigger('click');
-		}
-	}
-
+	/**
+	 * 옵션 버튼 클릭했을 때,
+	 */
 	public dropDowns(): void {
 		document.getElementById("options").classList.toggle("show");
 	}
-}
 
-// window.onclick = function(e: Event) {
-// 	const target = e.target as HTMLElement;
-// 	if (!target.matches('.dropbtn')) {
-// 		var options = document.getElementById("options");
-// 		if (!target.matches('.slider') && !target.matches('input') && options.classList.contains('show')) {
-// 			options.classList.remove('show');
-// 		}
-// 	}
-//
-// 	var stackTraces = document.getElementById('stack_trace');
-//
-// 	if (target.matches('.errorItem') || target.matches('summary') || target.matches('.codestyle')) {
-// 		return;
-// 	}
-//
-// 	if (!!stackTraces && stackTraces.firstElementChild !== null && stackTraces.firstElementChild.tagName === 'DETAILS') {
-// 		while (stackTraces.childElementCount > 0) {
-// 			stackTraces.removeChild(stackTraces.firstElementChild)
-// 		}
-//
-// 		var header = document.createElement('h4');
-// 		header.innerHTML = '<h4 class="container_headers header-title mt-0">Please select error log in table</h4>';
-// 		stackTraces.appendChild(header);
-// 	}
-// };
+	/**
+	 * 엘리먼트 제거
+	 * @param target
+	 */
+	public clear(target: any): void {
+		const options = $('#options');
+		if (target.closest('#options').length === 0 && options.attr('class').indexOf('show') > -1) {
+			options.removeClass('show');
+		}
+
+		const stackTraces = $('#stack_trace');
+		const header = document.createElement('h4');
+		header.innerHTML = '<h4 class="container_headers header-title mt-0">Please select error log in table</h4>';
+		stackTraces.append(header);
+	}
+}
