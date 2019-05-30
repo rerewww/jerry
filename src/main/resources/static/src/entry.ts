@@ -5,11 +5,23 @@ import $ from 'jquery';
 import {Server} from "./Server";
 import {Setting} from "./Setting";
 
-const server = new Server();
-const setting = new Setting();
+const obj = {
+    server: new Server(),
+    setting: new Setting()
+};
 
 $( document ).ready( () => {
-    server.connect();
+    $('body').click( (event) => {
+        const target = $(event.target);
+        const that = target.attr('that');
+        const cmd = target.atrr('cmd');
+        if (!that || !cmd) {
+            return;
+        }
+
+        obj[that].cmd.call(obj[that]);
+    });
+    obj[server].connect();
     // action.getInfos();
 
     setting.onToggleLogEvent();
