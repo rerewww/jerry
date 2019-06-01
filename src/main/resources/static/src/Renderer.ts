@@ -1,24 +1,22 @@
+import $ from "jquery";
 import {clientConfig} from "./ClientConfig";
+import {theme} from "./Theme";
 /**
  * Created by son on 2019-03-04.
  */
 export class Renderer {
-	constructor() {
-
-	}
-	drawErrorElem(oResult: any): void {
-		var aExceptions = oResult.exceptions;
-		var aStackTraces = oResult.stackTraces;
+	renderErrorLogs(oResult: any): void {
+		const aExceptions = oResult.exceptions;
+		const aStackTraces = oResult.stackTraces;
 
 		if (aExceptions.length === 0 && aStackTraces.length === 0) {
 			return;
 		}
-		var rootElem = document.getElementById('error');
 
-		var index = aExceptions.length - 1;
-		var i = 0;
+		const rootElem = document.getElementById('error');
+		let index = aExceptions.length - 1;
+		let i = 0;
 		while (i <= index) {
-			// 제한 크기와 같으면 에러 로그 삽입을 중지한다.
 			if (i === clientConfig.removeNodeLimit) {
 				break;
 			}
@@ -27,16 +25,16 @@ export class Renderer {
 				rootElem.removeChild(rootElem.firstElementChild);
 			}
 
-			var tr = document.createElement('tr');
-			var td = document.createElement('td');
+			const tr = document.createElement('tr');
+			const td = document.createElement('td');
 			td.innerHTML = aExceptions[index];
 			td.className = 'errorItem';
 
-			var number = '' + index;
+			const number = '' + index;
 			td.setAttribute('number', number);
 
 			td.onclick  = function() {
-				// this.drawStackTrace(window.event.currentTarget.getAttribute('number'));
+				this.renderStackTrace($(window.event.currentTarget).attr('number'));
 			}.bind(this);
 
 			sessionStorage.setItem(number, aStackTraces[index]);
@@ -49,24 +47,22 @@ export class Renderer {
 		this.autoScroll(1);
 	}
 
-	/*
-	drawStackTrace(number: number): void {
-		var rootElem = document.getElementById('stack_trace');
+	renderStackTrace(number: number): void {
+		const rootElem = document.getElementById('stack_trace');
 
 		while(rootElem.firstChild) {
 			rootElem.removeChild(rootElem.firstChild);
 		}
 
-		var aStackTraces = sessionStorage.getItem(number).split('\n');
-
+		const aStackTraces: string = sessionStorage.getItem(number.toString()).split('\n').toString();
 		for (var i = 0; i < aStackTraces.length; i++) {
 			if (aStackTraces[i] === '') {
 				continue;
 			}
 
-			var details = document.createElement('details');
+			const details = document.createElement('details');
 			details.id = 'details';
-			var isSourcePackage = aStackTraces[i].indexOf(_info.sourcePackage) > -1;
+			const isSourcePackage = aStackTraces[i].indexOf(window['_info'].sourcePackage) > -1;
 
 			if (!clientConfig.checkedLib() && !isSourcePackage) {
 				console.log('라이브러리 경로는 무시합니다.');
@@ -74,35 +70,35 @@ export class Renderer {
 			}
 
 			details.onclick = function () {
-				var elem = window.event.currentTarget;
+				const elem = $(window.event.currentTarget);
 
 				// no more than 2 call ajax
-				if (elem.childElementCount >= 2) {
+				if (elem.children().length >= 2) {
 					return;
 				}
-				var text = elem.children[0].textContent;
+				let text = elem.children[0].textContent;
 
-				var fileInfo = text.substring(text.indexOf('('), text.length).replace('(', '').replace(')', '');
-				var fileName = fileInfo.split('.')[0];
-				var line = fileInfo.split(':')[1];
+				const fileInfo = text.substring(text.indexOf('('), text.length).replace('(', '').replace(')', '');
+				const fileName = fileInfo.split('.')[0];
+				const line = fileInfo.split(':')[1];
 
 				var successCallback = function (aResponse) {
-					var lineNumber = line;
+					const lineNumber = line;
 					if (aResponse.length === 0) {
 						var p = document.createElement('p');
 						p.className = 'fileInfo';
 						p.innerHTML = "Library files can not do code analysis.";
-						elem.appendChild(p);
+						elem.append(p);
 						$('#loading').css('display', 'none');
 						return;
 					}
 
 					for (var i = 0; i < aResponse.length; i++) {
-						var p = document.createElement('p');
+						const p = document.createElement('p');
 						p.className = 'codestyle';
 
 						if (lineNumber === aResponse[i].substring(0, aResponse[i].indexOf('&nbsp') - 1)) {
-							p.style = 'color: red; font-weight: bold';
+							$(p).css('color: red; font-weight: bold');
 						} else {
 							aResponse[i] = theme.apply(aResponse[i]);
 						}
@@ -111,45 +107,42 @@ export class Renderer {
 						} else {
 							p.innerHTML = aResponse[i] + '</br>';
 						}
-						elem.appendChild(p);
+						elem.append(p);
 					}
 					$('#loading').css('display', 'none');
 				}.bind(this);
-
 				// parser.viewCode(fileName, line, 10, successCallback);
 			};
 
-			var elem = document.createElement('summary');
+			const elem = document.createElement('summary');
 			elem.innerHTML = aStackTraces[i];
 
 			if (isSourcePackage) {
-				elem.style = 'color: #BBBB00';
+				$(elem).css('color: #BBBB00');
 			}
-
 			details.appendChild(elem);
 			rootElem.appendChild(details);
 		}
 	}
-	*/
 
-	drawLog(logs: string): void {
-		var aLogs = logs.split('\r\t');
-		var length = aLogs.length;
+	renderLogs(logs: string): void {
+		const aLogs = logs.split('\r\t');
+		const length = aLogs.length;
 
-		var tbody = document.getElementById('logs').children[0];
+		const tbody = document.getElementById('logs').children[0];
 		for (var i = 0; i < length; i++) {
 			if (tbody.childElementCount >= clientConfig.removeNodeLimit) {
 				tbody.removeChild(tbody.firstElementChild);
 			}
 
-			var re = /.+(.java|.class)(.*?)\)/g;
-			var tr = document.createElement('tr');
-			var td = document.createElement('td');
+			const re = /.+(.java|.class)(.*?)\)/g;
+			const tr = document.createElement('tr');
+			const td = document.createElement('td');
 
 			$(tr).css('text-indent: 10px; !important');
-			var text = aLogs[i];
+			const text = aLogs[i];
 
-			var span = document.createElement('span');
+			const span = document.createElement('span');
 			if (text.indexOf('\\a\\r') > -1) {
 				$(span).css('color: #BBBB00');
 				span.innerHTML = text.substring('\\a\\r'.length, text.indexOf('</br>'));
@@ -172,54 +165,42 @@ export class Renderer {
 	}
 
 	autoScroll(i: number): void {
-		var divTable = document.getElementsByClassName('table-responsive')[i];
+		const divTable = document.getElementsByClassName('table-responsive')[i];
 		divTable.scrollTop = divTable.scrollHeight;
 	}
 
-	drawUsage(oData: any): void {
-		var cpu = oData.cpu;
-		var memory = oData.memory;
+	renderUsage(oData: any): void {
+		const cpu = oData.cpu;
+		const memory = oData.memory;
+		const usageElem = document.getElementById('usage');
 
-		var usageElem = document.getElementById('usage');
-
-		var i = 0, j = 0;
-		var acrInterval = setInterval (function() {
+		let i = 0, j = 0;
+		const acrInterval = setInterval (function() {
 			usageElem.innerHTML = i + '/' + j;
 			if( i === cpu && j === memory) {
 				clearInterval(acrInterval);
 			}
-
-			if (i === cpu) {
-				i = cpu;
-			} else {
-				i++;
-			}
-
-			if (j === memory) {
-				j = memory;
-			} else {
-				j++;
-			}
+			i === cpu ? i = cpu : i++;
+			j === memory ? j = memory : j++;
 		}, 15);
 	}
 
 
 	drawInfos(oData: any): void {
-		var version = oData.version;
-		var branch = oData.branch;
-
-		var infosElem = document.getElementById('infos');
+		const version = oData.version;
+		const branch = oData.branch;
+		const infosElem = document.getElementById('infos');
 		infosElem.innerHTML = version + '<br>' + branch;
 	}
 
 	drawAccessLogs(data: any): void {
-		var elem = document.getElementById('accessLogs');
+		const elem = document.getElementById('accessLogs');
 		data.accessLogs.forEach(function (item) {
 			if (elem.childElementCount >= clientConfig.removeNodeLimit) {
 				elem.removeChild(elem.firstElementChild);
 			}
-			var tr = document.createElement('tr');
-			var td = document.createElement('td');
+			const tr = document.createElement('tr');
+			const td = document.createElement('td');
 			td.innerHTML = item;
 
 			tr.appendChild(td);
@@ -245,12 +226,12 @@ export class Renderer {
 		// window.chart = new Chart(ctx, chartConfig);
 	}
 
-	drawSetting(data: any): void {
-		var table = document.getElementById('settingTable');
-		for (var i in data) {
-			var tr = document.createElement('tr');
-			var key = document.createElement('td');
-			var value = document.createElement('input');
+	renderSetting(data: any): void {
+		const table = document.getElementById('settingTable');
+		for (const i in data) {
+			const tr = document.createElement('tr');
+			const key = document.createElement('td');
+			const value = document.createElement('input');
 			value.className = 'setting_values';
 			value.value = data[i];
 			for (var j = 0; j < clientConfig.readOnlyKeys.length; j++) {

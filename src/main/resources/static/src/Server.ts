@@ -26,7 +26,7 @@ function onMessageForLogs(message): void {
     if (message.body === "" || !clientConfig.checkedLog()) {
         return;
     }
-    renderer.drawLog(message.body);
+    renderer.renderLogs(message.body);
 }
 
 function onMessageForAccessLogs(message): void {
@@ -76,12 +76,12 @@ function onMessageForErrorLogs(message): void {
     if (message.body === "" || !clientConfig.checkedError()) {
         return;
     }
-    renderer.drawErrorElem(JSON.parse(message.body));
+    renderer.renderErrorLogs(JSON.parse(message.body));
 }
 
 function onMessageForUsage(message): void {
     if (message.body === "") {
         return;
     }
-    renderer.drawUsage(JSON.parse(message.body));
+    renderer.renderUsage(JSON.parse(message.body));
 }
