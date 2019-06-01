@@ -41,7 +41,9 @@ Requirements
 
 If you want to bootstrap Maven, you'll need:
 - Java 1.8+
-- Maven 3.0.5 or later
+- Maven 3.0.5+
+- node 10.15.1+
+- npm 6.5.1+
 
 MIT License
 -----------
