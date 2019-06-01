@@ -1,6 +1,7 @@
-import $ from "jquery";
-import {clientConfig} from "./ClientConfig";
-import {theme} from "./Theme";
+import $ from 'jquery';
+import {clientConfig} from './ClientConfig';
+import {theme} from './Theme';
+import {action} from './Action';
 /**
  * Created by son on 2019-03-04.
  */
@@ -111,7 +112,7 @@ export class Renderer {
 					}
 					$('#loading').css('display', 'none');
 				}.bind(this);
-				// parser.viewCode(fileName, line, 10, successCallback);
+				action.viewCode(fileName, line, 10, successCallback);
 			};
 
 			const elem = document.createElement('summary');
