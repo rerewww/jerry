@@ -37,6 +37,7 @@ export class Setting {
 		if (target.closest('#options').length === 0 && options.attr('class').indexOf('show') > -1) {
 			options.removeClass('show');
 		}
+		return;
 
 		const stackTraces = $('#stack_trace');
 		const header = document.createElement('h4');
