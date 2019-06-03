@@ -16,17 +16,19 @@ Quick Start
 
 1. Modify application.properties.xml
 ```
-- server.port = 'insert your port'
-- source.dir.path = 'source folder path to explore'
-- source.package.prefix = 'com.example'
-- log.file.path = 'tomcat log file path to explore'
-- accesslog.file.path = 'access log file path to explore'
-- admin.user.id = 'your admin id'
-- admin.user.password = 'your admin password'
+- server.port = insert your port
+- source.dir.path = source folder path to explore
+- source.package.prefix = com.example
+- log.file.path = tomcat log file path to explore
+- accesslog.file.path = access log file path to explore
+- admin.user.id = your admin id
+- admin.user.password = your admin password
 ```
 2. Run Maven
 ```
-mvn spring-boot:run
+$ cd {project}/src/main/resources/static/
+$ npm run build
+$ mvn spring-boot:run
 ```
 3. Connect "localhost:port"
 
