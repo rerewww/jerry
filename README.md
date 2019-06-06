@@ -1,4 +1,4 @@
-jerry
+Jerry
 ==================
 Collect tomcat logs and show them beautifully
 
@@ -24,10 +24,11 @@ Quick Start
 - admin.user.id = your admin id
 - admin.user.password = your admin password
 ```
-2. Run Maven
+2. Run command
 ```
 $ cd {project}/src/main/resources/static/
 $ npm run build
+$ cd {project}/
 $ mvn spring-boot:run
 ```
 3. Connect "localhost:port"
