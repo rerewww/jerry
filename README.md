@@ -27,6 +27,7 @@ Quick Start
 2. Run command
 ```
 $ cd {project}/src/main/resources/static/
+$ npm install
 $ npm run build
 $ cd {project}/
 $ mvn spring-boot:run
