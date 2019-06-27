@@ -16,7 +16,7 @@ export class action {
 			url: 'getInfos.son',
 			dataType: 'json',
 			success: function (response) {
-				self.renderer.drawInfos(response.data);
+				self.renderer.drawInfos(response);
 			}
 		})
 	}
