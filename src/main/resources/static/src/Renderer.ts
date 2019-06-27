@@ -210,23 +210,6 @@ export class Renderer {
 		this.autoScroll(0);
 	}
 
-	updateChart(oSuccess: any, oFail: any): void {
-		// if (chartConfig.data.datasets[0].data.length >= clientConfig.chartDataLimit || chartConfig.data.datasets[1].data.length >= clientConfig.chartDataLimit) {
-		// 	chartConfig.data.datasets[0].data.shift();
-		// 	chartConfig.data.datasets[1].data.shift();
-		// }
-        //
-        // chartConfig.data.datasets[0].data.push(oSuccess);
-        // chartConfig.data.datasets[1].data.push(oFail);
-        //
-        // window.chart.update();
-	}
-
-	drawChart(chartConfig: any): void {
-		// var ctx = document.getElementById("canvas").getContext("2d");
-		// window.chart = new Chart(ctx, chartConfig);
-	}
-
 	renderSetting(data: any): void {
 		const table = document.getElementById('settingTable');
 		for (const i in data) {

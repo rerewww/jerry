@@ -2,7 +2,25 @@
  * Created by son on 2019-03-09.
  */
 import $ from 'jquery';
+import {Renderer} from "./Renderer";
 export class action {
+	renderer: Renderer = new Renderer();
+
+	public init(): void {
+		this.getInfos();
+	}
+
+	private getInfos(): void {
+		const self = this;
+		$.ajax({
+			url: 'getInfos.son',
+			dataType: 'json',
+			success: function (response) {
+				self.renderer.drawInfos(response.data);
+			}
+		})
+	}
+
 	public setDefaultEnvs(data: any): void {
 		for (var i in data) {
 			window['_info'].defaultEnvs[i] = data[i];
