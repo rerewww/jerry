@@ -1,11 +1,15 @@
 import $ from 'jquery';
-import {clientConfig} from './ClientConfig';
-import {theme} from './Theme';
-import {action} from './Action';
+import {ClientConfig} from './ClientConfig';
+import {Theme} from './Theme';
+import {Action} from './Action';
 /**
  * Created by son on 2019-03-04.
  */
 export class Renderer {
+	private theme: Theme = new Theme();
+	private action: Action = new Action();
+	private clientConfig: ClientConfig = new ClientConfig();
+
 	renderErrorLogs(oResult: any): void {
 		const aExceptions = oResult.exceptions;
 		const aStackTraces = oResult.stackTraces;
@@ -18,11 +22,11 @@ export class Renderer {
 		let index = aExceptions.length - 1;
 		let i = 0;
 		while (i <= index) {
-			if (i === clientConfig.removeNodeLimit) {
+			if (i === this.clientConfig.removeNodeLimit) {
 				break;
 			}
 
-			if (rootElem.childElementCount >= clientConfig.removeNodeLimit) {
+			if (rootElem.childElementCount >= this.clientConfig.removeNodeLimit) {
 				rootElem.removeChild(rootElem.firstElementChild);
 			}
 
@@ -55,7 +59,7 @@ export class Renderer {
 			rootElem.removeChild(rootElem.firstChild);
 		}
 
-		const aStackTraces: string = sessionStorage.getItem(number.toString()).split('\n').toString();
+		const aStackTraces: string[] = sessionStorage.getItem(number.toString()).split('\n');
 		for (var i = 0; i < aStackTraces.length; i++) {
 			if (aStackTraces[i] === '') {
 				continue;
@@ -65,11 +69,12 @@ export class Renderer {
 			details.id = 'details';
 			const isSourcePackage = aStackTraces[i].indexOf(window['_info'].sourcePackage) > -1;
 
-			if (!clientConfig.checkedLib() && !isSourcePackage) {
+			if (!this.clientConfig.checkedLib() && !isSourcePackage) {
 				console.log('라이브러리 경로는 무시합니다.');
 				continue;
 			}
-
+			
+			const self = this;
 			details.onclick = function () {
 				const elem = $(window.event.currentTarget);
 
@@ -77,8 +82,8 @@ export class Renderer {
 				if (elem.children().length >= 2) {
 					return;
 				}
-				let text = elem.children[0].textContent;
-
+				let text = elem.text();
+				
 				const fileInfo = text.substring(text.indexOf('('), text.length).replace('(', '').replace(')', '');
 				const fileName = fileInfo.split('.')[0];
 				const line = fileInfo.split(':')[1];
@@ -101,7 +106,7 @@ export class Renderer {
 						if (lineNumber === aResponse[i].substring(0, aResponse[i].indexOf('&nbsp') - 1)) {
 							$(p).css('color: red; font-weight: bold');
 						} else {
-							aResponse[i] = theme.apply(aResponse[i]);
+							aResponse[i] = self.theme.render(aResponse[i]);
 						}
 						if (!aResponse[i + 1]) {
 							p.innerHTML = aResponse[i];
@@ -111,9 +116,9 @@ export class Renderer {
 						elem.append(p);
 					}
 					$('#loading').css('display', 'none');
-				}.bind(this);
-				action.viewCode(fileName, line, 10, successCallback);
-			};
+				};
+				self.action.viewCode(fileName, line, 10, successCallback);
+			}.bind(self);
 
 			const elem = document.createElement('summary');
 			elem.innerHTML = aStackTraces[i];
@@ -132,7 +137,7 @@ export class Renderer {
 
 		const tbody = document.getElementById('logs').children[0];
 		for (var i = 0; i < length; i++) {
-			if (tbody.childElementCount >= clientConfig.removeNodeLimit) {
+			if (tbody.childElementCount >= this.clientConfig.removeNodeLimit) {
 				tbody.removeChild(tbody.firstElementChild);
 			}
 
@@ -186,8 +191,7 @@ export class Renderer {
 		}, 15);
 	}
 
-
-	drawInfos(oData: any): void {
+	static drawInfos(oData: any): void {
 		const version = oData.version;
 		const branch = oData.branch;
 		const infosElem = document.getElementById('infos');
@@ -197,7 +201,7 @@ export class Renderer {
 	drawAccessLogs(data: any): void {
 		const elem = document.getElementById('accessLogs');
 		data.accessLogs.forEach(function (item) {
-			if (elem.childElementCount >= clientConfig.removeNodeLimit) {
+			if (elem.childElementCount >= this.clientConfig.removeNodeLimit) {
 				elem.removeChild(elem.firstElementChild);
 			}
 			const tr = document.createElement('tr');
@@ -218,8 +222,8 @@ export class Renderer {
 			const value = document.createElement('input');
 			value.className = 'setting_values';
 			value.value = data[i];
-			for (var j = 0; j < clientConfig.readOnlyKeys.length; j++) {
-				if (i === clientConfig.readOnlyKeys[j]) {
+			for (var j = 0; j < this.clientConfig.readOnlyKeys.length; j++) {
+				if (i === this.clientConfig.readOnlyKeys[j]) {
 					// value: HTMLTableDataCellElement = document.createElement('td');
 					break;
 				}

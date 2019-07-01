@@ -3,20 +3,14 @@
  */
 import $ from 'jquery';
 import {Renderer} from "./Renderer";
-export class action {
-	renderer: Renderer = new Renderer();
-
-	public init(): void {
-		this.getInfos();
-	}
-
-	private getInfos(): void {
+export class Action {
+	public getInfos(): void {
 		const self = this;
 		$.ajax({
 			url: 'getInfos.son',
 			dataType: 'json',
 			success: function (response) {
-				self.renderer.drawInfos(response);
+				Renderer.drawInfos(response);
 			}
 		})
 	}
@@ -61,7 +55,7 @@ export class action {
 		})
 	}
 
-	static viewCode(fileName: string, line: string, range: number, successCallback: any): void {
+	public viewCode(fileName: string, line: string, range: number, successCallback: any): void {
 		if (!line) {
 			return;
 		}
@@ -74,7 +68,7 @@ export class action {
 			data: {
 				fileName: fileName,
 				line: line,
-				range: $('#codeRange').text
+				range: $('#codeRange').val()
 			},
 			dataType: 'json',
 			success: successCallback

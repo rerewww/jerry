@@ -1,13 +1,14 @@
 import Stomp from "stompjs";
 import SockJS from "sockjs-client";
-import {clientConfig} from "./ClientConfig";
+import {ClientConfig} from "./ClientConfig";
 import {Renderer} from "./Renderer";
 
 /**
  * Created by son on 2019-03-05.
  */
-const renderer = new Renderer();
 
+const renderer: Renderer = new Renderer();
+const clientConfig: ClientConfig = new ClientConfig();
 export class Server {
     public connect(): void {
         const sock = new SockJS(window.location.origin + '/stomp');
