@@ -4,12 +4,12 @@
 import $ from 'jquery';
 import {Server} from "./Server";
 import {Setting} from "./Setting";
-import {action} from "./Action"
+import {Action} from "./Action"
 
 const obj = {
 	server: new Server(),
 	setting: new Setting(),
-	action: new action()
+	action: new Action()
 };
 
 $( document ).ready( () => {
@@ -25,7 +25,7 @@ $( document ).ready( () => {
 
 		obj[that][cmd].call(obj[that], target);
 	});
-	obj.action.init();
+	obj.action.getInfos();
 	obj.setting.init();
 	obj.server.connect();
 });

@@ -3,24 +3,24 @@
  */
 import $ from 'jquery';
 
-export class clientConfig {
-	static removeNodeLimit: number = 200;
-	static chartDataLimit: number = 6;
-	static readOnlyKeys: string[] = ['serverPort', 'ajpProtocol', 'ajpPort', 'ajpEnabled'];
+export class ClientConfig {
+	removeNodeLimit: number = 200;
+	chartDataLimit: number = 6;
+	readOnlyKeys: string[] = ['serverPort', 'ajpProtocol', 'ajpPort', 'ajpEnabled'];
 
-	static checkedLib(): boolean {
+	public checkedLib(): boolean {
 		return $('input[id=libCheck]').is(':checked');
 	}
 
-	static checkedLog(): boolean {
+	public checkedLog(): boolean {
 		return $('input[id=logCheck]').is(':checked');
 	}
 
-	static checkedError(): boolean {
+	public checkedError(): boolean {
 		return $('input[id=errorCheck]').is(':checked');
 	}
 
-	static checkedAccess(): boolean {
+	public checkedAccess(): boolean {
 		return $('input[id=accessCheck]').is(':checked');
 	}
 }

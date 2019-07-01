@@ -1,7 +1,7 @@
 /**
  * Created by son on 2019-03-14.
  */
-export class theme {
+export class Theme {
 	regexKeyword: any = /public|private|if|else|while|for|try|catch|return|new|null|final|break|continue|true|false/g;
 	regexType: any = /int|File|Path|MultipartFile|Iterator|boolean|char|@ResponseBody|@RequestMapping|@RequestParam|HttpServletRequest|HttpServletResponse/g;
 	regexAnnotation: any = /@ResponseBody|@RequestMapping|@RequestParam|@Autowired/g;
@@ -10,7 +10,7 @@ export class theme {
 	annotationColor: string = '#BBB529';
 	numberColor: string = '#606366';
 
-	apply(text: string): string {
+	render(text: string): string {
 		var result = text;
 
 		if (text.indexOf(':') > 0) {
