@@ -195,7 +195,7 @@ export class Renderer {
 		const version = oData.version;
 		const branch = oData.branch;
 		const infosElem = document.getElementById('infos');
-		infosElem.innerHTML = version + '<br>' + branch;
+		infosElem.innerHTML = version + '/' + branch;
 	}
 
 	drawAccessLogs(data: any): void {
