@@ -86,15 +86,15 @@
 	  <div class="row">
 		<div class="col-xl-3 col-md-3 card_items container_items">
 		  <div class="card-box">
-			<div class="widget-box-2" style="width: 50%; float: left;">
+			<div class="widget-box-2 info-box" style="float: left;">
 			  <div class="widget-detail-2">
-				<h6 class="mb-0" style="margin-top: 10px; font-weight: bold; color: beige;">CPU/MEMORY(%)</h6>
+				<h6 class="mb-0 info">CPU/MEMORY(%)</h6>
 				<div id="usage" class="usage"></div>
 			  </div>
 			</div>
-			<div class="widget-box-2" style="width: 50%; float: right;">
+			<div class="widget-box-2 info-box" style="float: right;">
 			  <div class="widget-detail-2">
-				<h6 class="mb-0" style="margin-top: 10px; font-weight: bold; color: beige;">VERSION/BRANCH</h6>
+				<h6 class="mb-0 info">VERSION/BRANCH</h6>
 				<div id="infos" class="usage"></div>
 			  </div>
 			</div>
@@ -102,7 +102,7 @@
 		</div>
 		<div class="col-xl-3 col-md-3 card_items container_items table-responsive">
 		  <div class="card-box">
-			<h4 class="container_headers header-title mt-0 m-b-30">ACCESS LOGS</h4>
+			<h5 class="container_headers header-title mt-0 m-b-30">ACCESS LOGS</h5>
 			<table id="accessLogs" class="table table-striped">
 			</table>
 		  </div>
@@ -111,18 +111,18 @@
 
 		<div class="row" style="margin-top: 15px">
 			<div class="col-xs-5 table-responsive container_items error_logs">
-				<h6 class="container_headers header-title mt-0">ERROR LOGS</h6>
+				<h5 class="container_headers header-title mt-0 error-log-title">ERROR LOGS</h5>
 				<table id="error" class="table table-striped">
 				</table>
 			</div>
 			<div id='stack_trace' class="col-xs-7 container_items">
-				<h6 class="container_headers header-title mt-0">Please select error log in table</h6>
+				<h5 class="container_headers header-title mt-0">Please select error log in table</h5>
 			</div>
 		</div>
 	</div>
 
 	  <div class="table-responsive container_items logs">
-		<h6 class="container_headers header-title mt-0">LOGS</h6>
+		<h5 class="container_headers header-title mt-0">LOGS</h5>
 	  <table id="logs" class="table table-striped">
 		<tbody></tbody>
 	  </table>

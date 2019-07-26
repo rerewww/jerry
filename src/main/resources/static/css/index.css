@@ -146,10 +146,8 @@ p {
 }
 
 .usage {
-	float: left;
 	font-size: 18px;
 	color: #F8F8F2;
-	font-weight: bold;
 }
 
 .error_logs {
@@ -164,4 +162,18 @@ p {
 }
 .errorLine {
 	background-color: red;
+}
+
+.info {
+	margin-bottom: 0;
+	color: beige;
+}
+
+.info-box {
+	width: 50%;
+	text-align: center;
+}
+
+.error-log-title {
+	margin-left: 15px;
 }
