@@ -142,3 +142,7 @@ p {
 	background-color: aqua;
 	font-weight: bold;
 }
+
+.errorLine {
+	background-color: red;
+}
