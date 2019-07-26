@@ -5,7 +5,6 @@ import $ from 'jquery';
 import {Renderer} from "./Renderer";
 export class Action {
 	public getInfos(): void {
-		const self = this;
 		$.ajax({
 			url: 'getInfos.son',
 			dataType: 'json',

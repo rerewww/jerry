@@ -11,6 +11,9 @@
 }
 
 #stack_trace {
+	width: 57%;
+	margin-left: 15px;
+	background-color: #2F3E47;
 	font-family: "Karla", sans-serif;
 	text-align: left;
 }
@@ -59,11 +62,10 @@ tr {
 
 .card_items {
 	width: 24.2%;
-	margin-left: 15px;
-	margin-bottom: 10px;
 	flex: 0 0 25%;
 	font-family: "Karla", sans-serif;
 	max-width: 25%;
+	margin: 5px;
 }
 
 tr:nth-of-type(odd) {
@@ -143,6 +145,35 @@ p {
 	font-weight: bold;
 }
 
+.usage {
+	font-size: 18px;
+	color: #F8F8F2;
+}
+
+.error_logs {
+	margin-bottom: 0px;
+	height: 250px;
+}
+
+.logs {
+	height: 550px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
 .errorLine {
 	background-color: red;
+}
+
+.info {
+	margin-bottom: 0;
+	color: beige;
+}
+
+.info-box {
+	width: 50%;
+	text-align: center;
+}
+
+.error-log-title {
+	margin-left: 15px;
 }
