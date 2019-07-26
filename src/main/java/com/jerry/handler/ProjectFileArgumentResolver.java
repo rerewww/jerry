@@ -67,6 +67,9 @@ public class ProjectFileArgumentResolver implements HandlerMethodArgumentResolve
 			if (isFind) {
 				break;
 			}
+			if (!file.getAbsolutePath().contains("src")) {
+				continue;
+			}
 			if (file.isDirectory()) {
 				this.getJavaFileFromFileName(file.listFiles(), fileName);
 			}
