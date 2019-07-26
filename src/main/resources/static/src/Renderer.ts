@@ -104,7 +104,7 @@ export class Renderer {
 						p.className = 'codestyle';
 
 						if (lineNumber === aResponse[i].substring(0, aResponse[i].indexOf('&nbsp') - 1)) {
-							$(p).css('color: red; font-weight: bold');
+							$(p).addClass('errorLine');
 						} else {
 							aResponse[i] = self.theme.render(aResponse[i]);
 						}
