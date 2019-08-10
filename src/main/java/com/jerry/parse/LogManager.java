@@ -39,8 +39,7 @@ public class LogManager implements Manager {
 	}
 
 	public List<String> getTomcatLogs() {
-		List<String> logs = tailer.getLogs();
-		return logs;
+		return tailer.getLogs();
 	}
 
 	public LogModel parse(final File file) {
@@ -48,8 +47,7 @@ public class LogManager implements Manager {
 	}
 
 	public List<String> getViewCode(final File file, final int line, final int range) {
-		List<String> contents = parser.getViewCode(file, line, range);
-		return contents;
+		return parser.getViewCode(file, line, range);
 	}
 
 	public LogModel getAccessLogs() {

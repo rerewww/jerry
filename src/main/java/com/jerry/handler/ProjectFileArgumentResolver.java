@@ -3,7 +3,6 @@ package com.jerry.handler;
 import com.jerry.config.ServerConfig;
 import com.jerry.project.ProjectFile;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -23,8 +22,6 @@ import java.io.File;
 @Service
 public class ProjectFileArgumentResolver implements HandlerMethodArgumentResolver {
 	private ServerConfig config;
-
-	private boolean isFind = false;
 	private File srcFile = null;
 	
 	ProjectFileArgumentResolver(final ServerConfig config) {
@@ -62,9 +59,9 @@ public class ProjectFileArgumentResolver implements HandlerMethodArgumentResolve
 		return new ProjectFile(srcFile.getName(), srcFile.getAbsolutePath());
 	}
 
-	private File getJavaFileFromFileName(final File[] files, final String fileName) {
+	public File getJavaFileFromFileName(final File[] files, final String fileName) {
 		for (File file : files) {
-			if (isFind) {
+			if (srcFile != null && srcFile.exists()) {
 				break;
 			}
 			if (!file.getAbsolutePath().contains("src")) {
@@ -75,11 +72,8 @@ public class ProjectFileArgumentResolver implements HandlerMethodArgumentResolve
 			}
 			if (file.isFile() && file.getName().equals(fileName + ".java")) {
 				srcFile = file;
-				isFind = true;
-				break;
 			}
 		}
-		isFind = false;
 		return srcFile;
 	}
 }
