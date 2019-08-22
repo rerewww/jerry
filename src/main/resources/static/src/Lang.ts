@@ -16,6 +16,7 @@ export class Lang {
     }
 
     public dropDowns(): void {
+        $("#dropdown-lang").toggleClass("show");
         return;
     }
 }
