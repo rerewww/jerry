@@ -5,11 +5,13 @@ import $ from 'jquery';
 import {Server} from "./Server";
 import {Setting} from "./Setting";
 import {Action} from "./Action"
+import {Lang} from "./Lang";
 
 const obj = {
 	server: new Server(),
 	setting: new Setting(),
-	action: new Action()
+	action: new Action(),
+	lang: new Lang()
 };
 
 $( document ).ready( () => {
@@ -27,5 +29,6 @@ $( document ).ready( () => {
 	});
 	obj.action.getInfos();
 	obj.setting.init();
+	obj.lang.init();
 	obj.server.connect();
 });
