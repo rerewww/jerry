@@ -20,6 +20,8 @@
   <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
   <link href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}" rel="stylesheet">
   <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet">
+
+  <th:block th:include="../templates/template"></th:block>
 </head>
 
 <body style="background-color: #253138">
@@ -136,6 +138,7 @@
 		window._info = {};
 	}
 	_info.sourcePackage = [[${sourcePackage}]];
+	_info.lang = [[${lang}]];
 </script>
 </body>
 </html>

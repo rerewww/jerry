@@ -177,3 +177,14 @@ p {
 .error-log-title {
 	margin-left: 15px;
 }
+
+.lang-item {
+	color: beige;
+	text-decoration: underline;
+	padding-bottom: 5px;
+	cursor: pointer;
+}
+
+.lang-item:hover {
+	background-color: #2980B9;
+}
