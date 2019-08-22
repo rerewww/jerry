@@ -15,7 +15,10 @@ const obj = {
 };
 
 $( document ).ready( () => {
-	$('body').click( (event) => {
+	const body: JQuery = $('body');
+
+	body.attr('class', window['_info'].lang);
+	body.click( (event) => {
 		const target = $(event.target);
 		const that = target.attr('that');
 		const cmd = target.attr('cmd');
