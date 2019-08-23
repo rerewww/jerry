@@ -46,12 +46,14 @@ tr {
 }
 
 .container_items {
+	padding-left: 0px;
 	background-color: #2F3E47;
 	border-radius: 10px;
 	box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
 }
 
 .container_headers {
+	margin-left: 15px;
 	margin-bottom: 10px;
 	font-weight: 600;
 	line-height: 16px;
@@ -172,10 +174,6 @@ p {
 .info-box {
 	width: 50%;
 	text-align: center;
-}
-
-.error-log-title {
-	margin-left: 15px;
 }
 
 .lang-item {

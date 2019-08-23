@@ -16,8 +16,13 @@ const obj = {
 
 $( document ).ready( () => {
 	const body: JQuery = $('body');
-
 	body.attr('class', window['_info'].lang);
+
+	obj.action.getInfos();
+	obj.setting.init();
+	obj.lang.init();
+	obj.server.connect();
+
 	body.click( (event) => {
 		const target = $(event.target);
 		const that = target.attr('that');
@@ -30,8 +35,4 @@ $( document ).ready( () => {
 
 		obj[that][cmd].call(obj[that], target);
 	});
-	obj.action.getInfos();
-	obj.setting.init();
-	obj.lang.init();
-	obj.server.connect();
 });
