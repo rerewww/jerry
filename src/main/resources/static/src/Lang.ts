@@ -26,7 +26,7 @@ export class Lang {
 
     private changeLanguage(lang: string): void {
         $.ajax({
-            url: '/lang.son',
+            url: '/',
             data: {lang},
             success: () => {
                 window.location.reload();

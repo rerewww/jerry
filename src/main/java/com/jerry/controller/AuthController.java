@@ -6,12 +6,10 @@ import com.jerry.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -48,11 +46,9 @@ public class AuthController {
 			final HttpSession session,
 			final UserInfo userInfo,
 			@RequestParam("pw") final String pw) {
-		String lang = (String)session.getAttribute("lang");
 		ModelAndView mv = new ModelAndView("index");
 
 		mv.addObject("sourcePackage", config.getSourcePackagePrefix());
-		mv.addObject("lang", StringUtils.isEmpty(lang) ? Locale.KOREA.getLanguage() : lang);
 		if (authService.checkSession(userInfo.getUserId(), (String)session.getAttribute(AUTH_KEY))) {
 			return mv;
 		}
@@ -77,14 +73,5 @@ public class AuthController {
 	public boolean apply(@RequestBody final Map<String, String> data) {
 		authService.setEnviornments(data);
 		return true;
-	}
-
-	@ResponseBody
-	@RequestMapping("/lang.son")
-	public void lang(
-			final HttpSession session,
-			@RequestParam("lang") final String lang
-	) {
-		session.setAttribute("lang", lang);
 	}
 }
