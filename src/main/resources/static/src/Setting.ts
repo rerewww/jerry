@@ -33,10 +33,13 @@ export class Setting {
 	 * @param target
 	 */
 	public clear(target: any): void {
-		const options = $('#options');
-		if (target.closest('#options').length === 0 && options.attr('class').indexOf('show') > -1) {
-			options.removeClass('show');
-		}
+		const dropDowns = ['#options', '#dropdown-lang'];
+		dropDowns.forEach( (n) => {
+			const el = $(n);
+			if (target.closest(n).length === 0 && el.attr('class').indexOf('show') > -1) {
+				el.removeClass('show');
+			}
+		});
 		return;
 
 		const stackTraces = $('#stack_trace');
