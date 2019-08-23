@@ -1,6 +1,6 @@
-<textarea id="langDropdown" class="hide">
+<textarea id="langDropdown" class="hide" xmlns:th="http://www.w3.org/1999/xhtml">
 		  <div class="dropdown">
-			<button that="lang" cmd="dropDowns" class="dropbtn">Languages</button>
+			<button that="lang" cmd="dropDowns" class="dropbtn" th:text="#{languages}"/>
 			<div id="dropdown-lang" class="dropdown-content">
 			  <div class='lang-item' lang="ko">한국어</div>
 				<div class='lang-item' lang="en">English</div>

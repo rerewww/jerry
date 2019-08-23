@@ -49,7 +49,7 @@ public class SystemCommonUtils {
 
 	private String getTomcatVersion() {
 		if (System.getProperty("os.name").toLowerCase().contains("window")) {
-			return "Do not windows";
+			return "false";
 		}
 
 		File tomcatDir = new File(config.getLogFilePath()).getParentFile().getParentFile();
@@ -86,7 +86,7 @@ public class SystemCommonUtils {
 
 	private String getBranchInfo() {
 		if (System.getProperty("os.name").toLowerCase().contains("window")) {
-			return "Do not windows";
+			return "false";
 		}
 
 		File projectDir = new File(config.getSourceDirPath());

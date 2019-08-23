@@ -39,7 +39,7 @@
 		<li class="active"><a href="/" th:text="#{home}"/></li>
 		<li>
 		  <div class="dropdown">
-			<button that="setting" cmd="dropDowns" class="dropbtn">Options</button>
+			<button that="setting" cmd="dropDowns" class="dropbtn" th:text="#{option}"/>
 			<div id="options" class="dropdown-content">
 			  <div style="padding-bottom: 5px;">
 				<span class="switchHeader">ACCESS</span>
@@ -76,7 +76,7 @@
 			</div>
 		  </div>
 		</li>
-		<li><a href="/setting">Setting</a></li>
+		<li><a href="/setting" th:text="#{setting}"/></li>
 	  </ul>
 	</div>
   </div>
@@ -97,7 +97,7 @@
 			<div class="widget-box-2 info-box" style="float: right;">
 			  <div class="widget-detail-2">
 				<h6 class="mb-0 info">VERSION/BRANCH</h6>
-				<div id="infos" class="usage"></div>
+				<div id="infos" class="usage" th:text="#{info_warrning_message01}"/>
 			  </div>
 			</div>
 		  </div>
@@ -118,7 +118,7 @@
 				</table>
 			</div>
 			<div id='stack_trace' class="col-xs-7 container_items">
-				<h5 class="container_headers header-title mt-0">Please select error log in table</h5>
+				<h5 class="container_headers header-title mt-0" th:text="#{stacktrace_message}"/>
 			</div>
 		</div>
 	</div>
